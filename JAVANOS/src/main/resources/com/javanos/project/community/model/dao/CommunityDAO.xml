@@ -15,7 +15,7 @@
 		<association property="user" resultMap="UserResultMap"></association>
 	</resultMap>
 	
-	<resultMap type="com.javanos.project.community.model.dto.UserDTO" id="UserResultMap">
+	<resultMap type="com.javanos.project.user.model.dto.UserDTO" id="UserResultMap">
 		<id property="userNo" column="USER_NO"/>
 		<result property="userId" column="USER_ID"/>
 		<result property="userPwd" column="USER_PWD"/>
