@@ -19,7 +19,7 @@
 					<li><a href="">home</a></li>
 					<li><a href="">내려요</a></li>
 					<li><a href="">분실물</a></li>
-					<li><a href="">커뮤니티</a></li>
+					<li><a href="${pageContext.servletContext.contextPath }/community/list">커뮤니티</a></li>
 					<li><a href="">공지사항</a></li>
 					<li><a href="">로그인</a></li>
 					</ul>
