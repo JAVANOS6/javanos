@@ -1,6 +1,7 @@
 package com.javanos.project.community.model.dto;
 
 import java.sql.Date;
+import java.util.List;
 
 public class CommunityDTO implements java.io.Serializable{
 
@@ -12,13 +13,16 @@ public class CommunityDTO implements java.io.Serializable{
 	private Date communityModifyDate;
 	private char communityBoardStatus;
 	private int userNo;
+	private UserDTO user;
+	private List<PictureDTO> pictureList;
 	
 	public CommunityDTO() {
 		super();
 	}
 
 	public CommunityDTO(int communityNo, String communityTtile, String communityBody, String communityCount,
-			Date communityEnrollDate, Date communityModifyDate, char communityBoardStatus, int userNo) {
+			Date communityEnrollDate, Date communityModifyDate, char communityBoardStatus, int userNo, UserDTO user,
+			List<PictureDTO> pictureList) {
 		super();
 		this.communityNo = communityNo;
 		this.communityTtile = communityTtile;
@@ -28,6 +32,8 @@ public class CommunityDTO implements java.io.Serializable{
 		this.communityModifyDate = communityModifyDate;
 		this.communityBoardStatus = communityBoardStatus;
 		this.userNo = userNo;
+		this.user = user;
+		this.pictureList = pictureList;
 	}
 
 	public int getCommunityNo() {
@@ -94,13 +100,31 @@ public class CommunityDTO implements java.io.Serializable{
 		this.userNo = userNo;
 	}
 
+	public UserDTO getUser() {
+		return user;
+	}
+
+	public void setUser(UserDTO user) {
+		this.user = user;
+	}
+
+	public List<PictureDTO> getPictureList() {
+		return pictureList;
+	}
+
+	public void setPictureList(List<PictureDTO> pictureList) {
+		this.pictureList = pictureList;
+	}
+
 	@Override
 	public String toString() {
 		return "CommunityDTO [communityNo=" + communityNo + ", communityTtile=" + communityTtile + ", communityBody="
 				+ communityBody + ", communityCount=" + communityCount + ", communityEnrollDate=" + communityEnrollDate
 				+ ", communityModifyDate=" + communityModifyDate + ", communityBoardStatus=" + communityBoardStatus
-				+ ", userNo=" + userNo + "]";
+				+ ", userNo=" + userNo + ", user=" + user + ", pictureList=" + pictureList + "]";
 	}
+
+	
 	
 	
 	
