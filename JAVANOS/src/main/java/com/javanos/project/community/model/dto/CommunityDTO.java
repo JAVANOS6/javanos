@@ -3,6 +3,8 @@ package com.javanos.project.community.model.dto;
 import java.sql.Date;
 import java.util.List;
 
+import com.javanos.project.user.model.dto.UserDTO;
+
 public class CommunityDTO implements java.io.Serializable{
 
 	private int communityNo;
