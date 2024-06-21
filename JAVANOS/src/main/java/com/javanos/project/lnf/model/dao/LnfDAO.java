@@ -19,7 +19,7 @@ public interface LnfDAO {
 	public int deleteBoard(LnfBoardDTO deleteBoard);
 	
 	// 게시글 상세 보기 조회
-	public LnfBoardDTO selectBoardDetail();
+	public List<LnfBoardDTO> selectBoardDetail();
 	
 	// 첫화면 
 
