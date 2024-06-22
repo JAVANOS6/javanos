@@ -65,4 +65,6 @@
 		AND A.COMMUNITY_BOARD_STATUS = 'Y'
 	</select>
 
+
+
 </mapper>
