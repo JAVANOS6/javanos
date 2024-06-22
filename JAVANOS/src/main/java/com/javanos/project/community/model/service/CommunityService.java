@@ -19,6 +19,7 @@ public class CommunityService {
 		
 		List<CommunityDTO> communityList = communityDAO.selectAllCommunityList();
 		
+		session.close();
 		return communityList;
 		
 	}

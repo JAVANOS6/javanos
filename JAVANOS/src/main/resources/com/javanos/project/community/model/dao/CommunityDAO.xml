@@ -12,7 +12,7 @@
 		<result property="communityModifyDate" column="COMMUNITY_MODIFY_DATE"/>
 		<result property="communityBoardStatus" column="COMMUNITY_BOARD_STATUS"/>
 		<result property="userNo" column="USER_NO"/>
-		<association property="user" resultMap="UserResultMap"></association>
+		<association property="user" resultMap="UserResultMap"/>
 	</resultMap>
 	
 	<resultMap type="com.javanos.project.user.model.dto.UserDTO" id="UserResultMap">
@@ -27,13 +27,42 @@
 		<result property="userStatus" column="USER_STATUS"/>
 		<result property="userStopDate" column="USER_STOP_DATE"/>
 	</resultMap>
-
-	<!-- <select id="selectAllCommunityList" resultMap="communityResultMap">
-		SELECT
-			COMMUNITY_NO,
-			COMMUNITY_TITLE,
-			
 	
-	</select> -->
+	<resultMap type="com.javanos.project.community.model.dto.CommunityDTO" id="ThumbnailResultMap">
+		<id property="communityNo" column="COMMUNITY_NO"/>
+		<result property="communityTtile" column="COMMUNITY_TITLE"/>
+		<result property="communityBody" column="COMMUNITY_BODY"/>
+		<result property="communityCount" column="COMMUNITY_COUNT"/>
+		<result property="communityEnrollDate" column="COMMUNITY_ENROLL_DATE"/>
+		<result property="communityModifyDate" column="COMMUNITY_MODIFY_DATE"/>
+		<result property="communityBoardStatus" column="COMMUNITY_BOARD_STATUS"/>
+		<result property="userNo" column="USER_NO"/>
+		<association property="user" resultMap="UserResultMap"/>
+		<collection property="pictureList" column="PictureResultMap"/>
+	</resultMap>
+	
+	<resultMap type="com.javanos.project.community.model.dto.PictureDTO" id="PictureResultMap">
+		<id property="picNo" column="PIC_NO"/>
+		<result property="savedName" column="SAVED_NAME"/>
+		<result property="savedPath" column="SAVE_PATH"/>
+		<result property="fileType" column="FILE_TYPE"/>
+		<result property="thumbnailPath" column="THUMBNAIL_PATH"/>
+		<result property="picBoardStatus" column="PIC_BOARD_STATUS"/>
+		<result property="communityNo" column="COMMUNITY_NO"/>
+	</resultMap>
+
+	<select id="selectAllCommunityList" resultMap="communityResultMap">
+		SELECT
+				A.COMMUNITY_NO,
+				A.COMMUNITY_TITLE,
+				A.COMMUNITY_BODY,
+				A.COMMUNITY_COUNT,
+				A.COMMUNITY_ENROLL_DATE,
+				A.COMMUNITY_BOARD_STATUS,
+				A.USER_NO,
+			B.USER_NICKNAME
+		FROM TBL_COMMUNITY A JOIN TBL_USER B ON (A.USER_NO = B.USER_NO)
+		AND A.COMMUNITY_BOARD_STATUS = 'Y'
+	</select>
 
 </mapper>
