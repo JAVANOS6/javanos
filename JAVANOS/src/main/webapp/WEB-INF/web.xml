@@ -9,14 +9,3 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
-  <servlet>
-    <description></description>
-    <display-name>CommunityModifyServlet</display-name>
-    <servlet-name>CommunityModifyServlet</servlet-name>
-    <servlet-class>com.javanos.project.community.controller.CommunityModifyServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>CommunityModifyServlet</servlet-name>
-    <url-pattern>/CommunityModifyServlet</url-pattern>
-  </servlet-mapping>
-</web-app>
