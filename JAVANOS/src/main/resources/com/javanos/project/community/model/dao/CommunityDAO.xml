@@ -5,7 +5,7 @@
 <mapper namespace="com.javanos.project.community.model.dao.CommunityDAO">
 	<resultMap type="com.javanos.project.community.model.dto.CommunityDTO" id="communityResultMap">
 		<id property="communityNo" column="COMMUNITY_NO"/>
-		<result property="communityTtile" column="COMMUNITY_TITLE"/>
+		<result property="communityTitle" column="COMMUNITY_TITLE"/>
 		<result property="communityBody" column="COMMUNITY_BODY"/>
 		<result property="communityCount" column="COMMUNITY_COUNT"/>
 		<result property="communityEnrollDate" column="COMMUNITY_ENROLL_DATE"/>
@@ -30,7 +30,7 @@
 	
 	<resultMap type="com.javanos.project.community.model.dto.CommunityDTO" id="ThumbnailResultMap">
 		<id property="communityNo" column="COMMUNITY_NO"/>
-		<result property="communityTtile" column="COMMUNITY_TITLE"/>
+		<result property="communityTitle" column="COMMUNITY_TITLE"/>
 		<result property="communityBody" column="COMMUNITY_BODY"/>
 		<result property="communityCount" column="COMMUNITY_COUNT"/>
 		<result property="communityEnrollDate" column="COMMUNITY_ENROLL_DATE"/>
@@ -66,5 +66,28 @@
 	</select>
 
 
+	<select id="selectOneCommunity" resultMap="communityResultMap">
+	SELECT 
+				A.COMMUNITY_NO,
+				A.COMMUNITY_TITLE,
+				A.COMMUNITY_BODY,
+				A.COMMUNITY_COUNT,
+				A.COMMUNITY_ENROLL_DATE,
+				A.COMMUNITY_BOARD_STATUS,
+				A.USER_NO,
+			B.USER_NICKNAME
+		FROM TBL_COMMUNITY A JOIN TBL_USER B ON (A.USER_NO = B.USER_NO)
+		AND A.COMMUNITY_BOARD_STATUS = 'Y'
+		WHERE A.COMMUNITY_NO = #{communityNo}
+	</select>
+	
+	<update id="updateCommunity" parameterType="com.javanos.project.community.model.dto.CommunityDTO">
+		UPDATE TBL_COMMUNITY
+		SET
+			COMMUNITY_TITLE = #{communityTitle},
+			COMMUNITY_BODY = #{communityBody}
+			COMMUNITY_MODIFY_DATE = #{communityModifyDate}
+		WHERE COMMUNITY_NO = #{communityNo}
+	</update>
 
 </mapper>

@@ -8,4 +8,9 @@ public interface CommunityDAO {
 
 	List<CommunityDTO> selectAllCommunityList();
 
+	CommunityDTO selectOneCommunity(int communityNo);
+
+	int updateCommunity(CommunityDTO updateCommunity);
+
+
 }
