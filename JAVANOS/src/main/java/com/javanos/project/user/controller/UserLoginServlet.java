@@ -35,11 +35,10 @@ public class UserLoginServlet extends HttpServlet {
 		if (loginUser != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", loginUser);
-			System.out.println("로그인성공");
 			response.sendRedirect(request.getContextPath()); // main으로 이동
 		} else {
-			request.setAttribute("message", "로그인에 실패하였습니다. :(");
-			request.setAttribute("code", "userLogin");
+			request.setAttribute("message", "로그인에 실패하였습니다.");
+			request.setAttribute("code", "loginUser");
 			request.getRequestDispatcher("/WEB-INF/views/common/fail.jsp").forward(request, response);
 		}
 

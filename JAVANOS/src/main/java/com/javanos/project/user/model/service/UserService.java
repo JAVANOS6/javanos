@@ -22,7 +22,7 @@ public class UserService {
 		return result;
 	}
 
-	public int registUser(UserDTO requestUser) {
+	public int joinUser(UserDTO requestUser) {
 		SqlSession session = getSqlSession();
 		userDAO = session.getMapper(UserDAO.class);
 
@@ -42,22 +42,23 @@ public class UserService {
 		userDAO = session.getMapper(UserDAO.class);
 
 		UserDTO loginUser = null;
-		
-		// 로그인 회원이 null이 아니고 비밀번호가 null이 아닌 경우에 로그인 처리
-		if(requestUser != null && requestUser.getUserPwd() != null) {
-			String planPwd = userDAO.selectPlainPwd(requestUser);
-			
-			// 로그인 요청한 원문 비밀번호와 저장되어있는 평문화 비밀번호가 일치하는지 확인 (admin계정)
-			if (requestUser.getUserPwd() != null && planPwd != null && planPwd.equals(requestUser.getUserPwd())) {
-				loginUser = userDAO.selectLoginUser(requestUser);
-			} else {
-				String encPwd = userDAO.selectEncryptedPwd(requestUser);
-				BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-				
-				// 로그인 요청한 원문 비밀번호와 저장되어있는 암호화된 비밀번호가 일치하는지 확인
-				// 비밀번호가 일치하는 경우에만 회원 정보를 조회
-				if (passwordEncoder.matches(requestUser.getUserPwd(), encPwd)) {
+
+		// 로그인 아이디와 비밀번호가 null이 아닌 경우에 로그인 처리
+		if (requestUser.getUserId() != null && requestUser.getUserPwd() != null) {
+			String storedPwd = userDAO.selectPwd(requestUser);
+
+			if (storedPwd != null) {
+				// 로그인 요청한 원문 비밀번호와 저장되어있는 평문화 비밀번호가 일치하는지 확인 (admin계정)
+				if (storedPwd.equals(requestUser.getUserPwd())) {
 					loginUser = userDAO.selectLoginUser(requestUser);
+				} else {
+					BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+					// 로그인 요청한 원문 비밀번호와 저장되어있는 암호화된 비밀번호가 일치하는지 확인
+					// 비밀번호가 일치하는 경우에만 회원 정보를 조회
+					if (passwordEncoder.matches(requestUser.getUserPwd(), storedPwd)) {
+						loginUser = userDAO.selectLoginUser(requestUser);
+					}
 				}
 			}
 		}
@@ -65,5 +66,36 @@ public class UserService {
 		session.close();
 		return loginUser;
 	}
-	
+
+	public UserDTO updateUser(UserDTO originUser) {
+		SqlSession session = getSqlSession();
+		userDAO = session.getMapper(UserDAO.class);
+		
+		UserDTO updateUser = null;
+		
+		int result = userDAO.updateUser(originUser);
+		if(result > 0) {
+			session.commit();
+			updateUser = userDAO.selectLoginUser(originUser);
+		} else {
+			session.close();
+		}
+		
+		return updateUser;
+	}
+
+	public int deleteUser(UserDTO loginUser) {
+		SqlSession session = getSqlSession();
+		userDAO = session.getMapper(UserDAO.class);
+		
+		int result  = userDAO.deleteUser(loginUser);
+		if(result > 0) {
+			session.commit();
+		} else {
+			session.rollback();
+		}
+		session.close();
+		return result;
+	}
+
 }

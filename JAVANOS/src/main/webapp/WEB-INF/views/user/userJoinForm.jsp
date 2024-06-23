@@ -8,9 +8,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-	<div class="regist-wrapper">
+ 	<jsp:include page="../common/menubar.jsp"/> 
+
+	<div class="join-wrapper">
 		<h2>회원가입</h2>
-		<form action="${ pageContext.servletContext.contextPath }/user/regist" method="post" id="regist-form">
+		<form action="${ pageContext.servletContext.contextPath }/user/join" method="post" id="join-form">
 			<input type="text" name="userId" id="userId" placeholder="*아이디" required>
 			<input type="button" value="중복확인" id="dupCheck" required><br>
 			<input type="password" name="userPwd" placeholder="*비밀번호" required><br>
@@ -22,7 +24,7 @@
 				<input type="checkbox" id="agreeTerms" name="agreeTerms" required>
 				이용약관과 개인정보 수집 및 정보이용에 동의합니다
 			</label><br>
-			<input type="submit" id="registBtn" value="회원가입"><br>
+			<input type="submit" id="joinBtn" value="회원가입"><br>
 		</form>
 	</div>
 	

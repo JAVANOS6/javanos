@@ -37,7 +37,7 @@
 		)
 	</insert>
 	
-	<select id="selectPlainPwd" resultType="java.lang.String">
+	<select id="selectPwd" resultType="java.lang.String">
 		SELECT USER_PWD
 			FROM TBL_USER
 		WHERE USER_STATUS = 'Y'
@@ -45,16 +45,9 @@
 			AND (USER_STOP_DATE IS NULL OR CURDATE() > USER_STOP_DATE)
 	</select>
 	
-	<select id="selectEncryptedPwd" resultType="java.lang.String">
-		SELECT USER_PWD
-	 		FROM TBL_USER
-	 	WHERE USER_STATUS = 'Y'
-	 		AND USER_ID = #{ userId }
-	 		AND (USER_STOP_DATE IS NULL OR CURDATE() > USER_STOP_DATE)
-	</select>
-		
 	<select id="selectLoginUser" resultMap="userResultMap">
 	SELECT
+		USER_NO,
 		USER_ID,
 		USER_PWD,
 		USER_NAME,
@@ -69,6 +62,24 @@
 	 	AND USER_STATUS = 'Y'
 	 	AND (USER_STOP_DATE IS NULL OR CURDATE() > USER_STOP_DATE)
 	</select>
-
-
+	
+	<update id="updateUser" parameterType="com.javanos.project.user.model.dto.UserDTO">
+	UPDATE 
+		TBL_USER
+	SET USER_NICKNAME = #{ userNickname },
+		USER_EMAIL = #{ userEmail }
+	WHERE USER_NO = #{ userNo }
+	 	AND USER_STATUS = 'Y'
+	 	AND (USER_STOP_DATE IS NULL OR CURDATE() > USER_STOP_DATE) 
+	</update>
+	
+	<update id="deleteUser" parameterType="com.javanos.project.user.model.dto.UserDTO">
+	UPDATE
+		TBL_USER
+	SET USER_STATUS = 'N'
+	WHERE USER_NO = #{ userNo }
+	 	AND USER_STATUS = 'Y'
+	 	AND (USER_STOP_DATE IS NULL OR CURDATE() > USER_STOP_DATE) 
+	</update>
+	
 </mapper>

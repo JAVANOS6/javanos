@@ -8,10 +8,12 @@ public interface UserDAO {
 
 	int insertUser(UserDTO requestUser);
 	
-	String selectPlainPwd(UserDTO requestUser);
-
-	String selectEncryptedPwd(UserDTO requestUser);
+	String selectPwd(UserDTO requestUser);
 
 	UserDTO selectLoginUser(UserDTO requestUser);
+
+	int updateUser(UserDTO originUser);
+
+	int deleteUser(UserDTO loginUser);
 
 }

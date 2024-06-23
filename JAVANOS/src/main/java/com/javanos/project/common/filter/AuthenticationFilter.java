@@ -66,7 +66,8 @@ public class AuthenticationFilter implements Filter {
 				chain.doFilter(request, response);
 			} else {
 				request.setAttribute("message", "로그인이 필요한 서비스 입니다.");
-				request.getRequestDispatcher("/WEB-INF/views/common/failed.jsp").forward(hrequest, response);
+				request.setAttribute("code", "loginUser");
+				request.getRequestDispatcher("/WEB-INF/views/common/fail.jsp").forward(hrequest, response);
 			}
 		}
 		
@@ -79,8 +80,16 @@ public class AuthenticationFilter implements Filter {
 		List<String> userPermitList = new ArrayList<>();
 		List<String> adminPermitList = new ArrayList<>();
 		
-		allPermitList.add("/user/regist");
+		allPermitList.add("/user/join");
 		allPermitList.add("/user/login");
+		allPermitList.add("/user/logout");
+		
+		
+		
+		
+		userPermitList.add("/user/mypage");
+		userPermitList.add("/user/delete");
+		
 		
 		
 		
