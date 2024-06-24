@@ -3,32 +3,34 @@ package com.javanos.project.notice.model.dto;
 
 import java.sql.Date;
 
+import com.javanos.project.user.model.dto.UserDTO;
+
 public class NoticeDTO implements java.io.Serializable {
 
 	private int noticeNo;
+	private UserDTO noticeWriter;
 	private String noticeTitle;
 	private String noticeBody;
 	private Date noticeEnrollDate;
 	private Date noticeModifyDate;
 	private int noticeCount;
 	private String noticeBoardStatus;
-	private int noticeUserNo;
-
+	
 	public NoticeDTO() {
 		super();
 	}
 
-	public NoticeDTO(int noticeNo, String noticeTitle, String noticeBody, Date noticeEnrollDate, Date noticeModifyDate,
-			int noticeCount, String noticeBoardStatus, int noticeUserNo) {
+	public NoticeDTO(int noticeNo, UserDTO noticeWriter, String noticeTitle, String noticeBody, Date noticeEnrollDate,
+			Date noticeModifyDate, int noticeCount, String noticeBoardStatus) {
 		super();
 		this.noticeNo = noticeNo;
+		this.noticeWriter = noticeWriter;
 		this.noticeTitle = noticeTitle;
 		this.noticeBody = noticeBody;
 		this.noticeEnrollDate = noticeEnrollDate;
 		this.noticeModifyDate = noticeModifyDate;
 		this.noticeCount = noticeCount;
 		this.noticeBoardStatus = noticeBoardStatus;
-		this.noticeUserNo = noticeUserNo;
 	}
 
 	public int getNoticeNo() {
@@ -37,6 +39,14 @@ public class NoticeDTO implements java.io.Serializable {
 
 	public void setNoticeNo(int noticeNo) {
 		this.noticeNo = noticeNo;
+	}
+
+	public UserDTO getNoticeWriter() {
+		return noticeWriter;
+	}
+
+	public void setNoticeWriter(UserDTO noticeWriter) {
+		this.noticeWriter = noticeWriter;
 	}
 
 	public String getNoticeTitle() {
@@ -87,19 +97,15 @@ public class NoticeDTO implements java.io.Serializable {
 		this.noticeBoardStatus = noticeBoardStatus;
 	}
 
-	public int getNoticeUserNo() {
-		return noticeUserNo;
-	}
-
-	public void setNoticeUserNo(int noticeUserNo) {
-		this.noticeUserNo = noticeUserNo;
-	}
-
 	@Override
 	public String toString() {
-		return "NoticeDTO [noticeNo=" + noticeNo + ", noticeTitle=" + noticeTitle + ", noticeBody=" + noticeBody
-				+ ", noticeEnrollDate=" + noticeEnrollDate + ", noticeModifyDate=" + noticeModifyDate + ", noticeCount="
-				+ noticeCount + ", noticeBoardStatus=" + noticeBoardStatus + ", noticeUserNo=" + noticeUserNo + "]";
+		return "NoticeDTO [noticeNo=" + noticeNo + ", noticeWriter=" + noticeWriter + ", noticeTitle=" + noticeTitle
+				+ ", noticeBody=" + noticeBody + ", noticeEnrollDate=" + noticeEnrollDate + ", noticeModifyDate="
+				+ noticeModifyDate + ", noticeCount=" + noticeCount + ", noticeBoardStatus=" + noticeBoardStatus + "]";
 	}
-
+	
+	
+	
+	
+	
 }
