@@ -53,6 +53,44 @@ public class CommunityService {
 		
 		return result;
 	}
+
+	public int deleteCommunity(int communityNo) {
+		
+		SqlSession session = getSqlSession();
+		
+		communityDAO = session.getMapper(CommunityDAO.class);
+		
+		int result = communityDAO.deleteCommunity(communityNo);
+		
+		if(result>0) {
+			session.commit();
+		}else {
+			session.rollback();
+		}
+		session.close();
+		
+		return result;
+	
+	
+	}
+
+	public int insertCommunity(CommunityDTO community) {
+		SqlSession session = getSqlSession();
+		
+		communityDAO = session.getMapper(CommunityDAO.class);
+		
+		int result = communityDAO.insertCommunity(community);
+		
+		if(result>0) {
+			session.commit();
+		}else {
+			session.rollback();
+		}
+		session.close();
+		
+		return result;
+	
+	}
 	
 
 }

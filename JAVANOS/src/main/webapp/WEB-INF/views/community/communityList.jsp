@@ -10,9 +10,9 @@
 <body>
 	<jsp:include page="../common/menubar.jsp"/>
 	<c:forEach items="${ communityList}" var="community">
-		<div>
+		<div onclick="showCommunityDeatil(${community.communityNo})">
 			<table>
-				<tr onclick="showCommunityDeatil(${community.communityNo})">
+				<tr>
 					<td>사진 넣는 곳</td>
 				</tr>
 				<tr>
@@ -22,11 +22,20 @@
 		</div>
 	</c:forEach>
 	
+	<c:if test="${ sessionScope.loginUser.userRole eq 'ROLE_USER' }">
+		<button onclick="insertcommunity()">등록</button>
+	</c:if>
 	
 	<script>
 		function showCommunityDeatil(communityNo) {
 			location.href="${pageContext.servletContext.contextPath}/community/detail?communityNo="+ communityNo;
 		};
+	</script>
+	
+	<script>
+	function insertcommunity() {
+		location.href="${pageContext.servletContext.contextPath}/community/insert";
+	};
 	</script>
 </body>
 </html>

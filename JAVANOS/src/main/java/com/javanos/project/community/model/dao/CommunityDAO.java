@@ -12,5 +12,9 @@ public interface CommunityDAO {
 
 	int updateCommunity(CommunityDTO updateCommunity);
 
+	int deleteCommunity(int communityNo);
+
+	int insertCommunity(CommunityDTO community);
+
 
 }

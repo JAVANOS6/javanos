@@ -43,6 +43,7 @@
 	
 	<resultMap type="com.javanos.project.community.model.dto.PictureDTO" id="PictureResultMap">
 		<id property="picNo" column="PIC_NO"/>
+		<result property="originalName" column="ORIGINAL_NAME"/>
 		<result property="savedName" column="SAVED_NAME"/>
 		<result property="savedPath" column="SAVE_PATH"/>
 		<result property="fileType" column="FILE_TYPE"/>
@@ -62,7 +63,8 @@
 				A.USER_NO,
 			B.USER_NICKNAME
 		FROM TBL_COMMUNITY A JOIN TBL_USER B ON (A.USER_NO = B.USER_NO)
-		AND A.COMMUNITY_BOARD_STATUS = 'Y'
+		WHERE A.COMMUNITY_BOARD_STATUS = 'Y'
+		ORDER BY A.COMMUNITY_ENROLL_DATE DESC
 	</select>
 
 
@@ -85,9 +87,85 @@
 		UPDATE TBL_COMMUNITY
 		SET
 			COMMUNITY_TITLE = #{communityTitle},
-			COMMUNITY_BODY = #{communityBody}
+			COMMUNITY_BODY = #{communityBody},
 			COMMUNITY_MODIFY_DATE = #{communityModifyDate}
 		WHERE COMMUNITY_NO = #{communityNo}
 	</update>
+	
+	<delete id="deleteCommunity" parameterType="int">
+		UPDATE TBL_COMMUNITY
+		SET
+			COMMUNITY_BOARD_STATUS = 'N'
+		WHERE COMMUNITY_NO = #{communityNo}
+	</delete>
+	
+<!-- 	<insert id="insertCommunity" parameterType="com.javanos.project.community.model.dto.CommunityDTO">
+		INSERT INTO TBL_COMMUNITY(
+			COMMUNITY_TITLE,
+			COMMUNITY_BODY,
+			USER_NO
+		)VALUES(
+			#{communityTitle},
+			#{communityBody},
+			#{userNo}
+		)
+	</insert> -->
+	
+<!-- 	<select id="selectThumbnailList" resultMap="ThumbnailResultMap">
+		SELECT
+				A.COMMUNITY_NO,
+				A.COMMUNITY_TITLE,
+				B.USER_NICKNAME,
+				A.COMMUNITY_COUNT,
+				A.COMMUNITY_ENROLL_DATE,
+				C.PIC_NO,
+				C.ORIGINAL_NAME,
+				C.SAVED_NAME,
+				C.SAVE_PATH,
+				C.THUMBNAIL_PATH
+		FROM TBL_COMMUNITY A 
+			JOIN TBL_USER B ON (A.USER_NO = B.USER_NO)
+			JOIN TBL_PICTURE C ON (A.COMMUNITY_NO = C.COMMUNITY_NO)
+		WHERE A.COMMUNITY_BOARD_STATUS = 'Y' 
+			AND C.PIC_BOARD_STATUS = 'Y'
+			AND C.FILE_TYPE = 'TITLE'
+		ORDER BY A.COMMUNITY_ENROLL_DATE DESC
+	</select> -->
+	
+	<insert id="insertCommunity">
+		INSERT INTO TBL_COMMUNITY(
+			COMMUNITY_TITLE,
+			COMMUNITY_BODY,
+			USER_NO
+		)VALUES(
+			#{communityTitle},
+			#{communityBody},
+			#{userNo}
+		)
+		<selectKey keyProperty="communityNo" resultType="integer" order="AFTER">
+			SELECT AUTO_INCREMENT-1
+			FROM INFORMATION_SCHEMA.TABLES
+			WHERE TABLE_SCHEMA = 'javanos'
+			 AND TABLE_NAME = 'tbl_community'
+		</selectKey>
+	</insert>
+	
+	<insert id="insertPicture">
+		INSERT INTO TBL_PICTURE(
+			COMMUNITY_NO,
+			ORIGINAL_NAME,
+			SAVED_NAME
+			SAVE_PATH
+			FILE_TYPE
+			THUMBNAIL_PATH
+		)VALUES(
+			#{ communityNo },
+			#{ originalName },
+			#{ savedName },
+			#{ savedPath },
+			#{ fileType },
+			#{ thumbnailPath }
+		)
+	</insert>
 
 </mapper>

@@ -7,7 +7,7 @@
 <title>커뮤니티 게시글 수정하기</title>
 </head>
 <body>
-	<form action="${pageContext.servletContext.contextPath}community/modify" method="post">
+	<form action="${pageContext.servletContext.contextPath}/community/update" method="post">
 		<table>
 				<tr>
 					<th>제목: <input type="text" name="communityTitle" value="${ community.communityTitle }"></th>
@@ -28,8 +28,15 @@
 			
 			
 			<button>등록</button>
-			<button>취소</button>
+			<button onclick="gobackdetail()">취소</button>
 	</form>
-		
+	<script>
+	function gobackdetail() {
+		window.history.back();
+		//혹시 모르니까
+/* 		let communityNo = ${ community.communityNo }
+		location.href="${pageContext.servletContext.contextPath}/community/detail?communityNo="+ communityNo;  */
+	};
+	</script>
 </body>
 </html>

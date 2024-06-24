@@ -28,16 +28,41 @@
 		</tr>
 	</table>
 	
-		<button onclick="gomModifypage()">수정</button>
-		<button>삭제</button>
-<%-- 	<c:if test="${ sessionScope.loginUser.userId eq community.userNo }">
-	</c:if> --%>
+	
+	<c:choose>
+		<c:when test="${ sessionScope.loginUser.userNo eq community.userNo }">
+			<button onclick="gomModifypage()">수정</button>
+			<button onclick="deletecommunity()">삭제</button>
+		</c:when>
+		<c:when test="${ (sessionScope.loginUser.userRole eq 'ROLE_USER') && (!(sessionScope.loginUser.userNo eq community.userNo))}">
+			<button>신고</button>
+		</c:when>
+		<c:when test="${ sessionScope.loginUser.userRole eq 'ROLE_ADMIN' }">
+			<button>계정정지</button>
+		</c:when>
+	</c:choose>
+	
+	
+	
 	<script>
+	// 수정버튼 클릭했을 때 적용되는 함수
 	function gomModifypage() {
 		let communityNo = ${ community.communityNo }
-		location.href="${pageContext.servletContext.contextPath}/community/modify?communityNo="+ communityNo;
-	}
+		location.href="${pageContext.servletContext.contextPath}/community/update?communityNo="+ communityNo;
+	};
+	</script>
+	
+	<script>
+		//삭제 버튼 클릭했을 때 적용되는 함수
+		function deletecommunity() {
+			let communityNo = ${ community.communityNo }
+			location.href="${pageContext.servletContext.contextPath}/community/delete?communityNo="+ communityNo;
+		}
+	
 	
 	</script>
+ 	
+	 
+	
 </body>
 </html>
