@@ -3,6 +3,7 @@ package com.javanos.project.community.model.dao;
 import java.util.List;
 
 import com.javanos.project.community.model.dto.CommunityDTO;
+import com.javanos.project.community.model.dto.PictureDTO;
 
 public interface CommunityDAO {
 
@@ -14,7 +15,9 @@ public interface CommunityDAO {
 
 	int deleteCommunity(int communityNo);
 
-	int insertCommunity(CommunityDTO community);
+	int insertCommunityTitleAndBody(CommunityDTO community);
+
+	int insertPicture(PictureDTO pictureDTO);
 
 
 }

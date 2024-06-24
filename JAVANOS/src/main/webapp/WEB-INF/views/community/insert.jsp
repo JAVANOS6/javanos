@@ -24,26 +24,40 @@
 								<td>썸네일 이미지</td>
 								<td>
 									<div class="title-img-area" id="titleImgArea">
-										<img id="titleImg">
+										<img id="titleImgView" width="350" height="200">
 									</div>
 								</td>
+								<td>
+									<input type="file" id="thumbnailImg" name="thumbnailImg" onchange="loadImg(this,1)">
+								</td>
 							</tr>
+							
+							
 							<tr>
 								<td>내용 사진</td>
 								<td>
 									<div class="body-img-area1" id="bodyImgArea1">
-										<img id="bodyImg1">
+										<img id="bodyImgView1" width="120" height="100">
 									</div>	
+								</td>
+								<td>
+									<input type="file" id="bodyImg1" name="bodyImg1" onchange="loadImg(this,2)">
 								</td>
 								<td>
 									<div class="body-img-area2" id="bodyImgArea2">
-										<img id="bodyImg2">
+										<img id="bodyImgView2" width="120" height="100">
 									</div>	
 								</td>
 								<td>
+									<input type="file" id="bodyImg2" name="bodyImg2" onchange="loadImg(this,3)">
+								</td>
+								<td>
 									<div class="body-img-area3" id="bodyImgArea3">
-										<img id="bodyImg3">
+										<img id="bodyImgView3" width="120" height="100">
 									</div>	
+								</td>
+								<td>
+									<input type="file" id="bodyImg3" name="bodyImg3" onchange="loadImg(this,4)">
 								</td>
 							</tr>
 							<tr>
@@ -53,15 +67,8 @@
 								</td>
 							</tr>
 						</table>
-						<div class="thumbnail-file-area">
-							<input type="file" id="thumbnailImg1" name="thumbnailImg1" onchange="loadImg(this,1)">
-							<input type="file" id="thumbnailImg2" name="thumbnailImg2" onchange="loadImg(this,2)">
-							<input type="file" id="thumbnailImg3" name="thumbnailImg3" onchange="loadImg(this,3)">
-							<input type="file" id="thumbnailImg4" name="thumbnailImg4" onchange="loadImg(this,4)">
-						</div>
 				</div>
 				<br>
-				<input type="hidden" name="userNo" value="${ sessionScope.loginUser.userNo }">
 				<div>
 					<button type="submit">등록</button>
 					<button onclick="gobackList()">취소</button>
@@ -75,19 +82,19 @@
 				const $bodyImgArea3 = document.getElementById("bodyImgArea3");
 				
 				$titleImgArea.onclick = function() { 
-					document.getElementById("thumbnailImg1").click(); 
+					document.getElementById("thumbnailImg").click(); 
 				}
 				
 				$bodyImgArea1.onclick = function() {
-					document.getElementById("thumbnailImg2").click();
+					document.getElementById("bodyImg1").click();
 				}
 				
 				$bodyImgArea2.onclick = function() {
-					document.getElementById("thumbnailImg3").click();
+					document.getElementById("bodyImg2").click();
 				}
 				
 				$bodyImgArea3.onclick = function() {
-					document.getElementById("thumbnailImg4").click();
+					document.getElementById("bodyImg3").click();
 				}
 				
 				function loadImg(value, num) {
@@ -97,16 +104,16 @@
 						reader.onload = function(e) {
 							switch(num){
 							case 1:
-								document.getElementById("titleImg").src = e.target.result;//파일의 데이터 url, 이미지 소스로 설정되어 브라우저에 이미지 표시
+								document.getElementById("titleImgView").src = e.target.result;//파일의 데이터 url, 이미지 소스로 설정되어 브라우저에 이미지 표시
 								break;
 							case 2:
-								document.getElementById("bodyImg1").src = e.target.result;
+								document.getElementById("bodyImgView1").src = e.target.result;
 								break;
 							case 3:
-								document.getElementById("bodyImg2").src = e.target.result;
+								document.getElementById("bodyImgView2").src = e.target.result;
 								break;
 							case 4:
-								document.getElementById("bodyImg3").src = e.target.result;
+								document.getElementById("bodyImgView3").src = e.target.result;
 								break;
 							}
 						}
@@ -119,6 +126,12 @@
 					파일 입력 요소에서 파일이 입력되면, 해당 파일을 읽고 데이터  url 형식으로 변환하여 지정된 이미지 요소에 미리보기를 표시
 					'num' 매개변수를 사용하여 어떤 이미지 요소에 이미지를 표시할지를 결정
 					사용자는 파일 선택시 즉시 미리보기 가능
+				*/
+				
+				
+				
+				/* 만약 한 input태그로 파일을 여러개 선택한다면??
+				//<input type="file" multiple">
 				*/
 			
 			

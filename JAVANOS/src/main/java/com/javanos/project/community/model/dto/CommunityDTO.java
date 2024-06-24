@@ -22,19 +22,6 @@ public class CommunityDTO implements java.io.Serializable{
 	public CommunityDTO() {
 		super();
 	}
-	
-	
-
-	public CommunityDTO(int communityNo, String communityTitle, String communityBody,
-			LocalDateTime communityModifyDate) {
-		super();
-		this.communityNo = communityNo;
-		this.communityTitle = communityTitle;
-		this.communityBody = communityBody;
-		this.communityModifyDate = communityModifyDate;
-	}
-
-
 
 	public CommunityDTO(int communityNo, String communityTitle, String communityBody, int communityCount,
 			LocalDateTime communityEnrollDate, LocalDateTime communityModifyDate, String communityBoardStatus, int userNo, UserDTO user,

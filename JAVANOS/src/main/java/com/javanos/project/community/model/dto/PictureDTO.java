@@ -4,9 +4,10 @@ import javax.tools.JavaCompiler;
 
 public class PictureDTO implements java.io.Serializable{
 	
-	private int picNO;
-	private String savedName;
-	private String savedPath;
+	private int picNo;
+	private String originalName;
+	private String saveName;
+	private String savePath;
 	private String fileType;
 	private String thumbnailPath;
 	private String picBoardStatus;
@@ -18,12 +19,13 @@ public class PictureDTO implements java.io.Serializable{
 	}
 
 
-	public PictureDTO(int picNO, String savedName, String savedPath, String fileType, String thumbnailPath,
-			String picBoardStatus, int communityNo) {
+	public PictureDTO(int picNo, String originalName, String saveName, String savePath, String fileType,
+			String thumbnailPath, String picBoardStatus, int communityNo) {
 		super();
-		this.picNO = picNO;
-		this.savedName = savedName;
-		this.savedPath = savedPath;
+		this.picNo = picNo;
+		this.originalName = originalName;
+		this.saveName = saveName;
+		this.savePath = savePath;
 		this.fileType = fileType;
 		this.thumbnailPath = thumbnailPath;
 		this.picBoardStatus = picBoardStatus;
@@ -31,33 +33,43 @@ public class PictureDTO implements java.io.Serializable{
 	}
 
 
-	public int getPicNO() {
-		return picNO;
+	public int getPicNo() {
+		return picNo;
 	}
 
 
-	public void setPicNO(int picNO) {
-		this.picNO = picNO;
+	public void setPicNo(int picNo) {
+		this.picNo = picNo;
 	}
 
 
-	public String getSavedName() {
-		return savedName;
+	public String getOriginalName() {
+		return originalName;
 	}
 
 
-	public void setSavedName(String savedName) {
-		this.savedName = savedName;
+	public void setOriginalName(String originalName) {
+		this.originalName = originalName;
 	}
 
 
-	public String getSavedPath() {
-		return savedPath;
+	public String getSaveName() {
+		return saveName;
 	}
 
 
-	public void setSavedPath(String savedPath) {
-		this.savedPath = savedPath;
+	public void setSaveName(String saveName) {
+		this.saveName = saveName;
+	}
+
+
+	public String getSavePath() {
+		return savePath;
+	}
+
+
+	public void setSavePath(String savePath) {
+		this.savePath = savePath;
 	}
 
 
@@ -103,10 +115,12 @@ public class PictureDTO implements java.io.Serializable{
 
 	@Override
 	public String toString() {
-		return "PictureDTO [picNO=" + picNO + ", savedName=" + savedName + ", savedPath=" + savedPath + ", fileType="
-				+ fileType + ", thumbnailPath=" + thumbnailPath + ", picBoardStatus=" + picBoardStatus
-				+ ", communityNo=" + communityNo + "]";
+		return "PictureDTO [picNo=" + picNo + ", originalName=" + originalName + ", saveName=" + saveName
+				+ ", savePath=" + savePath + ", fileType=" + fileType + ", thumbnailPath=" + thumbnailPath
+				+ ", picBoardStatus=" + picBoardStatus + ", communityNo=" + communityNo + "]";
 	}
+
+
 	
 	
 	
