@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.javanos.project.community.model.dao.CommunityDAO">
+	<resultMap type="com.javanos.project.community.model.dto.CommunityDTO" id="communityResultMap">
+		<id property="communityNo" column="COMMUNITY_NO"/>
+		<result property="communityTtile" column="COMMUNITY_TITLE"/>
+		<result property="communityBody" column="COMMUNITY_BODY"/>
+		<result property="communityCount" column="COMMUNITY_COUNT"/>
+		<result property="communityEnrollDate" column="COMMUNITY_ENROLL_DATE"/>
+		<result property="communityModifyDate" column="COMMUNITY_MODIFY_DATE"/>
+		<result property="communityBoardStatus" column="COMMUNITY_BOARD_STATUS"/>
+		<result property="userNo" column="USER_NO"/>
+		<association property="user" resultMap="UserResultMap"></association>
+	</resultMap>
+	
+	<resultMap type="com.javanos.project.user.model.dto.UserDTO" id="UserResultMap">
+		<id property="userNo" column="USER_NO"/>
+		<result property="userId" column="USER_ID"/>
+		<result property="userPwd" column="USER_PWD"/>
+		<result property="userName" column="USER_NAME"/>
+		<result property="userNickname" column="USER_NICKNAME"/>
+		<result property="userEmail" column="USER_EMAIL"/>
+		<result property="userRole" column="USER_ROLE"/>
+		<result property="userEnrollDate" column="USER_ENROLL_DATE"/>
+		<result property="userStatus" column="USER_STATUS"/>
+		<result property="userStopDate" column="USER_STOP_DATE"/>
+	</resultMap>
+
+	<!-- <select id="selectAllCommunityList" resultMap="communityResultMap">
+		SELECT
+			COMMUNITY_NO,
+			COMMUNITY_TITLE,
+			
+	
+	</select> -->
+
+</mapper>
