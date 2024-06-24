@@ -104,5 +104,4 @@ public class NoticeDTO implements java.io.Serializable {
 				+ noticeModifyDate + ", noticeCount=" + noticeCount + ", noticeBoardStatus=" + noticeBoardStatus + "]";
 	}
 	
-	
 }
