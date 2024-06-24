@@ -105,7 +105,4 @@ public class NoticeDTO implements java.io.Serializable {
 	}
 	
 	
-	
-	
-	
 }
