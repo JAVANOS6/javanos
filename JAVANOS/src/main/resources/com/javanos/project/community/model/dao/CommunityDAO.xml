@@ -93,10 +93,12 @@
 	</update>
 	
 	<delete id="deleteCommunity" parameterType="int">
-		UPDATE TBL_COMMUNITY
+		UPDATE TBL_COMMUNITY A, TBL_PIC B
 		SET
-			COMMUNITY_BOARD_STATUS = 'N'
-		WHERE COMMUNITY_NO = #{communityNo}
+			A.COMMUNITY_BOARD_STATUS = 'N',
+            B.PIC_BOARD_STATUS = 'N'
+		WHERE A.COMMUNITY_NO = B.COMMUNITY_NO
+        AND A.COMMUNITY_NO = #{communityNo};
 	</delete>
 	
 
