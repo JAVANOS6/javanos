@@ -8,29 +8,31 @@ import com.javanos.project.user.model.dto.UserDTO;
 public class NoticeDTO implements java.io.Serializable {
 
 	private int noticeNo;
-	private UserDTO noticeWriter;
 	private String noticeTitle;
 	private String noticeBody;
 	private Date noticeEnrollDate;
 	private Date noticeModifyDate;
 	private int noticeCount;
 	private String noticeBoardStatus;
+	private int noticeUserno;
+	private UserDTO noticeWriter;
 	
 	public NoticeDTO() {
 		super();
 	}
 
-	public NoticeDTO(int noticeNo, UserDTO noticeWriter, String noticeTitle, String noticeBody, Date noticeEnrollDate,
-			Date noticeModifyDate, int noticeCount, String noticeBoardStatus) {
+	public NoticeDTO(int noticeNo, String noticeTitle, String noticeBody, Date noticeEnrollDate, Date noticeModifyDate,
+			int noticeCount, String noticeBoardStatus, int noticeUserno, UserDTO noticeWriter) {
 		super();
 		this.noticeNo = noticeNo;
-		this.noticeWriter = noticeWriter;
 		this.noticeTitle = noticeTitle;
 		this.noticeBody = noticeBody;
 		this.noticeEnrollDate = noticeEnrollDate;
 		this.noticeModifyDate = noticeModifyDate;
 		this.noticeCount = noticeCount;
 		this.noticeBoardStatus = noticeBoardStatus;
+		this.noticeUserno = noticeUserno;
+		this.noticeWriter = noticeWriter;
 	}
 
 	public int getNoticeNo() {
@@ -39,14 +41,6 @@ public class NoticeDTO implements java.io.Serializable {
 
 	public void setNoticeNo(int noticeNo) {
 		this.noticeNo = noticeNo;
-	}
-
-	public UserDTO getNoticeWriter() {
-		return noticeWriter;
-	}
-
-	public void setNoticeWriter(UserDTO noticeWriter) {
-		this.noticeWriter = noticeWriter;
 	}
 
 	public String getNoticeTitle() {
@@ -97,11 +91,29 @@ public class NoticeDTO implements java.io.Serializable {
 		this.noticeBoardStatus = noticeBoardStatus;
 	}
 
+	public int getNoticeUserno() {
+		return noticeUserno;
+	}
+
+	public void setNoticeUserno(int noticeUserno) {
+		this.noticeUserno = noticeUserno;
+	}
+
+	public UserDTO getNoticeWriter() {
+		return noticeWriter;
+	}
+
+	public void setNoticeWriter(UserDTO noticeWriter) {
+		this.noticeWriter = noticeWriter;
+	}
+
 	@Override
 	public String toString() {
-		return "NoticeDTO [noticeNo=" + noticeNo + ", noticeWriter=" + noticeWriter + ", noticeTitle=" + noticeTitle
-				+ ", noticeBody=" + noticeBody + ", noticeEnrollDate=" + noticeEnrollDate + ", noticeModifyDate="
-				+ noticeModifyDate + ", noticeCount=" + noticeCount + ", noticeBoardStatus=" + noticeBoardStatus + "]";
+		return "NoticeDTO [noticeNo=" + noticeNo + ", noticeTitle=" + noticeTitle + ", noticeBody=" + noticeBody
+				+ ", noticeEnrollDate=" + noticeEnrollDate + ", noticeModifyDate=" + noticeModifyDate + ", noticeCount="
+				+ noticeCount + ", noticeBoardStatus=" + noticeBoardStatus + ", noticeUserno=" + noticeUserno
+				+ ", noticeWriter=" + noticeWriter + "]";
 	}
 	
+		
 }
