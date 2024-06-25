@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,13 +21,14 @@
 					<td>호선</td>
 					<td>
 						<select name="staLine">
-							<option value="1">1호선</option>
-							<option value="2">2호선</option>
+							<c:forEach var="station" items="${stationList}">
+								<option value="${station.stationLine}">${station.stationLine}</option>
+							</c:forEach>
 						</select>
 					</td>
 				</tr>
 				
-			<!-- 호선 필터링해서 역 선택 -->
+			<!-- 호선 필터링해서 역 선택; 비동기 통신으로 가지고 오기 -->
 				<tr>
 					<td>역</td>
 					<td>
@@ -78,7 +80,7 @@
 					<td>역</td>
 					<td>
 						<select name="staName">
-							<option value=""></option>
+							<option value="what">아몰라</option>
 							<option value=""></option>
 						</select>
 					</td>

@@ -17,6 +17,11 @@
 			<table>
 			<!-- 호선, 습득 역, 발견일 정보 출력 -->
 				<tr>
+				<td>호선</td>
+				<td>${ sessionScope.loginMember.memberName }</td>
+					<input type="hidden" name="boardWriterMemberNo" value="${ sessionScope.loginMember.memberNo }">
+				</tr>
+				<tr>
 					<td>분실 품목</td>
 					<td>
 						<input type="text" name="missing"/>

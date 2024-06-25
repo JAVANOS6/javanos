@@ -3,6 +3,7 @@ package com.javanos.project.lnf.model.dao;
 import java.util.List;
 
 import com.javanos.project.lnf.model.dto.LnfBoardDTO;
+import com.javanos.project.lnf.model.dto.StationDTO;
 
 public interface LnfDAO {
 	
@@ -22,5 +23,6 @@ public interface LnfDAO {
 	public List<LnfBoardDTO> selectBoardDetail();
 	
 	// 첫화면 
+	public List<StationDTO> firstPage();
 
 }

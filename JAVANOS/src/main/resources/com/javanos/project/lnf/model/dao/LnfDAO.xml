@@ -40,11 +40,23 @@
 	
 	<!-- 게시글 삽입 -->
 	<insert id="enrollBoard">
-		INSERT com.javanos.project.lnf.model.dao.LnFDAO#enrollBoard() 
-			INTO TBL_LNF
-		(	
-			
+		INSERT INTO TBL_LNF(
+			STA_NO,
+			LNF_FIND_DATE,
+			LNF_FIND_TIME,
+			LNF_MISSING,
+			LNF_KEEP,
+			LNF_DESCRIPTION,
+			LNF_ENROLL_DATE	
+			LNF_		
 		) VALUES (
+			#{staNo},
+			#{findDate},
+			#{findTime},
+			#{missing},
+			#{keep},
+			#{description},
+			#{enrollDate},
 		
 		)
 	</insert>
@@ -56,7 +68,5 @@
 	<!-- 게시글 삭제 -->
 	
 	<!-- 게시글 상세 보기 조회 -->
-	
-	<!-- 첫화면 -->
 	
 </mapper>

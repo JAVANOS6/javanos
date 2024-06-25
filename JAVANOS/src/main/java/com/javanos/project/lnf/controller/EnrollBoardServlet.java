@@ -35,7 +35,7 @@ public class EnrollBoardServlet extends HttpServlet {
 		 */
 		
 		int lnfNo = Integer.parseInt(request.getParameter("lnfNo"));
-		int staNo=((StationDTO) request.getSession().getAttribute("stationNo")).getStaNo();
+//		int staNo=((StationDTO) request.getSession().getAttribute("stationNo")).getStaNo();
 		String missing = request.getParameter("missing");
 		String findDateStr = request.getParameter("findDate");
 			Date findDate = null;
