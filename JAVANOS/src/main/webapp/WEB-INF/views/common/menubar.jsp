@@ -29,7 +29,7 @@
 						</c:when>
 						<c:when
 							test="${ sessionScope.loginUser.userRole eq 'ROLE_ADMIN' }">
-							<li><a href="">신고내역</a></li>
+							<li><a href="${ pageContext.servletContext.contextPath }/CheckBoard">신고내역</a></li>
 							<li><a href="${ pageContext.servletContext.contextPath }/user/logout">로그아웃</a></li>
 						</c:when>
 					</c:choose>
