@@ -9,24 +9,4 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
-  <servlet>
-    <description></description>
-    <display-name>UserMypageServlet</display-name>
-    <servlet-name>UserMypageServlet</servlet-name>
-    <servlet-class>com.javanos.project.user.controller.UserMypageServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>UserMypageServlet</servlet-name>
-    <url-pattern>/UserMypageServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>UserDeleteServlet</display-name>
-    <servlet-name>UserDeleteServlet</servlet-name>
-    <servlet-class>com.javanos.project.user.controller.UserDeleteServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>UserDeleteServlet</servlet-name>
-    <url-pattern>/UserDeleteServlet</url-pattern>
-  </servlet-mapping>
 </web-app>
