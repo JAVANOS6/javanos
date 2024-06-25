@@ -23,6 +23,8 @@ public interface LnfDAO {
 	public List<LnfBoardDTO> selectBoardDetail();
 	
 	// 첫화면 
-	public List<StationDTO> firstPage();
+	public List<StationDTO> getAllStationLine();
+
+	public List<StationDTO> getStationNamesByLine(String staLine);
 
 }

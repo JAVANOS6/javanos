@@ -36,6 +36,20 @@
 	</div>
 	
 	<!-- 검색 -->
+	<div class="search-area" align="center">
+			<form id="loginForm" action="${ pageContext.servletContext.contextPath }/board/main" method="get">		
+			    <input type="hidden" name="currentPage" value="1">
+			    <select id="searchCondition" name="searchCondition">
+					<option value="missing" ${ requestScope.selectCriteria.searchCondition eq "missing"? "selected": "" }>분실 품목</option>
+					<option value="staLine" ${ requestScope.selectCriteria.searchCondition eq "staLine"? "selected": "" }>역</option>
+					<option value="staName" ${ requestScope.selectCriteria.searchCondition eq "staName"? "selected": "" }>호선</option>
+				</select>
+		        <input type="search" id="searchValue" name="searchValue" value="<c:out value="${ requestScope.selectCriteria.searchValue }"/>">
+
+				<button type="submit">검색하기</button>
+			</form>
+		</div>
+	</div>
 
 </body>
 </html>

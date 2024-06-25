@@ -16,11 +16,17 @@
 		<form action="${ pageContext.servletContext.contextPath }/board/insert" method="post">
 			<table>
 			<!-- 호선, 습득 역, 발견일 정보 출력 -->
-				<tr>
+			<tr>
 				<td>호선</td>
 				<td>${ sessionScope.loginMember.memberName }</td>
 					<input type="hidden" name="boardWriterMemberNo" value="${ sessionScope.loginMember.memberNo }">
-				</tr>
+					
+				<c:forEach var="fruit" items="${fruits}">
+    				<p>${fruit}</p>
+				</c:forEach>
+			</tr>
+			
+			<!-- 입력 받기  -->
 				<tr>
 					<td>분실 품목</td>
 					<td>

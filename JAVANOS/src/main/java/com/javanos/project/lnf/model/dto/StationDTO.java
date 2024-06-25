@@ -57,6 +57,4 @@ public class StationDTO implements java.io.Serializable {
 				+ "]";
 	}
 	
-	
-
 }
