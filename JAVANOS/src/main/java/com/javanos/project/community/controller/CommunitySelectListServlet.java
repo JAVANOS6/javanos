@@ -22,7 +22,7 @@ public class CommunitySelectListServlet extends HttpServlet {
 				List<CommunityDTO> communityList = new CommunityService().selectAllCommunityList();
 				
 				request.setAttribute("communityList", communityList);
-				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/community/community.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/community/communityList.jsp");
 				rd.forward(request, response);
 	
 	}
