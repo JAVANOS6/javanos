@@ -9,15 +9,4 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
-  <description></description>
-  <servlet>
-    <description></description>
-    <display-name>ReportDetailServlet</display-name>
-    <servlet-name>ReportDetailServlet</servlet-name>
-    <servlet-class>com.javanos.project.report.admin.controller.confim.ReportDetailServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ReportDetailServlet</servlet-name>
-    <url-pattern>/ReportDetailServlet</url-pattern>
-  </servlet-mapping>
-</web-app>
+  </web-app>
