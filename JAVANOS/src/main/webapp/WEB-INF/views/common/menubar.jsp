@@ -20,7 +20,7 @@
 					<li><a href="${ pageContext.servletContext.contextPath }/community/list">커뮤니티</a></li>
 					<li><a href="${ pageContext.servletContext.contextPath }/notice/list">공지사항</a></li>
 					<c:choose>
-						<c:when test="${ empty sessionScope.loginUser }">
+						<c:when test="${ empty sessionScope.loginUser }"> 
 							<li><a href="${ pageContext.servletContext.contextPath }/user/login">로그인</a></li>
 						</c:when>
 						<c:when test="${ sessionScope.loginUser.userRole eq 'ROLE_USER' }">
