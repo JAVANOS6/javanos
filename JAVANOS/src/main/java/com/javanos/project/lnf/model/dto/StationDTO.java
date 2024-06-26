@@ -3,7 +3,7 @@ package com.javanos.project.lnf.model.dto;
 public class StationDTO implements java.io.Serializable {
 	
 	private int staNo;
-	private int staCode;
+	private String staCode;
 	private String staName;
 	private String staLine;
 	
@@ -11,7 +11,7 @@ public class StationDTO implements java.io.Serializable {
 		super();
 	}
 
-	public StationDTO(int staNo, int staCode, String staName, String staLine) {
+	public StationDTO(int staNo, String staCode, String staName, String staLine) {
 		super();
 		this.staNo = staNo;
 		this.staCode = staCode;
@@ -27,11 +27,11 @@ public class StationDTO implements java.io.Serializable {
 		this.staNo = staNo;
 	}
 
-	public int getStaCode() {
+	public String getStaCode() {
 		return staCode;
 	}
 
-	public void setStaCode(int staCode) {
+	public void setStaCode(String staCode) {
 		this.staCode = staCode;
 	}
 
