@@ -13,7 +13,7 @@
 	<div>
 		<br>
 		<h2 align="center">게시판 작성</h2>
-		<div class="table-area">
+		<div class="table-area" align="center">
 			<form action="${ pageContext.servletContext.contextPath }/lnf/insert" method="post">
 				<table>
 					<tr>
@@ -34,14 +34,12 @@
 								<option value="수인분당선">수인분당선</option>
 							</select>
 						</td>
-					</tr>
-					<tr>
-						<td>역</td>
+						
+						<td>역 </td>
 						<td>
 							<input type="text" name="staName">
 						</td>
-					</tr>
-					<tr>
+					
 						<td>발견일</td>
 						<td>
 							<input type="date" name="findDate">
@@ -52,8 +50,7 @@
 						<td>
 							<input type="text" name="missing">
 						</td>
-					</tr>
-					<tr>
+
 						<td>보관 장소</td>
 						<td>
 							<input type="text" name="keep">
@@ -62,12 +59,13 @@
 					<tr>
 						<td>내용</td>
 						<td>
-							<textarea name="description" cols="60" rows="15" style="resize:none;"></textarea>
+							<textarea name="description" cols="100" rows="15" style="resize:none;"></textarea>
 						</td>
 					</tr>
 				</table>
 				<br>
 				<div align="center">
+					<!-- 취소하면 firstPage로 반환 -->
 					<button type="reset">취소하기</button>
 					<button type="submit">등록하기</button>
 				</div>

@@ -12,6 +12,7 @@
 	<jsp:include page="../../common/menubar.jsp"/>
 	
 	<!-- 게시글 출력할 것 -->
+	<h2>분실물 게시판</h2>
 	<div>
 		<table>
 			<tr>
@@ -33,6 +34,8 @@
 		</table>
 	</div>
 	
+	
+	
 	<!-- 검색 -->
 	<div class="search-area" align="center">
 			<form id="loginForm" action="${ pageContext.servletContext.contextPath }/lnf/search" method="get">		
@@ -46,7 +49,6 @@
 
 				<button type="submit">검색하기</button>
 			</form>
-		</div>
 	</div>
 
 </body>

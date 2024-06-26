@@ -11,6 +11,8 @@ import java.io.IOException;
 public class BoardDetailServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		request.getRequestDispatcher("/WEB-INF/views/lnf/page/detailForm.jsp").forward(request, response);
 
 	}
 
