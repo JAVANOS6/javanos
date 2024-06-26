@@ -4,11 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>커뮤니티</title>
+<title>Insert title here</title>
 </head>
 <body>
-	<jsp:include page="../common/menubar.jsp"/>
-	
-	
+
+<!-- 공지사항 내용수정 화면 폼 -->
+
 </body>
 </html>
