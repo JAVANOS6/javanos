@@ -14,7 +14,7 @@
 		<div class="menu-area">
 			<div class="nav-area">
 				<ul>
-					<li><a href="">home</a></li>
+					<li><a href="${ pageContext.servletContext.contextPath }">home</a></li>
 					<li><a href="">내려요</a></li>
 					<li><a href="">분실물</a></li>
 					<li><a href="${ pageContext.servletContext.contextPath }/community/list">커뮤니티</a></li>
@@ -24,7 +24,7 @@
 							<li><a href="${ pageContext.servletContext.contextPath }/user/login">로그인</a></li>
 						</c:when>
 						<c:when test="${ sessionScope.loginUser.userRole eq 'ROLE_USER' }">
-							<li><a href="">마이페이지</a></li>
+							<li><a href="${ pageContext.servletContext.contextPath }/user/mypage">마이페이지</a></li>
 							<li><a href="${ pageContext.servletContext.contextPath }/user/logout">로그아웃</a></li>
 						</c:when>
 						<c:when
