@@ -1,14 +1,66 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
+<meta charset="UTF-8">
+<title>ê³„ì • ê´€ë¦¬ ê²Œì‹œíŒ</title>
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 60px;
+    }
+    table, th, td {
+        border: 1px solid black;
+    }
+    th, td {
+        padding: 10px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+</style>
 </head>
 <body>
+<jsp:include page="../common/menubar.jsp"/>
 
-<h1>°èÁ¤ °ü¸® °Ô½ÃÆÇ ¸ŞÀÎ</h1>
+<h1>ì‹ ê³  ë‚´ì—­</h1>
+
+<table>
+    <tr>
+        <th>#</th>
+        <th>ì‘ì„±ì</th>
+        <th>ì‹ ê³  ë‚´ìš©</th>
+        <th>ë“±ë¡ì¼</th>
+    </tr>
+    <%
+        Object reportsObj = application.getAttribute("reports");
+        if (reportsObj instanceof List) {
+            List<?> reportsList = (List<?>) reportsObj;
+            int index = 1;
+            for (Object reportObj : reportsList) {
+                if (reportObj instanceof String[]) {
+                    String[] report = (String[]) reportObj;
+                    String userId = report[0];
+                    String check1 = report[1];
+                    String additionalText = report[2];
+                    String currentDate = report[3];
+    %>
+    <tr>
+        <td><%= index++ %></td>
+        <td><%= userId %></td>
+        <td><%= check1 %></td>
+        <td><%= currentDate %></td>
+    </tr>
+    <%
+                }
+            }
+        }
+    %>
+</table>
 
 </body>
 </html>

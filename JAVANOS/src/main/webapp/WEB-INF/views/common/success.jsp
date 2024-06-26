@@ -27,6 +27,11 @@
 					successMessage = "탈퇴가 완료되었습니다.";
 					movePath = "${ pageContext.servletContext.contextPath }";
 					break;
+					
+				case "reportSubmitted":
+					successMessage = "신고가 완료되었습니다.";
+					movePath = "${ pageContext.servletContext.contextPath }/community/list";
+					break;
 			}
 
 			alert(successMessage);
