@@ -75,8 +75,5 @@
 		location.href="${pageContext.servletContext.contextPath}/community/list";
 	}
 	</script>
- 	
-	 
-	
 </body>
 </html>
