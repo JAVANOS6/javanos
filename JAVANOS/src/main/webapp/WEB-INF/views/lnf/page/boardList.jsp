@@ -16,20 +16,18 @@
 		<table>
 			<tr>
 				<th>#</th>
-				<th>습득 호선</th>
-				<th>습득 역</th>
+<!-- 				<th>습득 호선</th>
+				<th>습득 역</th> -->
 				<th>분실 품목</th>
 				<th>등록일</th>
 				<th>발견일</th>
 			</tr>
-			<c:forEach var="lnfBoard" items="${ requestScope.boardList }">
+			<c:forEach var="lnfBoard" items="${ requestScope.lnfBoardList }">
 			<tr>
-				<td><c:out value="${ board.no }"/></td>
-				<td><c:out value="${ board.sta.line }"/></td>
-				<td><c:out value="${ board.sta.date }"/></td>
-				<td><c:out value="${ board.missing }"/></td>
-				<td><c:out value="${ board.enroll.date }"/></td>
-				<td><c:out value="${ board.find.date }"/></td>
+				<td><c:out value="${ lnfBoard.lnfNo }"/></td>
+				<td><c:out value="${ lnfBoard.missing }"/></td>
+				<td><c:out value="${ lnfBoard.enroll.date }"/></td>
+				<td><c:out value="${ lnfBoard.find.date }"/></td>
 			</tr>
 			</c:forEach>
 		</table>
@@ -37,7 +35,7 @@
 	
 	<!-- 검색 -->
 	<div class="search-area" align="center">
-			<form id="loginForm" action="${ pageContext.servletContext.contextPath }/board/main" method="get">		
+			<form id="loginForm" action="${ pageContext.servletContext.contextPath }/lnf/search" method="get">		
 			    <input type="hidden" name="currentPage" value="1">
 			    <select id="searchCondition" name="searchCondition">
 					<option value="missing" ${ requestScope.selectCriteria.searchCondition eq "missing"? "selected": "" }>분실 품목</option>
