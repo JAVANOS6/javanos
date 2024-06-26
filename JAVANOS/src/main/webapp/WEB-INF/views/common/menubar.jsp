@@ -16,7 +16,7 @@
 				<ul>
 					<li><a href="${ pageContext.servletContext.contextPath }">home</a></li>
 					<li><a href="">내려요</a></li>
-					<li><a href="">분실물</a></li>
+					<li><a href="${ pageContext.servletContext.contextPath }/lnf/first">분실물</a></li>
 					<li><a href="${ pageContext.servletContext.contextPath }/community/list">커뮤니티</a></li>
 					<li><a href="">공지사항</a></li>
 					<c:choose>
@@ -29,7 +29,7 @@
 						</c:when>
 						<c:when
 							test="${ sessionScope.loginUser.userRole eq 'ROLE_ADMIN' }">
-							<li><a href="">신고내역</a></li>
+							<li><a href="${ pageContext.servletContext.contextPath }/CheckBoard">신고내역</a></li>
 							<li><a href="${ pageContext.servletContext.contextPath }/user/logout">로그아웃</a></li>
 						</c:when>
 					</c:choose>
