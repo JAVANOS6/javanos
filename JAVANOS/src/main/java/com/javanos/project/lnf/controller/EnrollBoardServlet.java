@@ -56,6 +56,8 @@ public class EnrollBoardServlet extends HttpServlet {
 		LnfBoardService boardService = new LnfBoardService();
 		int result = boardService.enrollBoard(newBoard);
 		
+		System.out.println(boardService);
+		
 		String path = "";
 		if(result > 0) {
 			path = "/WEB-INF/views/common/success.jsp";
