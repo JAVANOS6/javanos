@@ -14,6 +14,9 @@
 		<div class="menu-area">
 			<div class="nav-area">
 				<ul>
+					<li><a href="${ pageContext.servletContext.contextPath }">home</a></li>
+					<li><a href="${ pageContext.servletContext.contextPath }/down/enroll">내려요</a></li>
+					<li><a href="${ pageContext.servletContext.contextPath }/lnf/first">분실물</a></li>
 					<li><a href="${ pageContext.servletContext.contextPath }/community/list">커뮤니티</a></li>
 					<li><a href="${ pageContext.servletContext.contextPath }/notice/list">공지사항</a></li>
 					<c:choose>
