@@ -11,12 +11,4 @@
   </welcome-file-list>
   <servlet>
     <description></description>
-    <display-name>RegistForwardServlet</display-name>
-    <servlet-name>RegistForwardServlet</servlet-name>
-    <servlet-class>com.javanos.project.report.member.controller.regist.RegistForwardServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>RegistForwardServlet</servlet-name>
-    <url-pattern>/RegistForwardServlet</url-pattern>
-  </servlet-mapping>
 </web-app>
