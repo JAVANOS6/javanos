@@ -20,6 +20,7 @@
 			<form
 				action="${ pageContext.servletContext.contextPath }/notice/update"
 				method="post">
+				
 				<table>
 					<tr>
 						<td>번호</td>

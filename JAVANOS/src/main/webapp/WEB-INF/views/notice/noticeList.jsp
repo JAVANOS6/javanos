@@ -29,8 +29,7 @@
 				.forEach(function(row) {
 					row.onclick = function() {
 						const noticeNo = this.cells[0].innerText.trim(); // 첫 번째 셀의 텍스트(공지번호)
-						location.href = "${pageContext.servletContext.contextPath}/notice/detail?no="
-								+ noticeNo;
+						location.href = "${pageContext.servletContext.contextPath}/notice/detail?no=" + noticeNo;
 					};
 				});
 	};

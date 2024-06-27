@@ -53,41 +53,29 @@ public class NoticeUpdateServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// 요청 파라미터에서 공지사항 정보 추출
-		String noticeNo = request.getParameter("noticeNo");
+		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
 		String title = request.getParameter("title");
 		String body = request.getParameter("content");
 		int writerUserNo = ((UserDTO) request.getSession().getAttribute("loginUser")).getUserNo();
 
-		// NoticeDTO 객체 생성 및 데이터 설정
-		NoticeDTO updateNotice = new NoticeDTO();
-		updateNotice.setNoticeNo(writerUserNo);
-		updateNotice.setNoticeTitle(title);
-		updateNotice.setNoticeBody(body);
-		updateNotice.setNoticeUserno(writerUserNo); // 공지 작성자 회원번호 넣음
-		
-		System.out.println("========");
-		System.out.println(updateNotice);
+		NoticeDTO originNotice = new NoticeDTO();
+		originNotice.setNoticeNo(noticeNo);
+		originNotice.setNoticeTitle(title);
+		originNotice.setNoticeBody(body);
+		originNotice.setNoticeUserno(writerUserNo);
 
-		// NoticeService를 통해 공지사항 수정
 		NoticeService noticeService = new NoticeService();
-		int result = noticeService.updateNotice(updateNotice);
+		int result = noticeService.updateNotice(originNotice);
 		System.out.println("servlet의 result " + result);
 
-		// 응답 처리
 		String path = "";
 		if (result > 0) {
-			// 수정 성공 시, 공지사항 목록 페이지로 리디렉션
 			path = "/WEB-INF/views/common/success.jsp";
 			request.setAttribute("successCode", "updateNotice");
 		} else {
-			// 수정 실패 시, 에러 페이지로 포워딩
 			path = "/WEB-INF/views/common/fail.jsp";
 			request.setAttribute("message", "공지사항 수정에 실패했습니다.");
-
 		}
 		request.getRequestDispatcher(path).forward(request, response);
-
 	}
-
 }

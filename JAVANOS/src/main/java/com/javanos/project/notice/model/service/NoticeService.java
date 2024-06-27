@@ -83,12 +83,11 @@ public class NoticeService {
 	}
 
 	// 공지사항 수정
-	public int updateNotice(NoticeDTO updateNotice) {
-
+	public int updateNotice(NoticeDTO originNotice) {
 		SqlSession session = getSqlSession();
 		noticeDAO = session.getMapper(NoticeDAO.class);
 
-		int result = noticeDAO.updateNotice(updateNotice);
+		int result = noticeDAO.updateNotice(originNotice);
 		System.out.println("service의 result : " + result);
 
 		if (result > 0) {
