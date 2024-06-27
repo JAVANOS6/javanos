@@ -2,6 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,10 +31,56 @@
 				.forEach(function(row) {
 					row.onclick = function() {
 						const noticeNo = this.cells[0].innerText.trim(); // 첫 번째 셀의 텍스트(공지번호)
-						location.href = "${pageContext.servletContext.contextPath}/notice/detail?no=" + noticeNo;
+						location.href = "${pageContext.servletContext.contextPath}/notice/detail?no="
+								+ noticeNo;
 					};
 				});
+
+		
+		// 검색하기 버튼 클릭 이벤트 처리
+		const searchButton = document.querySelector("button[type=submit]");
+        if (searchButton) {
+            searchButton.onclick = function() {
+                const searchCondition = document.getElementById("searchCondition").value;
+                const keyword = document.querySelector("input[type=search]").value;
+                
+                // AJAX를 이용하여 서버에 검색 요청 보내기
+                fetchSearchResults(searchCondition, keyword);
+			};
+		}
 	};
+	
+	function fetchSearchResults(searchCondition, keyword) {
+        const url = "${pageContext.servletContext.contextPath}/notice/noticeSearchList";
+        const params = `searchCondition=${searchCondition}&keyword=${keyword}`;
+
+        fetch(url + "?" + params)
+            .then(response => response.json())
+            .then(data => {
+                // 검색 결과를 받아서 처리할 코드
+                renderSearchResults(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+
+    function renderSearchResults(noticeList) {
+        const tableBody = document.querySelector("#listArea tbody");
+        tableBody.innerHTML = ""; // 기존 목록 초기화
+
+        noticeList.forEach(function(notice) {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${notice.noticeNo}</td>
+                <td>${notice.noticeTitle}</td>
+                <td>${notice.noticeWriter.userNickname}</td>
+                <td>${notice.noticeCount}</td>
+                <td>${notice.noticeEnrollDate}</td>
+            `;
+            tableBody.appendChild(row);
+        });
+    }
 </script>
 </head>
 <body>
@@ -63,19 +111,24 @@
 			</table>
 		</div>
 		<div class="search-area" align="center">
-			<select id="searchCondition" name="searchCondition">
-				<option value="writer">작성자</option>
-				<option value="title">제목</option>
-				<option value="content">내용</option>
-			</select> <input type="search">
-			<button type="submit">검색하기</button>
-
+				<form action="${pageContext.request.contextPath}/notice/noticeSearchList"
+				method="GET">
+				<select id="searchCondition" name="searchCondition">
+					<option value="title">제목</option>
+					<option value="body">내용</option>
+					<option value="titleAndBody">제목+내용</option>
+				</select> <input type="search" name="keyword">
+				<button type="submit">검색하기</button>
+			</form>
+			
 			<c:if test="${ sessionScope.loginUser.userRole eq 'ROLE_ADMIN' }">
 				<!-- 관리자인 경우에만 작성 버튼이 보여집니다. -->
 				<button id="writeNotice">작성</button>
 			</c:if>
 		</div>
 	</div>
+
+
 
 </body>
 </html>

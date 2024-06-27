@@ -140,18 +140,84 @@
 		UPDATE TBL_NOTICE
 		SET
 		NOTICE_TITLE = #{noticeTitle},
-		NOTICE_BODY = #{noticeBody},
+		NOTICE_BODY =
+		#{noticeBody},
 		NOTICE_USER_NO = #{noticeUserno}
 		WHERE
-		NOTICE_NO = #{noticeNo}
+		NOTICE_NO =
+		#{noticeNo}
 	</update>
 
 
 	<!-- 삭제 쿼리 -->
 	<delete id="deleteNotice" parameterType="int">
-        <!-- com.javanos.project.notice.model.dao.NoticeDAO#deleteNotice() 메소드에서 호출됨을 의미 -->
-        DELETE FROM TBL_NOTICE
-        WHERE NOTICE_NO = #{noticeNo}
-    </delete>
+		<!-- com.javanos.project.notice.model.dao.NoticeDAO#deleteNotice() 메소드에서 
+			호출됨을 의미 -->
+		DELETE FROM TBL_NOTICE
+		WHERE NOTICE_NO = #{noticeNo}
+	</delete>
+
+
+	<select id="searchNoticeByTitle" resultMap="noticeResultMap"
+		parameterType="String">
+		SELECT
+		A.NOTICE_NO,
+		A.NOTICE_TITLE,
+		A.NOTICE_BODY,
+		A.NOTICE_USER_NO,
+		B.USER_NICKNAME,
+		A.NOTICE_ENROLL_DATE,
+		A.NOTICE_COUNT
+		FROM TBL_NOTICE A
+		JOIN TBL_USER B ON (A.NOTICE_USER_NO = B.USER_NO)
+		WHERE
+		A.NOTICE_BOARD_STATUS = 'Y' <!-- 공지사항 상태 'Y'일때만 조회함 -->
+		AND A.NOTICE_TITLE LIKE CONCAT('%', #{keyword}, '%')
+		ORDER BY
+		A.NOTICE_NO DESC <!-- 공지사항 정렬 최신순 -->
+	</select>
+
+	<select id="searchNoticeByBody" resultMap="noticeResultMap"
+		parameterType="String">
+		SELECT
+		A.NOTICE_NO,
+		A.NOTICE_TITLE,
+		A.NOTICE_BODY,
+		A.NOTICE_USER_NO,
+		B.USER_NICKNAME,
+		A.NOTICE_ENROLL_DATE,
+		A.NOTICE_COUNT
+		FROM TBL_NOTICE A
+		JOIN TBL_USER B ON (A.NOTICE_USER_NO = B.USER_NO)
+		WHERE
+		A.NOTICE_BOARD_STATUS = 'Y' <!-- 공지사항 상태 'Y'일때만 조회함 -->
+		AND A.NOTICE_BODY LIKE CONCAT('%', #{keyword}, '%')
+		ORDER BY
+		A.NOTICE_NO DESC <!-- 공지사항 정렬 최신순 -->
+	</select>
+
+
+	<select id="searchNoticeByTitleAndBody" resultMap="noticeResultMap"
+		parameterType="String">
+		SELECT
+		A.NOTICE_NO,
+		A.NOTICE_TITLE,
+		A.NOTICE_BODY,
+		A.NOTICE_USER_NO,
+		B.USER_NICKNAME,
+		A.NOTICE_ENROLL_DATE,
+		A.NOTICE_COUNT
+		FROM TBL_NOTICE A
+		JOIN TBL_USER B ON (A.NOTICE_USER_NO = B.USER_NO)
+		WHERE A.NOTICE_BOARD_STATUS = 'Y'
+		AND (
+		A.NOTICE_TITLE LIKE CONCAT('%', #{keyword}, '%')
+		OR A.NOTICE_BODY LIKE CONCAT('%', #{keyword}, '%')
+		)
+		ORDER BY A.NOTICE_NO DESC
+	</select>
+
+
+
 
 </mapper>

@@ -1,6 +1,8 @@
 package com.javanos.project.notice.model.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -120,4 +122,37 @@ public class NoticeService {
 		return result;
 	}
 
+	// 제목으로 공지사항 검색 메소드
+	public List<NoticeDTO> searchNoticeByTitle(String title) {
+
+		SqlSession session = getSqlSession();
+		noticeDAO = session.getMapper(NoticeDAO.class);
+
+		List<NoticeDTO> searchResult = noticeDAO.searchNoticeByTitle(title);
+
+		session.close();
+
+		return searchResult;
+	}
+
+	// 내용으로 공지사항 검색 메소드
+	public List<NoticeDTO> searchNoticeByBody(String body) {
+		SqlSession session = getSqlSession();
+		noticeDAO = session.getMapper(NoticeDAO.class);
+		List<NoticeDTO> searchResult = noticeDAO.searchNoticeByBody(body);
+		session.close();
+		return searchResult;
+	}
+
+	// 제목 또는 내용으로 공지사항 검색 메소드
+	public List<NoticeDTO> searchNoticeByTitleAndBody(String keyword) {
+		SqlSession session = getSqlSession();
+		noticeDAO = session.getMapper(NoticeDAO.class);
+
+		List<NoticeDTO> noticeList = noticeDAO.searchNoticeByTitleAndBody(keyword);
+
+		session.close();
+
+		return noticeList;
+	}
 }
