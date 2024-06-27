@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/notice/event.js"></script>
+
 </head>
 <body>
 
@@ -72,6 +74,7 @@
 				$tds[i].onclick = function() {
 					
 					const no = this.parentNode.children[0].innerText;
+					/* 공지사항 클릭 시 상세정보 페이지로 이동함 */
 					location.href = "${ pageContext.servletContext.contextPath }/notice/detail?no=" + no;
 				}
 				

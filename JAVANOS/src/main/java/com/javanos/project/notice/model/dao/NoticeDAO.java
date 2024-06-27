@@ -24,4 +24,6 @@ public interface NoticeDAO {
 	// 매개변수: 조회할 공지사항의 번호
 	public NoticeDTO selectNoticeDetail(int no);
 
+	// 수정 메소드
+	public int updateNotice(NoticeDTO updateNotice);
 }

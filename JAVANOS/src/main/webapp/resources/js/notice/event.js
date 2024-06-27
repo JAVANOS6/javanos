@@ -11,7 +11,7 @@ window.onload = function() {
 		const $writeNotice = document.getElementById("writeNotice");
 		$writeNotice.onclick = function(){
 				// 작성버튼 누르면 작성페이지로 이동함
-				location.href = "/project/notice/insert";
+				location.href = "/notice/insert";
 		}
 	}
 	
@@ -20,7 +20,7 @@ window.onload = function() {
 		const $cancleNotice = document.getElementById("cancleNotice");
 		$writeNotice.onclick = function(){
 				// 취소버튼 누르면 공지사항 목록 으로 이동함
-				location.href = "/project/notice/list";
+				location.href = "/notice/list";
 		}
 	}
 	

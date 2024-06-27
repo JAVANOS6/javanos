@@ -11,6 +11,8 @@
 <%-- 새로운 공지사항 작성 화면 폼 --%>
 	<jsp:include page="../common/menubar.jsp"/>
 	
+	<button onclick="moveLocation('insertNotice')">작성 페이지로 이동</button>
+	
 	<div class="outer outer-notice-insert">
 		<br>
 		<h2 align="center">공지 사항 작성</h2>

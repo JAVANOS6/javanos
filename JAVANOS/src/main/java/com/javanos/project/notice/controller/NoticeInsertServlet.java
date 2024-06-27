@@ -22,7 +22,7 @@ public class NoticeInsertServlet extends HttpServlet {
 //		3. 클라는 insertForm.jsp 볼 수 있음		
 		
 //		클라에게 포워딩(전달해줄)할 JSP 파일경로 -> String 문자열로 저장함
-		String path = "/WEB-INF/views/notice/insertForm.jsp";
+		String path = "/WEB-INF/views/notice/noticeInsertForm.jsp";
 		
 //		path 경로로 요청을 보낼 객체 반환. 클라의 요청을 지정된 경로*inserForm.jsp로 포워딩(전달)함.
 //		-> 요청 url은 변경되지 않지만 서버측에서 다른 리소스가 응답 생성해서 클라이언트에게 반환함.(dispatcher기능)
@@ -32,8 +32,8 @@ public class NoticeInsertServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String title = request.getParameter("noticeTitle");
-		String body = request.getParameter("noticeBody");
+		String title = request.getParameter("title");
+		String body = request.getParameter("body");
 		int writerUserNo = ((UserDTO) request.getSession().getAttribute("loginUser")).getUserNo();
 		
 		NoticeDTO newNotice = new NoticeDTO();
