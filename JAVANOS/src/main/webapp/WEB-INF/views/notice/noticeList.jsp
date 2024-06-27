@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 
@@ -30,7 +31,7 @@
 					<tr>
 						<td><c:out value="${ notice.noticeNo }" /></td>
 						<td><c:out value="${ notice.noticeTitle }" /></td>
-						<td><c:out value="${ notice.noticeUserno}" /></td>
+						<td><c:out value="${ notice.noticeWriter.userNickname }" /></td>
 						<td><c:out value="${ notice.noticeCount }" /></td>
 						<td><c:out value="${ notice.noticeEnrollDate }" /></td>
 					</tr>

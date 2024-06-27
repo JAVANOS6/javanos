@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.javanos.project.user.model.dao.UserDAO;
 import com.javanos.project.notice.model.dao.NoticeDAO;
 import com.javanos.project.notice.model.dto.NoticeDTO;
 

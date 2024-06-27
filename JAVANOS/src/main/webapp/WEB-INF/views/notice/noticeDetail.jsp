@@ -27,7 +27,7 @@
 					<td>작성자</td>
 					<%-- ${}: jsp에서 자바 객체의 필드나 속성 값을 출력할 때 사용함 --%>
 					<td><p>
-							<c:out value="${ requestScope.notice.noticeUserno }" />
+							<c:out value="${ requestScope.notice.noticeWriter.userNickname }" />
 						</p></td>
 					<td>작성일</td>
 					<td><p>
