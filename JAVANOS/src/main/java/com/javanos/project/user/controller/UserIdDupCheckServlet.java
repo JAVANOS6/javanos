@@ -9,13 +9,19 @@ import java.io.IOException;
 
 import com.javanos.project.user.model.service.UserService;
 
-@WebServlet("/user/checkid")
+@WebServlet("/user/check-id")
 public class UserIdDupCheckServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userId = request.getParameter("userId");
 		
 		int result = new UserService().checkDupUserId(userId);
+		
+		if(result > 0) {
+			response.getWriter().write("fail");
+		} else {
+			response.getWriter().write("pass");
+		}
 	}
 
 }
