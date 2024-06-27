@@ -6,6 +6,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/notice/noticeUpdateForm.css">
+<script>
+	// 취소 버튼 클릭 시 초기화 및 이동 처리
+	function cancelAndMoveToList() {
+		// 입력된 내용 초기화
+		document.querySelector("form").reset();
+
+		// 공지사항 전체 목록 페이지로 이동
+		location.href = "${pageContext.servletContext.contextPath}/notice/list";
+	}
+</script>
 </head>
 <body>
 
@@ -20,7 +32,7 @@
 			<form
 				action="${ pageContext.servletContext.contextPath }/notice/update"
 				method="post">
-				
+
 				<table>
 					<tr>
 						<td>번호</td>
@@ -35,8 +47,8 @@
 					<tr>
 						<td>작성자</td>
 						<td><input type="text"
-							value="${ requestScope.notice.noticeWriter.userNickname }" name="writer"
-							readonly></td>
+							value="${ requestScope.notice.noticeWriter.userNickname }"
+							name="writer" readonly></td>
 					</tr>
 					<tr>
 						<td>내용</td>
@@ -49,7 +61,7 @@
 				</table>
 				<br>
 				<div align="center">
-					<button type="reset" id="cancleNotice">취소</button>
+					<button type="button" onclick="cancelAndMoveToList()">취소</button>
 					<button type="submit">수정</button>
 				</div>
 			</form>
