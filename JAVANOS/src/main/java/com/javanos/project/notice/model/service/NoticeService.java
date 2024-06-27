@@ -102,4 +102,23 @@ public class NoticeService {
 		return result;
 	}
 
+	// 공지사항 삭제
+	public int deleteNotice(int no) {
+
+		SqlSession session = getSqlSession();
+		noticeDAO = session.getMapper(NoticeDAO.class);
+
+		int result = noticeDAO.deleteNotice(no);
+
+		if (result > 0) {
+			session.commit();
+		} else {
+			session.rollback();
+		}
+
+		session.close();
+
+		return result;
+	}
+
 }

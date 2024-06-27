@@ -26,4 +26,8 @@ public interface NoticeDAO {
 
 	// 수정 메소드
 	public int updateNotice(NoticeDTO updateNotice);
+
+	// 삭제 메소드
+	public int deleteNotice(int no);
+		
 }

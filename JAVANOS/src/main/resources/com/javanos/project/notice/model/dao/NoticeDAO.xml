@@ -129,31 +129,29 @@
 
 
 	<!-- 공지사항 수정 쿼리 -->
-	<!-- <update id="updateNotice">
-		UPDATE/*
-		com.javanos.project.notice.model.dao.NoticeDAO#updateNotice()
-		*/
+	<!-- <update id="updateNotice"> UPDATE/* com.javanos.project.notice.model.dao.NoticeDAO#updateNotice() 
+		*/ TBL_NOTICE SET NOTICE_TITLE = #{noticeTitle}, NOTICE_BODY = #{noticeBody}, 
+		NOTICE_USER_NO = #{noticeUserno} WHERE NOTICE_NO = #{noticeNo} </update> -->
 
-		TBL_NOTICE
-
+	<update id="updateNotice"
+		parameterType="com.javanos.project.notice.model.dto.NoticeDTO">
+		<!-- com.javanos.project.notice.model.dao.NoticeDAO#updateNotice() 메소드에서 
+			호출됨을 의미 -->
+		UPDATE TBL_NOTICE
 		SET
 		NOTICE_TITLE = #{noticeTitle},
 		NOTICE_BODY = #{noticeBody},
 		NOTICE_USER_NO = #{noticeUserno}
 		WHERE
 		NOTICE_NO = #{noticeNo}
-	</update> -->
-	
-	<update id="updateNotice" parameterType="com.javanos.project.notice.model.dto.NoticeDTO">
-    <!-- com.javanos.project.notice.model.dao.NoticeDAO#updateNotice() 메소드에서 호출됨을 의미 -->
-    UPDATE TBL_NOTICE
-    SET
-        NOTICE_TITLE = #{noticeTitle},
-        NOTICE_BODY = #{noticeBody},
-        NOTICE_USER_NO = #{noticeUserno}
-    WHERE
-        NOTICE_NO = #{noticeNo}
-</update>
+	</update>
 
+
+	<!-- 삭제 쿼리 -->
+	<delete id="deleteNotice" parameterType="int">
+        <!-- com.javanos.project.notice.model.dao.NoticeDAO#deleteNotice() 메소드에서 호출됨을 의미 -->
+        DELETE FROM TBL_NOTICE
+        WHERE NOTICE_NO = #{noticeNo}
+    </delete>
 
 </mapper>

@@ -51,10 +51,19 @@
 					<%-- 따라서 ? 뒤는 사용자가 클릭한 버튼을 통해 해당 공지사항의 번호이고, 그 번호의 수정페이지로 이동함 --%>
 					<button
 						onclick="location.href='${ pageContext.servletContext.contextPath }/notice/update?no=${ requestScope.notice.noticeNo }'">수정</button>
+					<button onclick="deleteNotice(${ requestScope.notice.noticeNo })">삭제</button>
 				</c:if>
 			</div>
 		</div>
 	</div>
+	
+	<script>
+    function deleteNotice(noticeNo) {
+        if (confirm("정말로 삭제하시겠습니까?")) {
+            location.href = "${ pageContext.servletContext.contextPath }/notice/delete?no=" + noticeNo;
+        }
+    }
+</script>
 
 
 </body>
