@@ -48,6 +48,16 @@
                 fetchSearchResults(searchCondition, keyword);
 			};
 		}
+        
+        
+        // 목록 버튼 클릭 시 전체 공지사항 목록 페이지로 이동
+        const listButton = document.getElementById("listButton");
+        if (listButton) {
+            listButton.onclick = function() {
+                location.href = "${pageContext.servletContext.contextPath}/notice/list";
+            }
+        }
+        
 	};
 	
 	function fetchSearchResults(searchCondition, keyword) {
@@ -111,7 +121,8 @@
 			</table>
 		</div>
 		<div class="search-area" align="center">
-				<form action="${pageContext.request.contextPath}/notice/noticeSearchList"
+			<form
+				action="${pageContext.request.contextPath}/notice/noticeSearchList"
 				method="GET">
 				<select id="searchCondition" name="searchCondition">
 					<option value="title">제목</option>
@@ -120,6 +131,11 @@
 				</select> <input type="search" name="keyword">
 				<button type="submit">검색하기</button>
 			</form>
+
+
+			<!-- 목록 버튼 추가 -->
+			<button id="listButton">목록</button>
+			
 			
 			<c:if test="${ sessionScope.loginUser.userRole eq 'ROLE_ADMIN' }">
 				<!-- 관리자인 경우에만 작성 버튼이 보여집니다. -->

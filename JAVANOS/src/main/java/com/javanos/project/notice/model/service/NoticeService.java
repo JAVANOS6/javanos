@@ -137,10 +137,14 @@ public class NoticeService {
 
 	// 내용으로 공지사항 검색 메소드
 	public List<NoticeDTO> searchNoticeByBody(String body) {
+		
 		SqlSession session = getSqlSession();
 		noticeDAO = session.getMapper(NoticeDAO.class);
+		
 		List<NoticeDTO> searchResult = noticeDAO.searchNoticeByBody(body);
+		
 		session.close();
+		
 		return searchResult;
 	}
 
