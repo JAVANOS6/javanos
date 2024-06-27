@@ -75,7 +75,8 @@
 	<!-- 게시글 삭제 -->
 	<update id="deleteBoard">
 		UPDATE TBL_LNF
-			SET LNF_BOARD_STATUS = 'N'
+			SET LNF_BOARD_STATUS = 'N',
+				MODIFIED_DATE = current_date
 			WHERE LNF_NO='{lnfNo}';
 	</update>
 	

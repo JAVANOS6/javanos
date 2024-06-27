@@ -39,7 +39,7 @@
 		</form>
 		</table>
 		
-		<div align="center">
+		<div>
 				<c:if test="${ sessionScope.loginMember.role eq 'ROLE_USER' }">
 					<button onclick="location.href='${ pageContext.servletContext.contextPath }/lnf/modify?no=${ requestScope.notice.no }'">수정</button>
 				</c:if>

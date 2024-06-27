@@ -21,7 +21,7 @@ public class ModifyBoardServlet extends HttpServlet {
 		LnfBoardService lnfBoardService = new LnfBoardService();
 		LnfBoardDTO lnfDetail = lnfBoardService.selectBoardDetail(no);
 		
-		System.out.println("lnfDetail : " + lnfDetail);
+		System.out.println(lnfDetail);
 		
 		String path = "";
 		if(lnfDetail != null) {
@@ -35,5 +35,12 @@ public class ModifyBoardServlet extends HttpServlet {
 		request.getRequestDispatcher(path).forward(request, response);
 
 	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
+
+	}
+
 
 }
