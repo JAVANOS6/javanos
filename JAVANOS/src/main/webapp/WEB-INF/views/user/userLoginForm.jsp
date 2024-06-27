@@ -5,8 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Javanos</title>
-<%-- <link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/css/user/userLogin.css">
- --%><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 	<jsp:include page="../common/menubar.jsp"/>
@@ -36,12 +34,12 @@
 				let valid = true;
 				
 				if($('#userId').val().trim() === "") {
-                    $('#userIdError').text("아이디를 입력하세요");
+                    $('#userIdError').text("아이디를 입력하세요.");
 					valid = false;
 				}
 				
 				if($('#userPwd').val().trim() ===  "") {
-                    $('#userPwdError').text("비밀번호를 입력하세요");
+                    $('#userPwdError').text("비밀번호를 입력하세요.");
 					valid = false;
 				}
 				
