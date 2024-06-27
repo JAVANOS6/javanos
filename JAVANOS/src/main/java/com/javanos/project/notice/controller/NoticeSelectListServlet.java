@@ -17,7 +17,6 @@ public class NoticeSelectListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		
 //		여기 요약
 //		1. 클라가 get요청 보냄
 //		2. noticeService 이용해 모든 공지사항 목록 조회함

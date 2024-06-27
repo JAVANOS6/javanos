@@ -24,8 +24,8 @@
 					<th>조회수</th>
 					<th width="100px">작성일</th>
 				</tr>
-				<!-- 각각의 공지사항 정보를 테이블 형태로 반복 출력 -->
-				<!-- var: 반복 중 사용할 각 요소를 지칭하는 변수?! -->
+				<%-- 각각의 공지사항 정보를 테이블 형태로 반복 출력 --%>
+				<%-- var: 반복 중 사용할 각 요소를 지칭하는 변수?! --%>
 				<c:forEach items="${ noticeList }" var="notice">
 					<tr>
 						<td><c:out value="${ notice.noticeNo }" /></td>
@@ -45,25 +45,27 @@
 			</select> <input type="search">
 			<button type="submit">검색하기</button>
 
-			<!-- 관리자인 경우에만 작성하기 버튼이 보여짐 -->
-			<c:if test="${ sessionScope.loginUser.role eq 'ROLE_ADMIN' }">
+			<%-- 관리자인 경우에만 작성하기 버튼이 보여짐 --%>
+			<c:if test="${ sessionScope.loginUser.userRole eq 'ROLE_ADMIN' }">
 				<button id="writeNotice">작성</button>
 			</c:if>
 		</div>
 	</div>
 
-	<!-- <script>
+	<script>
 		if(document.getElementsByTagName("td")) {
 			const $tds = document.getElementsByTagName("td");
 			for(let i = 0; i < $tds.length; i++) {
 				
 				$tds[i].onmouseenter = function() {
-					this.parentNode.style.backgroundColor = "orangered";
+					this.parentNode.style.backgroundColor = "pink";
 					this.parentNode.style.cursor = "pointer";
+					this.parentNode.style.textAlign = "center";
+					this.parentNode.style.verticalAlign = "middel";
 				}
 				
 				$tds[i].onmouseout = function() {
-					this.parentNode.style.backgroundColor = "black";
+					this.parentNode.style.backgroundColor = "white";
 				}
 				
 				$tds[i].onclick = function() {
@@ -87,7 +89,7 @@
 				location.href = "${ pageContext.servletContext.contextPath }/notice/detail?no=" + no;
 			});
 		}); */
-	</script> -->
+	</script>
 
 
 
