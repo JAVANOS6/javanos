@@ -10,6 +10,7 @@ import java.io.IOException;
 @WebServlet("/lnf/delete")
 public class DeleteBoardServlet extends HttpServlet {
 
+	// 진짜 삭제하는 게 아니라 숨김 처리하는 method
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 	}
