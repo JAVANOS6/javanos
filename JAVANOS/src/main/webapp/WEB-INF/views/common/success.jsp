@@ -33,6 +33,11 @@
 					movePath = "${ pageContext.servletContext.contextPath }/community/list";
 					break;
 					
+				case "insertNotice" :
+					successMessage = "새로운 공지사항이 등록되었습니다."
+					movePath = "${ pageContext.servletContext.contextPath }";
+					break;
+					
 				case "updateNotice" :
 					successMessage = "정상적으로 수정되었습니다."
 					movePath = "${ pageContext.servletContext.contextPath }";

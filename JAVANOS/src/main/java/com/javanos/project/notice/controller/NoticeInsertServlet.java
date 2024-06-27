@@ -49,10 +49,10 @@ public class NoticeInsertServlet extends HttpServlet {
 		// 페이지 만들기? alert 처리?
 		String path = "";
 		if(result > 0 ) {
-			path = "/WEB-INF/views/common/sucess.jsp";
+			path = "/WEB-INF/views/common/success.jsp";
 			request.setAttribute("successCode", "insertNotice");
 		}else {
-			path = "/WEB-INF/views/common/failed.jsp";
+			path = "/WEB-INF/views/common/fail.jsp";
 			request.setAttribute("message", "공지사항 등록에 실패했습니다.");
 		}
 		
