@@ -9,24 +9,4 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
-  <servlet>
-    <description></description>
-    <display-name>NoticeDeleteServlet</display-name>
-    <servlet-name>NoticeDeleteServlet</servlet-name>
-    <servlet-class>com.javanos.project.notice.controller.NoticeDeleteServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>NoticeDeleteServlet</servlet-name>
-    <url-pattern>/NoticeDeleteServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>NoticeSearchListServlet</display-name>
-    <servlet-name>NoticeSearchListServlet</servlet-name>
-    <servlet-class>com.javanos.project.notice.controller.NoticeSearchListServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>NoticeSearchListServlet</servlet-name>
-    <url-pattern>/NoticeSearchListServlet</url-pattern>
-  </servlet-mapping>
 </web-app>
