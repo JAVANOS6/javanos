@@ -19,7 +19,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebFilter(urlPatterns = {"/user/*"})
+@WebFilter(urlPatterns = {"/user/*", "/community/*", "/notice/*", "/lnf/*", "/down/*", "/reportmain", "/CheckBoard"})
 public class AuthenticationFilter implements Filter {
 	
 	Map<String, List<String>> permitURIList;
@@ -30,7 +30,14 @@ public class AuthenticationFilter implements Filter {
 		
 		HttpServletRequest hrequest = (HttpServletRequest) request;
 		String uri = hrequest.getRequestURI();
+		String queryString = hrequest.getQueryString();		// 쿼리 스트링 가져오기
 		String intent = uri.replace(hrequest.getContextPath(), "");
+		
+		// get 방식이 존재할 경우
+		// 쿼리 스트링이 있다면 "?" 이후 부분을 제거함
+		if (queryString != null && !queryString.isEmpty()) {
+			intent = intent.replace("?" + queryString, "");
+		}
 		
 		System.out.println("intent : " + intent);
 		
@@ -87,20 +94,37 @@ public class AuthenticationFilter implements Filter {
 		allPermitList.add("/user/join");
 		allPermitList.add("/user/login");
 		allPermitList.add("/user/logout");
-		
-		
-		
+		allPermitList.add("/lnf/first");
+		allPermitList.add("/lnf/main");
+		allPermitList.add("/lnf/search");
+		allPermitList.add("/community/list");
+		allPermitList.add("/community/detail");
+		allPermitList.add("/notice/list");
+		allPermitList.add("/notice/detail");
+		allPermitList.add("/notice/noticeSearchList");
 		
 		userPermitList.add("/user/mypage");
 		userPermitList.add("/user/delete");
+		userPermitList.add("/down/enroll");
+		userPermitList.add("/lnf/insert");
+		userPermitList.add("/lnf/detail");
+		userPermitList.add("/lnf/modify");
+		userPermitList.add("/lnf/delete");
+		userPermitList.add("/community/insert");
+		userPermitList.add("/community/update");
+		userPermitList.add("/community/delete");
+		userPermitList.add("/reportmain");
 		
-		
-		
+		adminPermitList.add("/lnf/detail");
+		adminPermitList.add("/lnf/modify");
+		adminPermitList.add("/lnf/delete");
+		adminPermitList.add("/notice/insert");
+		adminPermitList.add("/notice/update");
+		adminPermitList.add("/notice/delete");
+		adminPermitList.add("/CheckBoard");
 		
 		permitURIList.put("adminPermitList", adminPermitList);
 		permitURIList.put("userPermitList", userPermitList);
 		permitURIList.put("allPermitList", allPermitList);
-		
 	}
-
 }
