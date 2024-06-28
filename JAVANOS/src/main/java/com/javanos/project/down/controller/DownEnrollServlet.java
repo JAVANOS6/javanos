@@ -87,8 +87,7 @@ public class DownEnrollServlet extends HttpServlet {
 
 		int inStationNo = Integer.parseInt(request.getParameter("inStationNo"));
 		int downStationNo = Integer.parseInt(request.getParameter("downStationNo"));
-
-		int userNo = 1;
+		int userNo = (((UserDTO) request.getSession().getAttribute("loginUser")).getUserNo()); 
 		String downRoom = request.getParameter("downRoom");
 		String downFull = request.getParameter("downFull");
 

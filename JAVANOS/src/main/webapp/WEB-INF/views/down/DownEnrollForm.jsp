@@ -120,6 +120,7 @@
 				<span><button>삭제</button></span>
 			</div>
 			</c:forEach>
+			  
 				<jsp:include page="../common/paging.jsp"/> 
 </body>
 </html>
