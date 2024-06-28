@@ -84,7 +84,8 @@ public class DownEnrollServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		/* 내려요 게시글 등록기능 */  
+		
 		int inStationNo = Integer.parseInt(request.getParameter("inStationNo"));
 		int downStationNo = Integer.parseInt(request.getParameter("downStationNo"));
 		int userNo = (((UserDTO) request.getSession().getAttribute("loginUser")).getUserNo()); 
