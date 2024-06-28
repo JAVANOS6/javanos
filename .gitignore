@@ -15,8 +15,7 @@ local.properties
 .recommenders
 Servers
 web.xml
-.classpath
-build/
+
 
 # External tool builders
 .externalToolBuilders/
