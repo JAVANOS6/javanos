@@ -30,14 +30,7 @@ public class AuthenticationFilter implements Filter {
 		
 		HttpServletRequest hrequest = (HttpServletRequest) request;
 		String uri = hrequest.getRequestURI();
-		String queryString = hrequest.getQueryString();		// 쿼리 스트링 가져오기
 		String intent = uri.replace(hrequest.getContextPath(), "");
-		
-		// get 방식이 존재할 경우
-		// 쿼리 스트링이 있다면 "?" 이후 부분을 제거함
-		if (queryString != null && !queryString.isEmpty()) {
-			intent = intent.replace("?" + queryString, "");
-		}
 		
 		System.out.println("intent : " + intent);
 		
