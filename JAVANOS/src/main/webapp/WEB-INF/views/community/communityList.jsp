@@ -11,7 +11,6 @@
 	<jsp:include page="../common/menubar.jsp"/>
 	
 	<div class="outer-community-list">
-		<br>
 		<h2 align="center">커뮤니티 게시판</h2>
 		<br>
 		<div class="community-list-area" >
@@ -34,16 +33,9 @@
 					</p>
 				</div>
 			</c:forEach>
-		
-		
-		
 		</div>
-	
-	
-	
-	
-	
 	</div>
+	<jsp:include page="../common/paging.jsp"/>
 	
 	
 	

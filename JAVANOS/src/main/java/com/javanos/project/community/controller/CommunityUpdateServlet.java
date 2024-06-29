@@ -44,144 +44,154 @@ public class CommunityUpdateServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-            System.out.println("Update 처리 중입니다.");
 
-        if (JakartaServletFileUpload.isMultipartContent(request)) {
-            processMultipartRequest(request, response);
-        }
-    }
+		System.out.println("Update 처리 중입니다.");
 
-	private void processMultipartRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-        String rootLocation = getServletContext().getRealPath("/");
-        String fileUploadDirectory = rootLocation + "/resources/upload/original/";
-        String thumbnailDirectory = rootLocation + "/resources/upload/thumbnail/";
-        
-        List<Map<String, String>> fileList = new ArrayList<>();
-        Map<String, String> parameter = new HashMap<>();
-        List<Integer> removedPicNos = new ArrayList<>();
+		if (JakartaServletFileUpload.isMultipartContent(request)) {
+			processMultipartRequest(request, response);
+		}
+	}
 
-        DiskFileItemFactory.Builder fileItemFactory = new DiskFileItemFactory.Builder();
-        fileItemFactory.setPath(fileUploadDirectory);
-        fileItemFactory.setBufferSize(1024 * 1024 * 10);
+	private void processMultipartRequest(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-        JakartaServletFileUpload fileUpload = new JakartaServletFileUpload(fileItemFactory.get());
+		String rootLocation = getServletContext().getRealPath("/");
+		String fileUploadDirectory = rootLocation + "/resources/upload/original/";
+		String thumbnailDirectory = rootLocation + "/resources/upload/thumbnail/";
 
-        try {
-            List<FileItem> fileItems = fileUpload.parseRequest(request);
+		List<Map<String, String>> fileList = new ArrayList<>();
+		Map<String, String> parameter = new HashMap<>();
+		List<Integer> removedPicNos = new ArrayList<>();
 
-            for (Iterator iterator = fileItems.iterator(); iterator.hasNext();) {
+		DiskFileItemFactory.Builder fileItemFactory = new DiskFileItemFactory.Builder();
+		fileItemFactory.setPath(fileUploadDirectory);
+		fileItemFactory.setBufferSize(1024 * 1024 * 10);
+
+		JakartaServletFileUpload fileUpload = new JakartaServletFileUpload(fileItemFactory.get());
+
+		try {
+			List<FileItem> fileItems = fileUpload.parseRequest(request);
+
+			for (Iterator iterator = fileItems.iterator(); iterator.hasNext();) {
 				FileItem fileItem = (FileItem) iterator.next();
 				System.out.println(fileItem);
-				
+
 			}
-            
-            
-            
-            for (FileItem fileItem : fileItems) {
-                if (!fileItem.isFormField() && fileItem.getSize() > 0) {
-                    processFileItem(fileItem, fileList, fileUploadDirectory, thumbnailDirectory);
-                } else if(fileItem.getFieldName().equals("remove_images")){
-                	removedPicNos.add(Integer.valueOf(fileItem.getString()));
-                	System.out.println(Integer.valueOf(fileItem.getString()));
-                	
-                }else {
-                	parameter.put(fileItem.getFieldName(), new String(fileItem.getString().getBytes("ISO-8859-1"), "UTF-8"));
-					
+
+			for (FileItem fileItem : fileItems) {
+				System.out.println("파일 아이템을 하나씩 꺼내기");
+				System.out.println(fileItem);
+				if (!fileItem.isFormField() && fileItem.getSize() > 0) {
+					processFileItem(fileItem, fileList, fileUploadDirectory, thumbnailDirectory);
+					System.out.println("파일 성공~~~");
+				} else if (fileItem.getFieldName().equals("remove_images")) {
+					removedPicNos.add(Integer.valueOf(fileItem.getString()));
+					System.out.println(Integer.valueOf(fileItem.getString()));
+
+				} else {
+					parameter.put(fileItem.getFieldName(),
+							new String(fileItem.getString().getBytes("ISO-8859-1"), "UTF-8"));
+
 				}
-            }
+			}
 
-            CommunityDTO community = createCommunityDTO(parameter, fileList,request);
-            int result = new CommunityService().updateCommunityWithPic(community,removedPicNos);
-            
-            int communityNo = Integer.parseInt(parameter.get("communityNo"));
-            forwardResult(request, response, result,communityNo);
-        } catch (Exception e) {
-            handleException(fileList, fileUploadDirectory, e);
-        }
-    }
-	
-	private void processFileItem(FileItem fileItem, List<Map<String, String>> fileList, String fileUploadDirectory, String thumbnailDirectory) throws Exception {
-        String originalName = fileItem.getName();
-        String inputTagName = fileItem.getFieldName();
+			CommunityDTO community = createCommunityDTO(parameter, fileList, request);
+			int result = new CommunityService().updateCommunityWithPic(community, removedPicNos);
 
-        String ext = originalName.substring(originalName.lastIndexOf("."));
-        String randomFileName = UUID.randomUUID().toString().replace("-", "") + ext;
+			System.out.println(parameter.get("communityNo"));
+			
+			  String communityNo = parameter.get("communityNo");
+			  forwardResult(request, response, result,communityNo);
+			  } catch (Exception e) {
+			handleException(fileList, fileUploadDirectory, e);
+		}
+	}
 
-        File storeFile = new File(fileUploadDirectory + "/" + randomFileName);
-        fileItem.write(storeFile.toPath());
+	private void processFileItem(FileItem fileItem, List<Map<String, String>> fileList, String fileUploadDirectory,
+			String thumbnailDirectory) throws Exception {
+		System.out.println("processFileItem 여기니??");
 
-        Map<String, String> fileMap = new HashMap<>();
-        fileMap.put("originalName", originalName);
-        fileMap.put("inputTagname", inputTagName);
-        fileMap.put("saveName", randomFileName);
-        fileMap.put("savePath", fileUploadDirectory);
+		String originalName = fileItem.getName();
+		String inputTagName = fileItem.getFieldName();
 
-        System.out.println(inputTagName);
-        System.out.println("thumbnailImg".equals(inputTagName));
-        int width = "thumbnailImg".equals(inputTagName) ? 350 : 120;
-        int height = "thumbnailImg".equals(inputTagName) ? 200 : 100;
-        fileMap.put("fileType", "thumbnailImg".equals(inputTagName) ? "TITLE" : "BODY");
+		String ext = originalName.substring(originalName.lastIndexOf("."));
+		String randomFileName = UUID.randomUUID().toString().replace("-", "") + ext;
 
-        Thumbnails.of(fileUploadDirectory + randomFileName)
-                .size(width, height)
-                .toFile(thumbnailDirectory + "thumbnail_" + randomFileName);
+		File storeFile = new File(fileUploadDirectory + "/" + randomFileName);
+		fileItem.write(storeFile.toPath());
+		System.out.println("사진을 실제로 저장햇어요");
 
-        fileMap.put("thumbnailPath", "/resources/upload/thumbnail/thumbnail_" + randomFileName);
+		Map<String, String> fileMap = new HashMap<>();
+		fileMap.put("originalName", originalName);
+		fileMap.put("inputTagname", inputTagName);
+		fileMap.put("saveName", randomFileName);
+		fileMap.put("savePath", fileUploadDirectory);
 
-        fileList.add(fileMap);
-    }
+		System.out.println(inputTagName);
+		System.out.println("thumbnailImg".equals(inputTagName));
+		int width = "thumbnailImg".equals(inputTagName) ? 350 : 120;
+		int height = "thumbnailImg".equals(inputTagName) ? 200 : 100;
+		fileMap.put("fileType", "thumbnailImg".equals(inputTagName) ? "TITLE" : "BODY");
 
-    private CommunityDTO createCommunityDTO(Map<String, String> parameter, List<Map<String, String>> fileList,HttpServletRequest request) {
-        CommunityDTO community = new CommunityDTO();
-        
-        community.setCommunityNo(Integer.parseInt(parameter.get("communityNo")));
-        community.setCommunityModifyDate(LocalDateTime.now());
-        community.setCommunityTitle(parameter.get("communityTitle"));
-        community.setCommunityBody(parameter.get("communityBody"));
-        community.setUserNo(((UserDTO) request.getSession().getAttribute("loginUser")).getUserNo());
+		Thumbnails.of(fileUploadDirectory + randomFileName).size(width, height)
+				.toFile(thumbnailDirectory + "thumbnail_" + randomFileName);
 
-        List<PictureDTO> pictureList = new ArrayList<>();
-        for (Map<String, String> file : fileList) {
-            PictureDTO picture = new PictureDTO();
-            picture.setOriginalName(file.get("originalName"));
-            picture.setSaveName(file.get("saveName"));
-            picture.setSavePath(file.get("savePath"));
-            picture.setFileType(file.get("fileType"));
-            picture.setThumbnailPath(file.get("thumbnailPath"));
+		fileMap.put("thumbnailPath", "/resources/upload/thumbnail/thumbnail_" + randomFileName);
 
-            pictureList.add(picture);
-        }
-        community.setPictureList(pictureList);
+		fileList.add(fileMap);
+		System.out.println("여기까지 왔니??");
+	}
 
-        return community;
-    }
-    
+	private CommunityDTO createCommunityDTO(Map<String, String> parameter, List<Map<String, String>> fileList,
+			HttpServletRequest request) {
+		CommunityDTO community = new CommunityDTO();
 
-    private void forwardResult(HttpServletRequest request, HttpServletResponse response, int result, int communityNo) throws ServletException, IOException {
-        String path;
-        if (result > 0) {
-            path = "/WEB-INF/views/common/success.jsp";
-            request.setAttribute("communityNo", communityNo);
-            request.setAttribute("successCode", "communityInsert");
-            request.setAttribute("message", "게시글이 등록되었습니다!");
-        } else {
-            path = "/WEB-INF/views/common/fail.jsp";
-            request.setAttribute("communityNo", communityNo);
-            request.setAttribute("code", "communityInsert");
-            request.setAttribute("message", "게시글 등록에 실패했습니다");
-        }
-        request.getRequestDispatcher(path).forward(request, response);
-    }
+		community.setCommunityNo(Integer.parseInt(parameter.get("communityNo")));
+		community.setCommunityModifyDate(LocalDateTime.now());
+		community.setCommunityTitle(parameter.get("communityTitle"));
+		community.setCommunityBody(parameter.get("communityBody"));
+		community.setUserNo(((UserDTO) request.getSession().getAttribute("loginUser")).getUserNo());
 
-    private void handleException(List<Map<String, String>> fileList, String fileUploadDirectory, Exception e) {
-        for (Map<String, String> file : fileList) {
-            File deleteFile = new File(fileUploadDirectory + "/" + file.get("saveName"));
-            if (deleteFile.delete()) {
-                System.out.println("Failed upload image deleted: " + file.get("saveName"));
-            }
-        }
-        e.printStackTrace();
-    }
+		List<PictureDTO> pictureList = new ArrayList<>();
+		for (Map<String, String> file : fileList) {
+			PictureDTO picture = new PictureDTO();
+			picture.setOriginalName(file.get("originalName"));
+			picture.setSaveName(file.get("saveName"));
+			picture.setSavePath(file.get("savePath"));
+			picture.setFileType(file.get("fileType"));
+			picture.setThumbnailPath(file.get("thumbnailPath"));
+
+			pictureList.add(picture);
+		}
+		community.setPictureList(pictureList);
+
+		return community;
+	}
+
+	private void forwardResult(HttpServletRequest request, HttpServletResponse response, int result, String communityNo)
+			throws ServletException, IOException {
+		String path;
+		if (result > 0) {
+			path = "/WEB-INF/views/common/success.jsp";
+			request.setAttribute("communityNo", communityNo);
+			request.setAttribute("successCode", "communityUpdate");
+			request.setAttribute("message", "게시글이 등록되었습니다!");
+		} else {
+			path = "/WEB-INF/views/common/fail.jsp";
+			request.setAttribute("communityNo", communityNo);
+			request.setAttribute("code", "communityUpdate");
+			request.setAttribute("message", "게시글 등록에 실패했습니다");
+		}
+		request.getRequestDispatcher(path).forward(request, response);
+	}
+
+	private void handleException(List<Map<String, String>> fileList, String fileUploadDirectory, Exception e) {
+		for (Map<String, String> file : fileList) {
+			File deleteFile = new File(fileUploadDirectory + "/" + file.get("saveName"));
+			if (deleteFile.delete()) {
+				System.out.println("Failed upload image deleted: " + file.get("saveName"));
+			}
+		}
+		e.printStackTrace();
+	}
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.javanos.project.common.paging.SelectCriteria;
 import com.javanos.project.community.model.dao.CommunityDAO;
 import com.javanos.project.community.model.dto.CommunityDTO;
 import com.javanos.project.community.model.dto.PictureDTO;
@@ -81,16 +82,6 @@ public class CommunityService {
 
 	}
 
-	public List<CommunityDTO> selectThumbnailList() {
-		SqlSession session = getSqlSession();
-		communityDAO = session.getMapper(CommunityDAO.class);
-
-		List<CommunityDTO> communityList = communityDAO.selectThumbnailList();
-
-		session.close();
-		return communityList;
-
-	}
 
 	public CommunityDTO selectOneThumbnailList(int communityNo) {
 
@@ -126,15 +117,20 @@ public class CommunityService {
 
 		int result = 0;
 		
-		for (Integer removedPicNo : removedPicNos) { 
-			  result += communityDAO.deletePictures(removedPicNo); 
-		 }
-		
-		if(result>0) {
+		if(removedPicNos!=null) {
+			System.out.println("삭제 버튼을 누른 사진이 있어 삭제중입니다.");
+			for (Integer removedPicNo : removedPicNos) { 
+				result += communityDAO.deletePictures(removedPicNo); 
+			}
 			System.out.println("삭제 버튼 누른 사진들 DB에 삭제완료!");
-			result = communityDAO.updateCommunity(community);
-			if (result > 0) {
-
+		}
+		
+		result = communityDAO.updateCommunity(community);
+		if (result > 0) {
+			System.out.println("제목과 내용을 수정했습니다!");
+			
+			if(community.getPictureList()!=null) {
+				System.out.println("추가된 사진이 있어 추가 중입니다.");
 				List<PictureDTO> pictureList = community.getPictureList();
 				int pictureResult = 0;
 				for (PictureDTO pictureDTO : pictureList) {
@@ -142,31 +138,55 @@ public class CommunityService {
 					pictureDTO.setCommunityNo(community.getCommunityNo());
 					pictureResult += communityDAO.insertPicture(pictureDTO);
 				}
-
 				if (pictureResult > 0) {
-					System.out.println("새로 넣은 수정 이미지 DB에 삽입 성공!");
+					System.out.println("수정 페이지에서 추가된 이미지 DB에 삽입 성공!");
 					session.commit();
 					result = 1;
 				} else {
-					System.out.println("새로 넣은 수정 이미지 DB에 삽입 실패!");
+					System.out.println("수정 페이지에서 추가된 이미지 DB에 삽입 실패!XXXXXXXXXXXX");
 					session.rollback();
 					result = 0;
 				}
-
-			} else {
-				session.rollback();
-				System.out.println("DB에 수정 실패!");
-				result = 0;
 			}
-		}else {
+
+		} else {
 			session.rollback();
-			System.out.println("DB에 수정 실패!");
+			System.out.println("제목과 내용 DB에 수정 실패!");
 			result = 0;
 		}
 		
+		System.out.println("수정 성공!");
 		session.close();
-
+		
 		return result;
+		
+	}
+	
+	
 
+	public List<CommunityDTO> selectThumbnailList(SelectCriteria selectCriteria) {
+		SqlSession session = getSqlSession();
+		communityDAO = session.getMapper(CommunityDAO.class);
+
+		selectCriteria.setStartRow(selectCriteria.getStartRow() - 1);
+		
+		System.out.println(selectCriteria.getStartRow());
+		List<CommunityDTO> communityList = communityDAO.selectThumbnailList(selectCriteria);
+
+		session.close();
+		return communityList;
+	
+	}
+
+	public int selectTotalCount() {
+		SqlSession session = getSqlSession();
+		communityDAO = session.getMapper(CommunityDAO.class);
+		
+		int totalCount = communityDAO.selectTotalCount();
+		
+		session.close();
+		return totalCount;
+	
+	
 	}
 }

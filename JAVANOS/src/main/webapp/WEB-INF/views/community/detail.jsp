@@ -78,18 +78,13 @@
 
 		    let button = document.getElementById('reportBtn');
 		    button.addEventListener('click', function() {
-		        showreportpage();
+			    let communityNo = ${ community.communityNo };
+			    let reportedUserId = ${ community.userNo };
+			    
+			    location.href = "${pageContext.servletContext.contextPath}/reportmain?communityNo=" + communityNo + "&reportedUserId=" + reportedUserId;
 		    });
 		});
 		
-		
-		function showreportpage() {
-		    let communityNo = ${ community.communityNo };
-		    let reportedUserId = ${ community.userNo };
-			 alert(`communityNo: ${communityNo}, reportedUserId: ${reportedUserId}`);
-		    
-		    location.href = "${pageContext.servletContext.contextPath}/reportmain?communityNo=" + communityNo + "&reportedUserId=" + reportedUserId;
-		}
 	</script>
 	
 	
