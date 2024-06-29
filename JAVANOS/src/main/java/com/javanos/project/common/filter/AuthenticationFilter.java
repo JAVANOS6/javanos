@@ -99,6 +99,7 @@ public class AuthenticationFilter implements Filter {
 		userPermitList.add("/user/mypage");
 		userPermitList.add("/user/delete");
 		userPermitList.add("/down/enroll");
+		userPermitList.add("/down/delete");
 		userPermitList.add("/lnf/insert");
 		userPermitList.add("/lnf/detail");
 		userPermitList.add("/lnf/modify");
