@@ -200,7 +200,7 @@ public class CommunityInsertServlet extends HttpServlet {
             request.setAttribute("successCode", "insertCommunity");
         } else {
             path = "/WEB-INF/views/common/fail.jsp";
-            request.setAttribute("code", "communityInsert");
+            request.setAttribute("code", "insertCommunity");
             request.setAttribute("message", "게시글 등록에 실패했습니다");
         }
         request.getRequestDispatcher(path).forward(request, response);
