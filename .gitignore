@@ -15,8 +15,8 @@ local.properties
 .recommenders
 Servers
 web.xml
-
-build/
+.classpath
+JAVANOS/build/classes
 
 
 # External tool builders
@@ -103,3 +103,4 @@ $RECYCLE.BIN/
 
 
 
+.gitignore
