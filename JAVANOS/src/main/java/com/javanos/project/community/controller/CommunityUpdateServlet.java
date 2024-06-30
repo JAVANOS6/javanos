@@ -59,6 +59,8 @@ public class CommunityUpdateServlet extends HttpServlet {
 		String fileUploadDirectory = rootLocation + "/resources/upload/original/";
 		String thumbnailDirectory = rootLocation + "/resources/upload/thumbnail/";
 
+		createDirectories(fileUploadDirectory, thumbnailDirectory);
+		
 		List<Map<String, String>> fileList = new ArrayList<>();
 		Map<String, String> parameter = new HashMap<>();
 		List<Integer> removedPicNos = new ArrayList<>();
@@ -85,6 +87,7 @@ public class CommunityUpdateServlet extends HttpServlet {
 					processFileItem(fileItem, fileList, fileUploadDirectory, thumbnailDirectory);
 					System.out.println("파일 성공~~~");
 				} else if (fileItem.getFieldName().equals("remove_images")) {
+					System.out.println("혹시 여기 오니.?");
 					removedPicNos.add(Integer.valueOf(fileItem.getString()));
 					System.out.println(Integer.valueOf(fileItem.getString()));
 
@@ -95,6 +98,7 @@ public class CommunityUpdateServlet extends HttpServlet {
 				}
 			}
 
+			System.out.println("삭제된 이미지들의 번호 저장하는 맵: "+removedPicNos);
 			CommunityDTO community = createCommunityDTO(parameter, fileList, request);
 			int result = new CommunityService().updateCommunityWithPic(community, removedPicNos);
 
@@ -106,16 +110,28 @@ public class CommunityUpdateServlet extends HttpServlet {
 			handleException(fileList, fileUploadDirectory, e);
 		}
 	}
+	
+	 private void createDirectories(String... directories) {
+	        for (String directory : directories) {
+	            File dir = new File(directory);
+	            if (!dir.exists()) {
+	                dir.mkdirs();
+	            }
+	        }
+	    }
 
 	private void processFileItem(FileItem fileItem, List<Map<String, String>> fileList, String fileUploadDirectory,
 			String thumbnailDirectory) throws Exception {
 		System.out.println("processFileItem 여기니??");
 
 		String originalName = fileItem.getName();
+		System.out.println("originalName : "+originalName);
 		String inputTagName = fileItem.getFieldName();
+		System.out.println("inputTagName : "+inputTagName);
 
 		String ext = originalName.substring(originalName.lastIndexOf("."));
 		String randomFileName = UUID.randomUUID().toString().replace("-", "") + ext;
+		System.out.println("randomFileName : " + randomFileName);
 
 		File storeFile = new File(fileUploadDirectory + "/" + randomFileName);
 		fileItem.write(storeFile.toPath());

@@ -92,6 +92,16 @@ body  {
     object-fit: cover; /* 이미지 커버 모드 설정 */
 }
 
+#listTitleImgView{
+	width: 100%;
+    height: 100%; /* 이미지 반응형 크기 */
+    max-width: 120px; /* 최대 너비 설정 */
+    max-height: 120px;
+    object-fit: cover; /* 이미지 커버 모드 설정 */
+}
+
+
+
 img {
     width: 100%;
     height: auto; /* 이미지 반응형 크기 */
@@ -100,6 +110,10 @@ img {
     object-fit: cover; /* 이미지 커버 모드 설정 */
 }
 
+#titleImgArea{
+	width: 150px;
+    height: 150px;
+}
 
 #communityTitleArea {
 	color: black;

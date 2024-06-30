@@ -19,10 +19,7 @@
 			</c:if>
 			<c:forEach items="${ communityList }" var="community">
 				<div class= "list-bar" onclick="showCommunityDeatil(${community.communityNo})">
-					<div class="title-img-area" id="titleImgArea">
-						<img id="titleImgView" onerror="setDefaultImage(this);" src="${pageContext.servletContext.contextPath }${ community.pictureList[0].thumbnailPath }">
-					</div>
-					
+						<img id="listTitleImgView" onerror="setDefaultImage(this);" src="${pageContext.servletContext.contextPath }${ community.pictureList[0].thumbnailPath }">
 					<div id="communityTitleArea">
 						<c:out value="${community.communityTitle}"></c:out>
 					</div>
