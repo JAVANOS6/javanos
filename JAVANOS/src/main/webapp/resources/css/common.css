@@ -41,17 +41,20 @@ body {
     background-color: #444;
 }
 
+
 /* Footer 스타일 추가 */
 .footer {
     background-color: #333;
     color: white;
     text-align: center;
     padding: 10px 0;
-    position: fixed;
-    width: 100%;
+	position: fixed;
+	width: 100%;
     bottom: 0;
     left: 0;
 }
+
+
 .home-image {
     text-align: center;
     margin-top: 20px;
