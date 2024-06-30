@@ -190,12 +190,11 @@ public class CommunityUpdateServlet extends HttpServlet {
 		if (result > 0) {
 			path = "/WEB-INF/views/common/success.jsp";
 			request.setAttribute("communityNo", communityNo);
-			request.setAttribute("successCode", "communityUpdate");
-			request.setAttribute("message", "게시글이 등록되었습니다!");
+			request.setAttribute("successCode", "updateCommunity");
 		} else {
 			path = "/WEB-INF/views/common/fail.jsp";
 			request.setAttribute("communityNo", communityNo);
-			request.setAttribute("code", "communityUpdate");
+			request.setAttribute("code", "updateCommunity");
 			request.setAttribute("message", "게시글 등록에 실패했습니다");
 		}
 		request.getRequestDispatcher(path).forward(request, response);
