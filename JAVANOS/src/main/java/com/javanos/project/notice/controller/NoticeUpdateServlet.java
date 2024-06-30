@@ -36,7 +36,7 @@ public class NoticeUpdateServlet extends HttpServlet {
 		String path = "";
 //		notice(상세정보)가 있을 경우
 		if (notice != null) {
-//			상세정보있을때 updateFrom페이지 경로 지정
+//			상세정보있을때 updateForm페이지 경로 지정
 			path = "/WEB-INF/views/notice/noticeUpdateForm.jsp";
 //			조회된 상세정보 요청 속성에 추가??
 			request.setAttribute("notice", notice);
