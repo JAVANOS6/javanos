@@ -21,20 +21,34 @@
     <meta charset="UTF-8">
     <title>신고 관리 페이지</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e8f5e9;
+            color: #333;
+        }
         table {
             width: 80%;
             border-collapse: collapse;
             margin: 20px auto;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         table, th, td {
-            border: 1px solid black;
+            border: 1px solid #a5d6a7;
         }
         th, td {
-            padding: 10px;
+            padding: 15px;
             text-align: left;
         }
         th {
-            background-color: #f2f2f2;
+            background-color: #81c784;
+            color: white;
+        }
+        tr {
+            background-color: white;
+            transition: box-shadow 0.3s;
+        }
+        tr:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         .container {
             text-align: center;
@@ -42,11 +56,14 @@
         .button {
             margin-top: 20px;
             padding: 10px 20px;
-            background-color: #1E90FF;
+            background-color: #4caf50;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+        }
+        .button:hover {
+            background-color: #388e3c;
         }
     </style>
 </head>

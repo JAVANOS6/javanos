@@ -46,4 +46,18 @@ public class ReportService {
         session.close();
         return user;
     }
+    
+    public int deleteReport(int reportNo) {
+        SqlSession session = getSqlSession();
+        reportDAO = session.getMapper(ReportDAO.class);
+        int result = reportDAO.deleteReport(reportNo);
+        if (result > 0) {
+            session.commit();
+        } else {
+            session.rollback();
+        }
+        session.close();
+        return result;
+    }
+    
 }
