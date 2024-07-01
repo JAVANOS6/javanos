@@ -108,8 +108,7 @@ public class AuthenticationFilter implements Filter {
 		userPermitList.add("/community/update");
 		userPermitList.add("/community/delete");
 		userPermitList.add("/reportmain");
-		
-		
+
 		adminPermitList.add("/notice/insert");
 		adminPermitList.add("/notice/update");
 		adminPermitList.add("/notice/delete");
