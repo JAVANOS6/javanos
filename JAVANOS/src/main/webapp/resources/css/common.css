@@ -117,8 +117,8 @@ section{
 
 button,
 input,
-select
-
+select,
+textarea
 {
 	font-family: 'DungGeunMo';
 }
