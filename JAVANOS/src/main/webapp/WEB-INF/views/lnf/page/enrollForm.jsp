@@ -75,6 +75,75 @@
             window.location.href = "${pageContext.servletContext.contextPath}/lnf/first";
         }
     </script>
+    
+    <!-- 유효성 검사 -->
+    <script>
+    function validateForm() {
+        // 호선 선택 유효성 검사
+        var staLine = document.getElementsByName("staLine")[0].value;
+        if (staLine === "") {
+            alert("호선을 선택해주세요.");
+            return false;
+        }
+
+        // 역 입력 유효성 검사
+        var staName = document.getElementsByName("staName")[0].value.trim();
+        if (staName === "") {
+            alert("역을 입력해주세요.");
+            return false;
+        }
+
+        // 발견일 입력 유효성 검사
+        var findDate = document.getElementsByName("findDate")[0].value.trim();
+        if (findDate === "") {
+            alert("발견일을 입력해주세요.");
+            return false;
+        }
+
+        // 발견 시간 입력 유효성 검사
+        var findTime = document.getElementsByName("findTime")[0].value.trim();
+        if (findTime === "") {
+            alert("발견 시간을 입력해주세요.");
+            return false;
+        }
+
+        // 분실 품목 입력 유효성 검사
+        var missing = document.getElementsByName("missing")[0].value.trim();
+        if (missing === "") {
+            alert("분실 품목을 입력해주세요.");
+            return false;
+        }
+
+        // 보관 장소 입력 유효성 검사
+        var keep = document.getElementsByName("keep")[0].value.trim();
+        if (keep === "") {
+            alert("보관 장소를 입력해주세요.");
+            return false;
+        }
+
+        // 상세 설명 입력 유효성 검사
+        var description = document.getElementsByName("description")[0].value.trim();
+        if (description === "") {
+            alert("상세 설명을 입력해주세요.");
+            return false;
+        }
+
+        // 모든 필드가 유효성 검사를 통과하면 true 반환
+        return true;
+    }
+
+    function cancelAction() {
+        window.location.href = "${pageContext.servletContext.contextPath}/lnf/first";
+    }
+
+    // 폼 제출 시 유효성 검사 함수 호출
+    document.querySelector("form").addEventListener("submit", function(event) {
+        if (!validateForm()) {
+            event.preventDefault(); // 폼 제출 중단
+        }
+    });
+</script>
+    
 </head>
 <body>
 
