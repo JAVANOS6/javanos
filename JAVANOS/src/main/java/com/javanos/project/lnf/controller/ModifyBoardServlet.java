@@ -11,6 +11,7 @@ import java.util.Date;
 
 import com.javanos.project.lnf.model.dto.LnfBoardDTO;
 import com.javanos.project.lnf.model.service.LnfBoardService;
+import com.javanos.project.user.model.dto.UserDTO;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -24,9 +25,9 @@ public class ModifyBoardServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int no = Integer.parseInt(request.getParameter("no"));
-		
-//		LnfBoardDTO lnfDetail = new LnfBoardService().selectBoardDetail(no);
+
 		LnfBoardService lnfBoardService = new LnfBoardService();
+		
 		LnfBoardDTO lnfDetail = lnfBoardService.selectBoardDetail(no);
 		
 		String path = "";
@@ -55,7 +56,6 @@ public class ModifyBoardServlet extends HttpServlet {
 		} catch (ParseException e) {
 		    e.printStackTrace(); // 오류 처리 필요
 		}
-		
 		// 발견 시간 
 		Time findTime = null;
         try {
@@ -67,15 +67,16 @@ public class ModifyBoardServlet extends HttpServlet {
         } catch (DateTimeParseException e) {
             e.printStackTrace();
         }
-		
 		String missing = request.getParameter("missing");
 		String keep = request.getParameter("keep");
 		String description = request.getParameter("description");
 		String staLine = request.getParameter("staLine");
 		String staName = request.getParameter("staName");
+		int writerUserNO = ((UserDTO) request.getSession().getAttribute("loginUser")).getUserNo();
 		
 		
 		LnfBoardDTO modifyBoard = new LnfBoardDTO();
+		modifyBoard.setLnfNo(no);
 		modifyBoard.setFindDate(findDate);
 		modifyBoard.setFindTime(findTime);
 		modifyBoard.setMissing(missing);
@@ -83,8 +84,20 @@ public class ModifyBoardServlet extends HttpServlet {
 		modifyBoard.setDescription(description);
 		modifyBoard.setDescription(staLine);
 		modifyBoard.setDescription(staName);
+		modifyBoard.setWriterNo(writerUserNO);
 		
-		int result = new LnfBoardService().modifyBoard(modifyBoard);
+		LnfBoardService lnfBoardService = new LnfBoardService();
+		int result = lnfBoardService.modifyBoard(modifyBoard);
+		System.out.println(result);
+		
+		String path = "";
+		if (result > 0) {
+			path = "/WEB-INF/views/common/success.jsp";
+			request.setAttribute("successCode", "updateNotice");
+		} else {
+			path = "/WEB-INF/views/common/fail.jsp";
+			request.setAttribute("message", "공지사항 수정에 실패했습니다.");
+		}
 		
 		response.sendRedirect(request.getContextPath() + "/lnf/detail?boardNo=" + no);
 		

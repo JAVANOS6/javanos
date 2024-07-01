@@ -116,6 +116,8 @@ public class LnfBoardService {
 	}
 
 	
+	// <검색>
+	
 	// 호선으로 검색
 		public List<LnfBoardDTO> searchByLine(String staLine) {
 

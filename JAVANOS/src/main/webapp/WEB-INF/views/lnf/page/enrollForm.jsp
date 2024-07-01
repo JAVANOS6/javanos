@@ -100,13 +100,6 @@
             return false;
         }
 
-        // 발견 시간 입력 유효성 검사
-        var findTime = document.getElementsByName("findTime")[0].value.trim();
-        if (findTime === "") {
-            alert("발견 시간을 입력해주세요.");
-            return false;
-        }
-
         // 분실 품목 입력 유효성 검사
         var missing = document.getElementsByName("missing")[0].value.trim();
         if (missing === "") {
@@ -118,13 +111,6 @@
         var keep = document.getElementsByName("keep")[0].value.trim();
         if (keep === "") {
             alert("보관 장소를 입력해주세요.");
-            return false;
-        }
-
-        // 상세 설명 입력 유효성 검사
-        var description = document.getElementsByName("description")[0].value.trim();
-        if (description === "") {
-            alert("상세 설명을 입력해주세요.");
             return false;
         }
 
@@ -161,15 +147,15 @@
                         <td>호선</td>
                         <td>
                             <select name="staLine">
-                                <option value="1">1호선</option>
-                                <option value="2">2호선</option>
-                                <option value="3">3호선</option>
-                                <option value="4">4호선</option>
-                                <option value="5">5호선</option>
-                                <option value="6">6호선</option>
-                                <option value="7">7호선</option>
-                                <option value="8">8호선</option>
-                                <option value="9">9호선</option>
+                                <option value="1호선">1호선</option>
+                                <option value="2호선">2호선</option>
+                                <option value="3호선">3호선</option>
+                                <option value="4호선">4호선</option>
+                                <option value="5호선">5호선</option>
+                                <option value="6호선">6호선</option>
+                                <option value="7호선">7호선</option>
+                                <option value="8호선">8호선</option>
+                                <option value="9호선">9호선</option>
                                 <option value="경의중앙선">경의중앙선</option>
                                 <option value="공항철도">공항철도</option>
                                 <option value="수인분당선">수인분당선</option>

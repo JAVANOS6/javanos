@@ -68,6 +68,8 @@
 
 <jsp:include page="../../common/menubar.jsp"/>
 
+<div id = "wrap">
+<section>
 <div class="container">
     <!-- 게시글 출력할 것 -->
     <h2 style="text-align: center;">분실물 게시판</h2>
@@ -106,14 +108,19 @@
         <form id="searchForm" action="${pageContext.servletContext.contextPath}/lnf/search" method="get">		
             <input type="hidden" name="currentPage" value="1">
             <select id="searchCondition" name="searchCondition">
-                <option value="missing" ${requestScope.selectCriteria.searchCondition eq "missing" ? "selected" : ""}>분실 품목</option>
-                <option value="staLine" ${requestScope.selectCriteria.searchCondition eq "staLine" ? "selected" : ""}>습득 호선</option>
-                <option value="staName" ${requestScope.selectCriteria.searchCondition eq "staName" ? "selected" : ""}>습득 역</option>
+                <option value="missing">분실 품목</option>
+                <option value="staLine">습득 호선</option>
+                <option value="staName">습득 역</option>
             </select>
-            <input type="search" id="searchValue" name="searchValue" value="<c:out value='${requestScope.selectCriteria.searchValue}'/>">
+            <input type="search" id="searchValue" name="keyword">
             <button type="submit">검색하기</button>
         </form>
     </div>
+</div>
+<%-- <jsp:include page="../../common/paging/jsp" flush="false">
+	<jsp:param value="lnf/search" name="link"/>
+</jsp:include> --%>
+</section>
 </div>
 
 <script>

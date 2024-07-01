@@ -93,8 +93,8 @@
                     <td>${lnfBoard.missing}</td> <!-- 분실 품목 -->
                     <td>${lnfBoard.enrollDate}</td> 
                     <td>${lnfBoard.findDate}</td> 
-<%--                     <td><fmt:formatDate value="${lnfBoard.enrollDate}" pattern="yyyy-MM-dd"/></td> <!-- 등록일 -->
-            		<td><fmt:formatDate value="${lnfBoard.findDate}" pattern="yyyy-MM-dd"/></td> <!-- 발견일 --> --%>
+<!--                     <td><script>document.write(new Date('${lnfBoard.enrollDate}').toLocaleDateString('ko-KR'))</script></td> 등록일
+        			<td><script>document.write(new Date('${lnfBoard.findDate}').toLocaleDateString('ko-KR'))</script></td> 발견일 -->
                 </tr>
             </c:forEach>
         </tbody>
@@ -114,6 +114,9 @@
         </form>
     </div>
 </div>
+<%-- <jsp:include page="../../common/paging/jsp" flush="false">
+	<jsp:param value="lnf/main" name="link"/>
+</jsp:include> --%>
 </section>
 </div>
 

@@ -94,14 +94,16 @@
 	<!-- 검색 -->
 	<select id="searchByLine" resultMap="lnfResultMap" parameterType="String">
 		SELECT
-			LNF_NO,
-			LNF_STA_LINE,
-			LNF_STA_NAME,
-			LNF_MISSING,
-			LNF_ENROLL_DATE,
-			LNF_FIND_DATE
-		WHERE LNF_BOARD_STATUS='Y';
-		AND LNF_STA_LINE LIKE #{keyword}
+        	LNF_NO,
+        	LNF_STA_LINE,
+        	LNF_STA_NAME,
+        	LNF_MISSING,
+        	LNF_ENROLL_DATE,
+        	LNF_FIND_DATE
+    	 FROM TBL_LNF 
+    	 WHERE
+        	LNF_BOARD_STATUS = 'Y' 
+         	AND LNF_STA_LINE LIKE CONCAT('%', #{keyword}, '%')
 	</select>
 	
 	<!-- 검색 -->
@@ -113,21 +115,25 @@
 			LNF_MISSING,
 			LNF_ENROLL_DATE,
 			LNF_FIND_DATE
-		WHERE LNF_BOARD_STATUS='Y';
-		AND LNF_STA_NAME LIKE #{keyword}
+		 FROM TBL_LNF 
+    	 WHERE
+        	LNF_BOARD_STATUS = 'Y' 
+         	AND LNF_STA_NAME LIKE CONCAT('%', #{keyword}, '%')
 	</select>
 	
 	<!-- 검색 -->
 	<select id="searchByMissing" resultMap="lnfResultMap" parameterType="String">
-	SELECT
+		SELECT
 			LNF_NO,
 			LNF_STA_LINE,
 			LNF_STA_NAME,
 			LNF_MISSING,
 			LNF_ENROLL_DATE,
 			LNF_FIND_DATE
-		WHERE LNF_BOARD_STATUS='Y';
-		AND LNF_MISSING LIKE #{keyword}
+		 FROM TBL_LNF 
+    	 WHERE
+        	LNF_BOARD_STATUS = 'Y' 
+         	AND LNF_MISSING LIKE CONCAT('%', #{keyword}, '%')
 	</select>
 	
 	<!-- 게시글 수정 -->
@@ -142,9 +148,10 @@
         	LNF_MODIFY_DATE = CURRENT_TIMESTAMP,
         	LNF_STA_LINE = #{staLine},
         	LNF_STA_NAME = #{staName}
+        	USER_NO = #{writerNo}
     	WHERE 
         	LNF_NO = #{lnfNo}
-</update>
+	</update>
 
 	
 	<!-- 게시글 삭제 -->
