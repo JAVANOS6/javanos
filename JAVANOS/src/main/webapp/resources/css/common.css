@@ -78,8 +78,8 @@ footer {
 
 .logo-container img {
 	width:300px;
-    max-width: 400px;
-    height: 90px;
+    max-width: 200px;
+    height: 110px;
     object-fit: cover;
 }
 .main-image-container, .home-image-container {
