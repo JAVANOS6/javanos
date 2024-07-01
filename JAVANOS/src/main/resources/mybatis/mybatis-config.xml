@@ -23,7 +23,7 @@
 		<mapper resource="com/javanos/project/notice/model/dao/NoticeDAO.xml"/>
 		 <mapper resource="com/javanos/project/down/model/dao/DownDAO.xml"/> 
 		<mapper resource="com/javanos/project/lnf/model/dao/LnfDAO.xml"/>
-		<!-- <mapper resource="com/javanos/project/report/model/dao/ReportDAO.xml"/> -->
+		<mapper resource="com/javanos/project/report/model/dao/ReportDAO.xml"/>
 	</mappers>
 	
 </configuration>
