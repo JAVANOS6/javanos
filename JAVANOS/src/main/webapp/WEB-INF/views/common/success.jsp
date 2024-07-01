@@ -46,6 +46,10 @@
 					successMessage = "정상적으로 수정되었습니다."
 					movePath = "${ pageContext.servletContext.contextPath }/community/detail?communityNo=${requestScope.communityNo}";
 					break;
+				case "downEnroll" :
+					successMessage = "정상적으로 등록되었습니다."
+					movePath = "${ pageContext.servletContext.contextPath }/down/enroll";
+					break;
 			}
 
 			alert(successMessage);
