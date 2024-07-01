@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.javanos.project.common.paging.SelectCriteria;
 import com.javanos.project.lnf.model.dto.LnfBoardDTO;
+import com.javanos.project.notice.model.dto.NoticeDTO;
 
 public interface LnfDAO {
 	
@@ -27,6 +28,16 @@ public interface LnfDAO {
 	public int selectTotalCount(Map<String, String> searchMap);
 	
 	public List<LnfBoardDTO> selectBoardList(SelectCriteria selectCriteria);
+	
+	
+	// 호선으로 검색 메소드
+		public List<LnfBoardDTO> searchByLine(String staLine);
+
+	// 역으로 검색 메소드
+		public List<LnfBoardDTO> searchByStation(String station);
+
+	// 분실 품목으로 검색 메소드
+	    public List<LnfBoardDTO> searchByMissing(String missing);
 	
 
 

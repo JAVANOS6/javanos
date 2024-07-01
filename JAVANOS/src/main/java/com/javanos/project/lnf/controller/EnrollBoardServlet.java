@@ -51,6 +51,7 @@ public class EnrollBoardServlet extends HttpServlet {
 		String keep = request.getParameter("keep");
 		String description = request.getParameter("description");
 		int writerUserNO = ((UserDTO) request.getSession().getAttribute("loginUser")).getUserNo();
+	
 		
 		LnfBoardDTO newBoard = new LnfBoardDTO();
 		newBoard.setLnfStaLine(staLine);
@@ -60,6 +61,8 @@ public class EnrollBoardServlet extends HttpServlet {
 		newBoard.setKeep(keep);
 		newBoard.setDescription(description);
 		newBoard.setWriterNo(writerUserNO);
+		
+		System.out.println(newBoard);
 		
 		LnfBoardService boardService = new LnfBoardService();
 		int result = boardService.enrollBoard(newBoard);

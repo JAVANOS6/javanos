@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>게시글 수정 - 분실물 게시판</title>
+    <title>습득 글 수정 - 분실물 게시판</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,24 +12,44 @@
             margin: 0;
             padding: 20px;
         }
-        table {
-            width: 80%;
+        .table-area {
+            max-width: 800px;
             margin: 20px auto;
-            border-collapse: collapse;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
             background-color: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
         }
         table, th, td {
-            border: 1px solid #ccc;
+            border: 1px solid #ddd;
+            text-align: center;
         }
         th, td {
             padding: 10px;
-            text-align: center;
         }
         th {
             background-color: #f2f2f2; /* 밝은 회색 배경 */
             color: #333; /* 검은색 글자 */
+        }
+        input[type="text"], select, textarea {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 100%;
+            box-sizing: border-box; /* 내용 박스 크기를 포함한 전체 상자 크기 설정 */
+        }
+        input[type="date"], input[type="time"] {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
         }
         button {
             padding: 10px 20px;
@@ -43,54 +63,88 @@
         button:hover {
             background-color: #0056b3;
         }
-        button#cancel {
-            background-color: #dc3545;
+        button[type="reset"] {
+            background-color: #6c757d; /* 회색으로 변경 */
         }
-        button#cancel:hover {
-            background-color: #bd2130;
+        button[type="reset"]:hover {
+            background-color: #5a6268; /* hover 시 더 짙은 회색으로 변경 */
         }
     </style>
+    <script>
+        function cancelAction() {
+            window.location.href = "${pageContext.servletContext.contextPath}/lnf/first";
+        }
+    </script>
 </head>
 <body>
 
     <jsp:include page="../../common/menubar.jsp"/>
 
-    <h2 style="text-align: center;">게시글 수정</h2>
-<div id = "wrap">
+<div id="wrap">
     <section>
-    <div align="center">
-        <form action="${pageContext.servletContext.contextPath}/lnf/modify" method="post">
-            <table>
-                <tr>
-                    <th>습득 호선</th>
-                    <th>습득 역</th>
-                    <th>발견일</th>
-                    <th>등록일</th>
-                    <th>분실 품목</th>
-                    <th>보관 장소</th>
-                    <th>상세 설명</th>
-                </tr>
-                <c:forEach items="${boardList}" var="lnfBoard">
+    <div>
+        <br>
+        <h2 align="center">게시판 수정</h2>
+        <div class="table-area">
+            <form action="${pageContext.servletContext.contextPath}/lnf/modify" method="post">
+                <table>
                     <tr>
-                        <td><c:out value="${lnfBoard.lnfStaLine}"/></td> <!-- 습득 호선 -->
-                        <td><c:out value="${lnfBoard.lnfStaName}"/></td> <!-- 습득 역 -->
-                        <td><c:out value="${lnfBoard.findDate}"/></td> <!-- 발견일 -->
-                        <td><c:out value="${lnfBoard.findTime}"/></td> 
-                        <td><c:out value="${lnfBoard.enrollDate}"/></td> <!-- 등록일 -->
-                        <td><c:out value="${lnfBoard.missing}"/></td> <!-- 분실 품목 -->
-                        <td><c:out value="${lnfBoard.keep}"/></td> <!-- 보관 장소 -->
-                        <td><c:out value="${lnfBoard.description}"/></td> <!-- 상세 설명 -->
+                        <td>호선</td>
+                        <td>
+                            <select name="staLine">
+                                <option value="1">1호선</option>
+                                <option value="2">2호선</option>
+                                <option value="3">3호선</option>
+                                <option value="4">4호선</option>
+                                <option value="5">5호선</option>
+                                <option value="6">6호선</option>
+                                <option value="7">7호선</option>
+                                <option value="8">8호선</option>
+                                <option value="9">9호선</option>
+                                <option value="경의중앙선">경의중앙선</option>
+                                <option value="공항철도">공항철도</option>
+                                <option value="수인분당선">수인분당선</option>
+                            </select>
+                        </td>
+                        <td>역</td>
+                        <td>
+                            <input type="text" name="staName" value="${requestScope.detail.lnfStaName}">
+                        </td>
+                        <td>발견일</td>
+                        <td>
+                            <input type="date" name="findDate" value="${requestScope.detail.findDate}">
+                        </td>
+                        <td>발견 시간</td>
+                        <td>
+                            <input type="time" name="findTime" value="${requestScope.detail.findTime}">
+                        </td>
                     </tr>
-                </c:forEach>
-            </table>
-
-            <div align="center">
-                <button type="reset" id="cancel">취소하기</button>
-                <button type="submit">수정하기</button>
-            </div>
-        </form>
+                    <tr>
+                        <td>분실 품목</td>
+                        <td colspan="3">
+                            <input type="text" name="missing" style="width: 100%;" value="${requestScope.detail.missing}">
+                        </td>
+                        <td>보관 장소</td>
+                        <td colspan="3">
+                            <input type="text" name="keep" style="width: 100%;" value="${requestScope.detail.keep}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>상세 설명</td>
+                        <td colspan="7">
+                            <textarea name="description" cols="100" rows="15" style="resize: none; width: 100%;">${requestScope.detail.description}</textarea>
+                        </td>
+                    </tr>
+                </table>
+                <br>
+                <div align="center">
+                    <button type="button" onclick="cancelAction()">취소</button>
+                    <button type="submit">수정</button>
+                </div>
+            </form>
+        </div>
     </div>
-  	</section>
+</section>
 </div>
 
 </body>

@@ -36,6 +36,7 @@
 		<result property="boardStatus" column="LNF_BOARD_STATUS"/>
 		<result property="lnfStaLine" column="LNF_STA_LINE"/>
 		<result property="lnfStaName" column="LNF_STA_NAME"/>
+		<result property="writerNo" column="USER_NO"/>
 		<association property="userNo" resultMap="userResultMap"/>
 	</resultMap>
 	
@@ -60,7 +61,7 @@
     		#{description},
     		#{lnfStaLine},
     		#{lnfStaName},
-    		#{userNo}
+    		#{writerNo}
     	);
    
 	</insert>
@@ -91,22 +92,42 @@
 	</select>
 	
 	<!-- 검색 -->
-	<select id="selectTotalCount" resultType="_int" parameterType="hashmap">
-    	SELECT
-               COUNT(*)
-          FROM TBL_LNF
-    	<where>
-			<if test="searchCondition == 'lnfStaLine'">
-	           LNF_STA_LINE = #{ searchValue }
-			</if>
-			<if test="searchCondition == 'lnfStaName'">
-	           LNF_STA_NAME = #{ searchValue }
-			</if>
-			<if test="searchCondition == 'missing'">
-	           LNF_MISSING = #{ searchValue }
-			</if>
-	       AND A.BOARD_STATUS = 'Y'
-    	</where>
+	<select id="searchByLine" resultMap="lnfResultMap" parameterType="String">
+		SELECT
+			LNF_NO,
+			LNF_STA_LINE,
+			LNF_STA_NAME,
+			LNF_MISSING,
+			LNF_ENROLL_DATE,
+			LNF_FIND_DATE
+		WHERE LNF_BOARD_STATUS='Y';
+		AND LNF_STA_LINE LIKE #{keyword}
+	</select>
+	
+	<!-- 검색 -->
+	<select id="searchByStation" resultMap="lnfResultMap" parameterType="String">
+		SELECT
+			LNF_NO,
+			LNF_STA_LINE,
+			LNF_STA_NAME,
+			LNF_MISSING,
+			LNF_ENROLL_DATE,
+			LNF_FIND_DATE
+		WHERE LNF_BOARD_STATUS='Y';
+		AND LNF_STA_NAME LIKE #{keyword}
+	</select>
+	
+	<!-- 검색 -->
+	<select id="searchByMissing" resultMap="lnfResultMap" parameterType="String">
+	SELECT
+			LNF_NO,
+			LNF_STA_LINE,
+			LNF_STA_NAME,
+			LNF_MISSING,
+			LNF_ENROLL_DATE,
+			LNF_FIND_DATE
+		WHERE LNF_BOARD_STATUS='Y';
+		AND LNF_MISSING LIKE #{keyword}
 	</select>
 	
 	<!-- 게시글 수정 -->
@@ -130,7 +151,7 @@
 	<update id="deleteBoard" parameterType="com.javanos.project.lnf.model.dto.LnfBoardDTO">
 		UPDATE TBL_LNF
 			SET LNF_BOARD_STATUS = 'N',
-				MODIFIED_DATE = current_date
+				LNF_MODIFY_DATE = current_date
 			WHERE LNF_NO= #{lnfNo};
 	</update>
 	

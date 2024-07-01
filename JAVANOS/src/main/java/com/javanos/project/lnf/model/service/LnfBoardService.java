@@ -9,25 +9,24 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.javanos.project.lnf.model.dao.LnfDAO;
 import com.javanos.project.lnf.model.dto.LnfBoardDTO;
-import com.javanos.project.notice.model.dao.NoticeDAO;
 import com.javanos.project.notice.model.dto.NoticeDTO;
 
 public class LnfBoardService {
 	
 	private LnfDAO lnfDAO;
 	
-	/* 페이징 처리를 위한 전체 게시물 수 조회용 메소드 */
-	public int selectTotalCount(Map<String, String> searchMap) {
-		
-		SqlSession session = getSqlSession();
-		lnfDAO = session.getMapper(LnfDAO.class);
-		
-		int totalCount = LnfDAO.selectTotalCount(searchMap);
-		
-		session.close();
-		
-		return totalCount;
-	}
+//	/* 페이징 처리를 위한 전체 게시물 수 조회용 메소드 */
+//	public int selectTotalCount(Map<String, String> searchMap) {
+//		
+//		SqlSession session = getSqlSession();
+//		lnfDAO = session.getMapper(LnfDAO.class);
+//		
+//		int totalCount = LnfDAO.selectTotalCount(searchMap);
+//		
+//		session.close();
+//		
+//		return totalCount;
+//	}
 	
 	// 게시글 삽입
 	public int enrollBoard(LnfBoardDTO enrollBoard) {
@@ -117,43 +116,43 @@ public class LnfBoardService {
 	}
 
 	
-//	// 호선으로 검색
-//		public List<NoticeDTO> searchByLine(String staLine) {
-//
-//		SqlSession session = getSqlSession();
-//		lnfDAO = session.getMapper(LnfDAO.class);
-//
-//		List<LnfBoardDTO> searchResult = lnfDAO.searchByLine(staLine);
-//
-//		session.close();
-//
-//		return searchResult;
-//	}
-//
-//	// 역으로 검색
-//		public List<LnfBoard> searchByStation(String staName) {
-//		
-//		SqlSession session = getSqlSession();
-//		LnfDAO = session.getMapper(LnfDAO.class);
-//		
-//		List<LnfBoardDTO> searchResult = lnfDAO.searchByStation(staName);
-//		
-//		session.close();
-//		
-//		return searchResult;
-//	}
-//
-//	// 분실 품목으로 검색
-//		public List<LnfBoard> searchByMissing(String missing) {
-//	
-//		SqlSession session = getSqlSession();
-//		LnfDAO = session.getMapper(LnfDAO.class);
-//	
-//		List<LnfBoardDTO> searchResult = lnfDAO.searchByMissing(missing);
-//	
-//		session.close();
-//	
-//		return searchResult;
-//	}
+	// 호선으로 검색
+		public List<LnfBoardDTO> searchByLine(String staLine) {
+
+		SqlSession session = getSqlSession();
+		lnfDAO = session.getMapper(LnfDAO.class);
+
+		List<LnfBoardDTO> searchResult = lnfDAO.searchByLine(staLine);
+
+		session.close();
+
+		return searchResult;
+	}
+
+	// 역으로 검색
+		public List<LnfBoardDTO> searchByStation(String staName) {
+		
+		SqlSession session = getSqlSession();
+		lnfDAO = session.getMapper(LnfDAO.class);
+		
+		List<LnfBoardDTO> searchResult = lnfDAO.searchByStation(staName);
+		
+		session.close();
+		
+		return searchResult;
+	}
+
+	// 분실 품목으로 검색
+		public List<LnfBoardDTO> searchByMissing(String missing) {
+	
+		SqlSession session = getSqlSession();
+		lnfDAO = session.getMapper(LnfDAO.class);
+	
+		List<LnfBoardDTO> searchResult = lnfDAO.searchByMissing(missing);
+	
+		session.close();
+	
+		return searchResult;
+	}
 	
 }
