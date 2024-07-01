@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.javanos.project.common.paging.Pagenation;
+import com.javanos.project.common.paging.SelectCriteria;
 import com.javanos.project.down.model.dto.DownDTO;
 import com.javanos.project.down.model.service.DownService;
 import com.javanos.project.user.model.dto.UserDTO;
@@ -66,7 +68,7 @@ public class DownEnrollServlet extends HttpServlet {
 		/* 조회해온다 */
 		List<DownDTO> downList = downService.selectDownList(selectCriteria);
 
-		System.out.println("boardList : " + downList);
+		System.out.println("downList : " + downList);
 
 		String path = "";
 		if (downList != null) {
