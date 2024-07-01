@@ -54,4 +54,8 @@
         WHERE 
             USER_ID = #{userId}
     </select>
+    
+        <delete id="deleteReport" parameterType="int">
+        DELETE FROM TBL_REPORT WHERE REPORT_NO = #{reportNo}
+    </delete>
 </mapper>

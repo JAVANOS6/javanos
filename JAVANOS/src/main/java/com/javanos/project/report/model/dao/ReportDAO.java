@@ -15,4 +15,6 @@ public interface ReportDAO {
     // UserDTO 조회 메서드 추가
     //UserDTO selectUserByUserId(@Param("userId") String userId);
     UserDTO selectUserByUserId(String userId);
+    
+    int deleteReport(int reportNo); // 신고 삭제 메서드
 }
