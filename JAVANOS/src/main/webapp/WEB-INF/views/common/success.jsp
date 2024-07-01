@@ -56,6 +56,7 @@
 					successMessage = "정상적으로 수정되었습니다."
 					movePath = "${ pageContext.servletContext.contextPath }/community/detail?communityNo=${requestScope.communityNo}";
 					break;
+
 				case "deleteCommunity" :
 					successMessage = "정상적으로 삭제되었습니다."
 					movePath = "${ pageContext.servletContext.contextPath }/community/list}";
