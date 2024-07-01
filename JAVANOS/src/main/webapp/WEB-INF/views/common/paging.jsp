@@ -41,10 +41,10 @@
 		<!-- 마지막 페이지로 이동 버튼 -->
 		<button id="maxPage">>></button> 
 	</div>
-	
+	<% String link = request.getParameter("link"); %>
 	<script>
 	
-		const link = "${ pageContext.servletContext.contextPath }/board/list";
+		const link = "${ pageContext.servletContext.contextPath }<%= link %>";
 		let searchText = "";
 		
 		if(${ !empty requestScope.selectCriteria.searchCondition? true: false }) {
