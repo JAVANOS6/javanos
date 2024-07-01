@@ -83,9 +83,9 @@
 					</div>
 				<div class="button-area">
 					<button type="submit" id="submitBtn">등록</button>
+					<button type="button" onclick="gobackdetail()">취소</button>
 				</div>
 			</form>
-					<button onclick="gobackdetail()">취소</button>
 			
 			
 			

@@ -25,14 +25,8 @@
 			case "deleteUser":
 				window.location.replace('${ pageContext.servletContext.contextPath }/user/mypage');
 				break;
-			case "insertCommunity":
-				window.location.replace('${ pageContext.servletContext.contextPath }/community/list');
-				break;
-			case "updateCommunity":
+			case "communityUpdate":
 				window.location.replace('${ pageContext.servletContext.contextPath }/community/detail?communityNo=${requestScope.communityNo}');
-				break;
-			case "deleteCommunity":
-				window.location.replace('${ pageContext.servletContext.contextPath }/community/list');
 				break;
 		}
 	</script>

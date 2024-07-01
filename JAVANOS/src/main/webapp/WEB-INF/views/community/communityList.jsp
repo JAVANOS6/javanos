@@ -9,8 +9,9 @@
 <link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/css/community/communityList.css">
 <body>	
 	<jsp:include page="../common/menubar.jsp"/>
-	
-	<div class="outer-community-list">
+	<div id="wrap">
+	<section>
+	<div id="outer-community-list">
 		<h2 align="center">커뮤니티 게시판</h2>
 		<br>
 		<div class="community-list-area" >
@@ -33,6 +34,9 @@
 		</div>
 	</div>
 	<jsp:include page="../common/paging.jsp"/>
+	</section>
+	</div>
+	<jsp:include page="../common/footer.jsp"/>
 	
 	
 	
