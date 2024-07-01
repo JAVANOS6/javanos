@@ -51,19 +51,19 @@
 				
 				/* 분실물 관련 */
 			case "enrollLnfBoard":
-			window.location.replace('${ pageContext.servletContext.contextPath }/lnf/insert');
+				window.location.replace('${ pageContext.servletContext.contextPath }/lnf/insert');
 				break;
 
 			case "modifyLnfBoard":
-			window.location.replace('${ pageContext.servletContext.contextPath }/lnf/modify');
+				window.location.replace('${ pageContext.servletContext.contextPath }/lnf/modify');
 				break;
 
 			case "deleteLnfBoard":
-			window.location.replace('${ pageContext.servletContext.contextPath }/lnf/delete');
+				window.location.replace('${ pageContext.servletContext.contextPath }/lnf/delete');
 				break;
 
 			case "searchLnfBoard":
-			window.location.replace('${ pageContext.servletContext.contextPath }/lnf/search');
+				window.location.replace('${ pageContext.servletContext.contextPath }/lnf/search');
 				break;
 
 				
