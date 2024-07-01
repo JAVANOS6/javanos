@@ -1,70 +1,97 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.List" %>
+<%@ page import="com.javanos.project.report.model.dto.ReportDTO" %>
+<%@ page import="com.javanos.project.user.model.dto.UserDTO" %>
+
+<%
+    List<ReportDTO> reports = (List<ReportDTO>) request.getAttribute("reports");
+    if (reports != null) {
+        for (ReportDTO report : reports) {
+            System.out.println("Report No: " + report.getReportNo());
+            System.out.println("Report User ID: " + (report.getReportUser() != null ? report.getReportUser().getUserId() : "null"));
+            System.out.println("Reported User ID: " + (report.getReportedUser() != null ? report.getReportedUser().getUserId() : "null"));
+        }
+    }
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>계정 관리 게시판</title>
-<style>
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 60px;
-    }
-    table, th, td {
-        border: 1px solid black;
-    }
-    th, td {
-        padding: 10px;
-        text-align: left;
-    }
-    th {
-        background-color: #f2f2f2;
-    }
-</style>
+    <meta charset="UTF-8">
+    <title>신고 관리 페이지</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e8f5e9;
+            color: #333;
+        }
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 20px auto;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        table, th, td {
+            border: 1px solid #a5d6a7;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+        th {
+            background-color: #81c784;
+            color: white;
+        }
+        tr {
+            background-color: white;
+            transition: box-shadow 0.3s;
+        }
+        tr:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .container {
+            text-align: center;
+        }
+        .button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #388e3c;
+        }
+    </style>
 </head>
 <body>
 <jsp:include page="../common/menubar.jsp"/>
 
-<h1>신고 내역</h1>
-
-<table>
-    <tr>
-        <th>#</th>
-        <th>신고한 회원</th>
-        <th>신고당한 회원</th>
-        <th>신고 내용</th>
-        <th>등록일</th>
-    </tr>
-    <%
-        Object reportsObj = application.getAttribute("reports");
-        if (reportsObj instanceof List) {
-            List<?> reportsList = (List<?>) reportsObj;
-            int index = 1;
-            for (Object reportObj : reportsList) {
-                if (reportObj instanceof String[]) {
-                    String[] report = (String[]) reportObj;
-                    String userId = report[0]; // 신고한 회원 ID
-                    String reportedUserId = report[1]; // 신고당한 회원 ID
-                    String check1 = report[2];
-                    String additionalText = report[3];
-                    String currentDate = report[4];
-                    String communityNo = report[5];
-    %>
-    <tr>
-        <td><%= index++ %></td>
-        <td><%= userId %></td>
-        <td><%= reportedUserId %></td>
-        <td><a href="${pageContext.servletContext.contextPath}/reportdetail?userId=<%= userId %>&reportedUserId=<%= reportedUserId %>&check1=<%= check1 %>&additionalText=<%= additionalText %>&currentDate=<%= currentDate %>"><%= check1 %></a></td>
-        <td><%= currentDate %></td>
-    </tr>
-    <%
-                }
-            }
-        }
-    %>
-</table>
-
+<div class="container">
+    <h1>신고 관리 페이지</h1>
+    <table>
+        <tr>
+            <th>신고 번호</th>
+            <th>신고 사유</th>
+            <th>신고 날짜</th>
+            <th>신고자</th>
+            <th>신고당한 회원</th>
+            <th>상세 보기</th>
+        </tr>
+        <c:forEach var="report" items="${reports}">
+            <tr>
+                <td>${report.reportNo}</td>
+                <td>${report.reportReason}</td>
+                <td>${report.reportDate}</td>
+                <td><c:out value="${report.reportUser.userId}" /></td>
+                <td><c:out value="${report.reportedUser.userId}" /></td>
+                <td><a href="reportdetail?reportNo=${report.reportNo}">상세 보기</a></td>
+            </tr>
+        </c:forEach>
+    </table>
+</div>
 </body>
 </html>

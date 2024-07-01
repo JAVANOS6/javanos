@@ -10,6 +10,8 @@
 </head>
 <body>
  	<jsp:include page="../common/menubar.jsp"/> 
+ 	<div id="wrap">
+	<section>
 
 	<div class="join-wrapper">
 		<h2>Sign Up</h2>
@@ -41,6 +43,9 @@
 			<input type="submit" id="joinBtn" value="회원가입"><br>
 		</form>
 	</div>
+	</section>
+	</div>
+	<jsp:include page="../common/footer.jsp"/>
 	
 	<script>
 		$(document).ready(function() {
@@ -253,9 +258,9 @@
 		    // 이용약관 동의 유효성 검사 함수
 		    function validateAgreeTerms() {
 		        if (!$("#agreeTerms").is(":checked")) {
-		            $("#agreeTermsType").text("이용약관에 동의해야 합니다.").addClass('invalid');
+		            $("#agreeTermsType").text("이용약관에 동의해야 합니다.").removeClass('valid').addClass('invalid');
 		        } else {
-		            $("#agreeTermsType").text("").removeClass('invalid').addClass('valid');
+		            $("#agreeTermsType").text("").removeClass('invalid')
 		        }
 		    }
 		});
