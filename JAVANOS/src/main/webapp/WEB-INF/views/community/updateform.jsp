@@ -10,7 +10,7 @@
 </head>
 <body>
 	<jsp:include page="../common/menubar.jsp"/>
-		<h2>커뮤니티 게시글 수정</h2>
+		<h2 align="center">커뮤니티 게시글 수정</h2>
 			<form id="edit-post-form" action="${pageContext.servletContext.contextPath}/community/update" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="communityNo" value="${ community.communityNo }">
 				<div class="thumbnail-update-area">
@@ -35,12 +35,12 @@
 										<c:when test="${ not empty community.pictureList }">
 											<div class="title-img-area" id="titleImgArea">
 												<img id="titleImgView" class="thumbnailImg" onerror="setDefaultImage(this);" src="${pageContext.servletContext.contextPath }${community.pictureList[0].thumbnailPath }">
-												<button type="button" class="remove-image-btn" data-image-id="${community.pictureList[0].picNo}">삭제</button>
 											</div>
+												<button type="button" class="remove-image-btn" data-image-id="${community.pictureList[0].picNo}">삭제</button>
 										</c:when>
 										<c:when test="${ empty community.pictureList }">
 					            			<label>첨부한 사진이 없습니다.</label>
-					            			<!-- <img class="imgView" onerror="setDefaultImage(this);"> -->
+					            			<img class="imgView" onerror="setDefaultImage(this);">
 							           </c:when>
 									</c:choose>
 									<input type="file" id="thumbnailImg" name="thumbnailImg">
@@ -83,9 +83,9 @@
 					</div>
 				<div class="button-area">
 					<button type="submit" id="submitBtn">등록</button>
+					<button type="button" onclick="gobackdetail()">취소</button>
 				</div>
 			</form>
-					<button onclick="gobackdetail()">취소</button>
 			
 			
 			
