@@ -12,9 +12,13 @@ public interface ReportDAO {
     int insertReport(ReportDTO report);
     ReportDTO selectReportByNo(int reportNo);
     
-    // UserDTO 조회 메서드 추가
-    //UserDTO selectUserByUserId(@Param("userId") String userId);
-    UserDTO selectUserByUserId(String userId);
+    UserDTO selectUserByUserId(@Param("userId") String userId);
     
-    int deleteReport(int reportNo); // 신고 삭제 메서드
+    int deleteReport(int reportNo);
+
+    String selectUserNicknameByUserNo(@Param("userNo") int userNo);
+    
+    // 회원 정지 메서드
+    int banUserByUserNo(@Param("userNo") int userNo);
+    int updateReportStatus(@Param("reportNo") int reportNo, @Param("reportStatus") String reportStatus);
 }

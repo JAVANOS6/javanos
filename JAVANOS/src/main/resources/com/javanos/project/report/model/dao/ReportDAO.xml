@@ -16,18 +16,18 @@
         </association>
     </resultMap>
 
-    <select id="selectAllReports" resultMap="reportResultMap">
-        SELECT 
-            R.REPORT_NO, R.REPORT_REASON, R.REPORT_DATE, R.REPORT_STATUS, 
-            R.REPORT_USER_NO, RU.USER_ID AS REPORT_USER_ID,
-            R.REPORTED_USER_NO, RE.USER_ID AS REPORTED_USER_ID
-        FROM 
-            TBL_REPORT R
-        LEFT JOIN TBL_USER RU ON R.REPORT_USER_NO = RU.USER_NO
-        LEFT JOIN TBL_USER RE ON R.REPORTED_USER_NO = RE.USER_NO
-        WHERE
-            R.REPORT_STATUS = 'Y'
-    </select>
+<select id="selectAllReports" resultMap="reportResultMap">
+    SELECT 
+        R.REPORT_NO, R.REPORT_REASON, R.REPORT_DATE, R.REPORT_STATUS, 
+        R.REPORT_USER_NO, RU.USER_ID AS REPORT_USER_ID,
+        R.REPORTED_USER_NO, RE.USER_ID AS REPORTED_USER_ID
+    FROM 
+        TBL_REPORT R
+    LEFT JOIN TBL_USER RU ON R.REPORT_USER_NO = RU.USER_NO
+    LEFT JOIN TBL_USER RE ON R.REPORTED_USER_NO = RE.USER_NO
+    WHERE
+        R.REPORT_STATUS IN ('Y', '계정정지완료')
+</select>
 
     <insert id="insertReport" parameterType="com.javanos.project.report.model.dto.ReportDTO">
         INSERT INTO TBL_REPORT (REPORT_REASON, REPORT_DATE, REPORT_STATUS, REPORT_USER_NO, REPORTED_USER_NO)
@@ -55,7 +55,25 @@
             USER_ID = #{userId}
     </select>
     
-        <delete id="deleteReport" parameterType="int">
+    <delete id="deleteReport" parameterType="int">
         DELETE FROM TBL_REPORT WHERE REPORT_NO = #{reportNo}
     </delete>
+    
+    <select id="selectUserNicknameByUserNo" parameterType="int" resultType="string">
+        SELECT USER_NICKNAME
+        FROM TBL_USER
+        WHERE USER_NO = #{userNo}
+    </select>
+    
+        <update id="updateReportStatus" parameterType="map">
+        UPDATE TBL_REPORT
+        SET REPORT_STATUS = #{reportStatus}
+        WHERE REPORT_NO = #{reportNo}
+    </update>
+
+<update id="banUserByUserNo" parameterType="int">
+    UPDATE TBL_USER
+    SET USER_STATUS = 'N'
+    WHERE USER_NO = #{userNo}
+</update>
 </mapper>
