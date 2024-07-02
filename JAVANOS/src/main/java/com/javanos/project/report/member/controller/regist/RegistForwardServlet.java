@@ -18,6 +18,10 @@ public class RegistForwardServlet extends HttpServlet {
             ReportService reportService = new ReportService();
             String reportedUserNickname = reportService.getUserNicknameByUserNo(Integer.parseInt(reportedUserNo));
             request.setAttribute("reportedUserNickname", reportedUserNickname);
+
+            // 디버깅 로그 추가
+            System.out.println("reportedUserNo: " + reportedUserNo);
+            System.out.println("reportedUserNickname: " + reportedUserNickname);
         }
 
         request.getRequestDispatcher("/WEB-INF/views/report/reportregistmain.jsp").forward(request, response);

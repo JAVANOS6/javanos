@@ -85,6 +85,23 @@
             <th>신고당한 회원</th>
             <td><%= report.getReportedUser() != null ? report.getReportedUser().getUserId() : "N/A" %></td>
         </tr>
+<tr>
+    <th>신고된 글</th>
+    <td>
+        <% 
+            if(report.getCommunityNo() != null) {
+                int communityNo = report.getCommunityNo().getCommunityNo();
+                String communityLink = request.getContextPath() + "/community/detail?communityNo=" + communityNo;
+        %>
+        <a href="<%= communityLink %>">신고된 글 보러가기</a>
+        <% } else { %>
+        N/A
+        <% } %>
+    </td>
+</tr>
+
+
+
         <tr>
             <th>신고 처리 상태</th>
             <td><%= report.getReportStatus() %></td>
