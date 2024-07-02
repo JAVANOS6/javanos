@@ -45,7 +45,7 @@
 					/* 커뮤니티 관련 */
 				case "insertCommunity" :
 					successMessage = "정상적으로 등록되었습니다.";
-					movePath = "${ pageContext.servletContext.contextPath }/community/list}";
+					movePath = "${ pageContext.servletContext.contextPath }/community/list";
 					break;
 				case "updateCommunity" :
 					successMessage = "정상적으로 수정되었습니다.";
@@ -54,7 +54,7 @@
 
 				case "deleteCommunity" :
 					successMessage = "정상적으로 삭제되었습니다.";
-					movePath = "${ pageContext.servletContext.contextPath }/community/list}";
+					movePath = "${ pageContext.servletContext.contextPath }/community/list";
 					break;
 					
 					
