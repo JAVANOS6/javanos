@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.javanos.project.community.model.dto.CommunityDTO; // CommunityDTO import 추가
 import com.javanos.project.report.model.dto.ReportDTO;
 import com.javanos.project.report.model.service.ReportService;
 import com.javanos.project.user.model.dto.UserDTO;
@@ -35,6 +36,12 @@ public class RegistReportServlet extends HttpServlet {
         String additionalText = request.getParameter("additionalText");
         String communityNo = request.getParameter("communityNo");
         String reportedUserNo = request.getParameter("reportedUserNo");
+
+        // 디버깅 로그 추가
+        System.out.println("check1: " + check1);
+        System.out.println("additionalText: " + additionalText);
+        System.out.println("communityNo: " + communityNo);
+        System.out.println("reportedUserNo: " + reportedUserNo);
 
         // ReportService를 이용해 reportedUserNo로 userNickname을 가져옴
         ReportService reportService = new ReportService();
@@ -67,6 +74,11 @@ public class RegistReportServlet extends HttpServlet {
         reportedUser.setUserNo(Integer.parseInt(reportedUserNo)); // userNo를 설정
         reportedUser.setUserNickname(reportedUserNickname);
         report.setReportedUser(reportedUser);
+
+        // CommunityDTO 객체 생성 및 설정
+        CommunityDTO community = new CommunityDTO();
+        community.setCommunityNo(Integer.parseInt(communityNo));
+        report.setCommunityNo(community);
 
         // 데이터베이스에 저장
         int result = reportService.insertReport(report);
