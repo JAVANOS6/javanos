@@ -24,7 +24,7 @@
 			
 			<input type="submit" id="loginBtn" value="로그인"><br>
 		</form>
-		<p>아직 회원이 아니신가요? <a href="${ pageContext.servletContext.contextPath }/user/join">회원가입</a>
+		<p id="join">아직 회원이 아니신가요? <a href="${ pageContext.servletContext.contextPath }/user/join">회원가입</a>
 	
 	</div>
 	</section>

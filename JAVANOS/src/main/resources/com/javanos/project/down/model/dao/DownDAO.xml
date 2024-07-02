@@ -64,7 +64,7 @@
 			</if>
 	</select>
 	
-     <!-- 게시글 조회 -->
+     <!-- 게시글 조회 -->                   <!-- resultmap의 id -->
 	<select id="selectDownList" resultMap="downResultMap">
 		SELECT A.DOWN_NO 
 		, A.DOWN_ROOM 

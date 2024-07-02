@@ -10,6 +10,8 @@
 </head>
 <body>
 	<jsp:include page="../common/menubar.jsp"/>
+	<div id="wrap">
+	<section>
 		<h2 align="center">커뮤니티 게시글 수정</h2>
 			<form id="edit-post-form" action="${pageContext.servletContext.contextPath}/community/update" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="communityNo" value="${ community.communityNo }">
@@ -32,15 +34,18 @@
 								<td>
 									<label>섬네일은 1개만 선택이 가능합니다. 수정을 원하시면 삭제 후 사진을 선택해주세요. </label>
 									<c:choose>
-										<c:when test="${ not empty community.pictureList }">
+										<c:when test="${ not empty community.pictureList[0].thumbnailPath }">
 											<div class="title-img-area" id="titleImgArea">
-												<img id="titleImgView" class="thumbnailImg" onerror="setDefaultImage(this);" src="${pageContext.servletContext.contextPath }${community.pictureList[0].thumbnailPath }">
+												<img id="titleImgView" class="thumbnailImg"  src="${pageContext.servletContext.contextPath }${community.pictureList[0].thumbnailPath }">
 												<button type="button" class="remove-image-btn" data-image-id="${community.pictureList[0].picNo}">삭제</button>
 											</div>
 										</c:when>
-										<c:when test="${ empty community.pictureList }">
-					            			<label>첨부한 사진이 없습니다.</label>
-					            			<img class="imgView" onerror="setDefaultImage(this);">
+										<c:when test="${ empty community.pictureList[0].thumbnailPath }">
+					            			<br>
+					            			<label style="color: blue;">첨부한 사진이 없습니다.</label>
+					            				<div id="titleImgArea">
+													<img id="titleImgView">
+												</div>
 							           </c:when>
 									</c:choose>
 									<input type="file" id="thumbnailImg" name="thumbnailImg">
@@ -56,25 +61,25 @@
 							            	<c:when test="${ not empty community.pictureList }">
 							            		<div class="body-img-area" id="bodyImgArea">
 							            			<c:set var="imageCount" value="0" />
-									                <c:forEach items="${ community.pictureList }" var="picture" begin="1">
-									                        <img class="imgView" onerror="setDefaultImage(this);" src="${pageContext.servletContext.contextPath }${ picture.thumbnailPath }">
-															<button type="button" class="remove-image-btn" data-image-id="${picture.picNo}">삭제</button>
-															<c:set var="imageCount" value="${imageCount + 1}" />
-									                </c:forEach>
+							            			<div class="bodyImgAndButton">
+								            			<c:forEach items="${ community.pictureList }" var="picture" begin="1">
+										                        <img class="imgView" onerror="setDefaultImage(this);" src="${pageContext.servletContext.contextPath }${ picture.thumbnailPath }">
+																<button type="button" class="remove-image-btn" data-image-id="${picture.picNo}">삭제</button>
+																<c:set var="imageCount" value="${imageCount + 1}" />
+										                </c:forEach>
+							            			</div>
+									                
 									                
 													<%-- 출력된 이미지 개수 계산 --%>
 													<c:set var="remainingImages" value="${3 - imageCount}" />
 													
 													<%-- 부족한 이미지 채우기 --%>
-													<c:forEach var="i" begin="1" end="${remainingImages}">
-													    <img class="imgView" onerror="setDefaultImage(this);">
-													    <button type="button" class="remove-image-btn" data-image-id="${picture.picNo}">삭제</button>
-														<div id="imageContainer">
-														        <img class="imgView" src=""  style="display: none;">
-														        <img class="imgView" src=""  style="display: none;">
-														        <img class="imgView" src=""  style="display: none;">
-												    	</div>
-													</c:forEach>
+													<div class="bodyImgAndButton">
+														<c:forEach var="i" begin="1" end="${remainingImages}">
+														    <img class="imgView" onerror="setDefaultImage(this);">
+
+														</c:forEach>
+													</div>
 									             </div>
 							            	</c:when>
 							         </c:choose>
@@ -98,6 +103,9 @@
 					<button type="button" onclick="gobackdetail()">취소</button>
 				</div>
 			</form>
+		</section>
+		</div>
+	<jsp:include page="../common/footer.jsp"/>
 			
 			
 			
@@ -124,6 +132,7 @@
 		        });
 		    });
 		});
+	
 		
 		//첨부하기 버튼 선택하면 미리보기 이미지 태그에 띄워주기
 		document.getElementById('thumbnailImg').addEventListener('change', (event) => {
@@ -189,7 +198,7 @@
 			document.getElementById('bodyImg').addEventListener('change', function(event) {
 					
 		           const files = event.target.files;
-		           const imgElements = document.querySelectorAll('.imgView');
+		           const imgElements = document.querySelectorAll('.');
 	
 		           imgElements.forEach(img => {
 		               img.src = '';
@@ -222,18 +231,19 @@
 		};
 		
 		
+		
+		
 		document.querySelector('#submitBtn').addEventListener('click',function(e){
-			if(document.querySelector('#communityTitle').value==''){
-				e.preventDefault()//폼 전송을 막는다.
-				alert('제목이 비어있습니다!!')
-			}else if(document.querySelector('#communityBody').value==''){
-				e.preventDefault()//폼 전송을 막는다.
-				alert('내용이 비어있습니다!!')
-			}else if(document.querySelector('.imgView').src!=''){
-				e.preventDefault()//폼 전송을 막는다.
-				alert('내용사진이 있을 경우 썸네일은 필수로 선택해주세요!')
+			
+			
+			if(document.querySelector('#communityTitle').value===''){
+				e.preventDefault();//폼 전송을 막는다.
+				alert('제목이 비어있습니다!!');
+			}else if(document.querySelector('#communityBody').value===''){
+				e.preventDefault();//폼 전송을 막는다.
+				alert('내용이 비어있습니다!!');
 			}
-		})
+		});
 	</script>
 </body>
 </html>
