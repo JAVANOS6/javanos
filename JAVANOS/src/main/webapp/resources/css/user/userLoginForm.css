@@ -37,10 +37,6 @@ body {
 	height: 50px; /* 높이 */
 }
 
-#login-form input[type="submit"] {
-	border: 3px solid #635DDA; 
-}
-
 
 /* 로그인 버튼 설정 */
 /* #login-form input[type="submit"]:hover {

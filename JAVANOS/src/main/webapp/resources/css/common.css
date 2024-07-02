@@ -118,7 +118,8 @@ section{
 button,
 input,
 select,
-textarea
+textarea,
+input[file]
 {
 	font-family: 'DungGeunMo';
 }
@@ -126,7 +127,8 @@ textarea
 
 button,
 input[type="button"],
-input[type="submit"] {
+input[type="submit"]
+{
     font-size: 14px; /* 글꼴 크기 설정 */
     border: solid;
     background-color: LightGreen; /* 배경색 설정 */

@@ -44,8 +44,8 @@ body {
 .mypage-wrapper input[type="submit"] {
     /* background-color: #333;
     color: white; */
-    border: 3px solid #635DDA; 
-    padding: 12px 0;
+/*     border: 3px solid #635DDA; 
+ */    padding: 12px 0;
     cursor: pointer;
     border-radius: 5px;
     width: 100%;
@@ -63,13 +63,9 @@ body {
 #updateBtn,
 #cancelBtn,
 #deleteBtn {
-    margin-top: 15px; 
-}
-
-#cancelBtn,
-#deleteBtn {
 	background-color: #ffffff;
-	border: 3px solid black;
+	border: 2px solid black;
+    margin-top: 15px; 
 }
 
 /* 에러 메시지 설정 */
