@@ -123,7 +123,7 @@
 </section>
 </div>
 
-<jsp:include page="../common/footer.jsp"/>
+<jsp:include page="../../common/footer.jsp"/>
 
 <script>
     $(document).ready(function() {
