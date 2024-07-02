@@ -1,160 +1,81 @@
-package com.javanos.project.lnf.model.service;
+package com.javanos.project.lnf.controller;
 
-import static com.javanos.project.common.mybatis.Template.getSqlSession;
-
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.session.SqlSession;
-
-import com.javanos.project.lnf.model.dao.LnfDAO;
+import com.javanos.project.common.paging.Pagenation;
+import com.javanos.project.common.paging.SelectCriteria;
 import com.javanos.project.lnf.model.dto.LnfBoardDTO;
-import com.javanos.project.notice.model.dto.NoticeDTO;
+import com.javanos.project.lnf.model.service.LnfBoardService;
 
-public class LnfBoardService {
-	
-	private LnfDAO lnfDAO;
-	
-//	/* 페이징 처리를 위한 전체 게시물 수 조회용 메소드 */
-//	public int selectTotalCount(Map<String, String> searchMap) {
-//		
-//		SqlSession session = getSqlSession();
-//		lnfDAO = session.getMapper(LnfDAO.class);
-//		
-//		int totalCount = LnfDAO.selectTotalCount(searchMap);
-//		
-//		session.close();
-//		
-//		return totalCount;
-//	}
-	
-	// 게시글 삽입
-	public int enrollBoard(LnfBoardDTO enrollBoard) {
-		
-		SqlSession session = getSqlSession();
-		lnfDAO = session.getMapper(LnfDAO.class);
-		
-		int result = lnfDAO.enrollBoard(enrollBoard);
-		
-		if(result > 0) {
-			session.commit();
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+@WebServlet("/lnf/main")
+public class MainBoardListServlet extends HttpServlet {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		// paging & search criteria
+		String currentPage = request.getParameter("currentPage");
+		int pageNo = 1;
+
+		if (currentPage != null && !"".equals(currentPage)) {
+			pageNo = Integer.parseInt(currentPage);
+		}
+
+		if (pageNo <= 0) {
+			pageNo = 1;
+		}
+
+		String searchCondition = request.getParameter("searchCondition");
+		String searchValue = request.getParameter("searchValue");
+
+		Map<String, String> searchMap = new HashMap<>();
+		searchMap.put("searchCondition", searchCondition);
+		searchMap.put("searchValue", searchValue);
+
+		LnfBoardService lnfBoardService = new LnfBoardService();
+		int totalCount = lnfBoardService.selectTotalCount(searchMap);
+
+		System.out.println("totaldownCount : " + totalCount);
+
+		/* 한 페이지에 보여 줄 게시물 수 */ 
+		int limit = 10;
+
+		/* 한 번에 보여질 페이징 버튼의 갯수 */ 
+		int buttonAmount = 5;
+
+		/* 페이징 처리를 위한 로직 호출 후 페이징 처리에 관한 정보를 담고 있는 인스턴스를 반환받는다. */ 
+		SelectCriteria selectCriteria = null;
+
+		if (searchCondition != null && !"".equals(searchCondition)) {
+			selectCriteria = Pagenation.getSelectCriteria(pageNo, totalCount, limit, buttonAmount, searchCondition, searchValue);
 		} else {
-			session.rollback();
-		}
-		
-		session.close();
-		
-		return result;
-		
-	}
-	
-	// 게시판 목록 조회
-	public List<LnfBoardDTO> selectAllBoardList() {
-		
-		SqlSession session = getSqlSession();	
-		lnfDAO = session.getMapper(LnfDAO.class);
-		
-		List<LnfBoardDTO> lnfBoardList = lnfDAO.selectAllBoardList();
-		
-		session.close();
-		
-		return lnfBoardList;
-	}
-	
-	// 게시글 상세 보기 조회
-		public LnfBoardDTO selectBoardDetail (int no) {
-				
-			SqlSession session = getSqlSession();
-			lnfDAO = session.getMapper(LnfDAO.class);
-				
-			LnfBoardDTO lnfDetail = lnfDAO.selectBoardDetail(no);
-			
-			session.close();
-			
-			return lnfDetail;
+			selectCriteria = Pagenation.getSelectCriteria(pageNo, totalCount, limit, buttonAmount);
 		}
 
-		
-	// 게시글 수정
-	public int modifyBoard(LnfBoardDTO modifyBoard) {
-			
-		SqlSession session = getSqlSession();
-		lnfDAO = session.getMapper(LnfDAO.class);
+		System.out.println(selectCriteria);
 
-		int result = lnfDAO.modifyBoard(modifyBoard);
-		System.out.println(result);
-			
-		if(result > 0) {
-			session.commit();
+		// 게시글 조회
+		List<LnfBoardDTO> boardList = lnfBoardService.selectAllBoardList();
+
+		System.out.println(boardList);
+
+		String path = "";
+		if (boardList != null && !boardList.isEmpty()) {
+		    path = "/WEB-INF/views/lnf/page/boardList.jsp";
+		    request.setAttribute("boardList", boardList);
+		    request.setAttribute("selectCriteria", selectCriteria); // 페이징 정보를 request에 추가
 		} else {
-			session.rollback();
+		    path = "/WEB-INF/views/common/failed.jsp";
+		    request.setAttribute("message", "게시글이 없습니다.");
 		}
-			
-		session.close();
-			
-		return result;
-			
+		request.getRequestDispatcher(path).forward(request, response);
 	}
-		
-	// 게시글 삭제
-	public int deleteBoard(int no) {
-			
-		SqlSession session = getSqlSession();
-		lnfDAO = session.getMapper(LnfDAO.class);
-			
-		int result = lnfDAO.deleteBoard(no);
-			
-		if(result > 0) {
-			session.commit();
-		} else {
-			session.rollback();
-		}
-			
-		session.close();
-			
-		return result;
-	}
-
-	
-	// <검색>
-	
-	// 호선으로 검색
-		public List<LnfBoardDTO> searchByLine(String staLine) {
-
-		SqlSession session = getSqlSession();
-		lnfDAO = session.getMapper(LnfDAO.class);
-
-		List<LnfBoardDTO> searchResult = lnfDAO.searchByLine(staLine);
-
-		session.close();
-
-		return searchResult;
-	}
-
-	// 역으로 검색
-		public List<LnfBoardDTO> searchByStation(String staName) {
-		
-		SqlSession session = getSqlSession();
-		lnfDAO = session.getMapper(LnfDAO.class);
-		
-		List<LnfBoardDTO> searchResult = lnfDAO.searchByStation(staName);
-		
-		session.close();
-		
-		return searchResult;
-	}
-
-	// 분실 품목으로 검색
-		public List<LnfBoardDTO> searchByMissing(String missing) {
-	
-		SqlSession session = getSqlSession();
-		lnfDAO = session.getMapper(LnfDAO.class);
-	
-		List<LnfBoardDTO> searchResult = lnfDAO.searchByMissing(missing);
-	
-		session.close();
-	
-		return searchResult;
-	}
-	
 }
