@@ -15,7 +15,11 @@
 	margin: 0 10px;
 }
 
-.community-list-area button {
+.community-list-area button,
+.button-area button,
+#listBtn,
+#reportBtn
+{
     padding: 5px 15px; 
     font-size: 18px;
     border: solid;
@@ -27,6 +31,8 @@
     margin-left: auto; 
     margin-right: 0px;
 }
+
+
 
 .button-area {
     padding: 10px;
