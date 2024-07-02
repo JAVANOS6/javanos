@@ -36,9 +36,6 @@ public class DownEnrollServlet extends HttpServlet {
 			request.setAttribute("stationList", stationList);		
 		}
 
-		
-		
-
 		/* 내려요 게시글 조회 */
 		String currentPage = request.getParameter("currentPage");
 		int pageNo = 1;

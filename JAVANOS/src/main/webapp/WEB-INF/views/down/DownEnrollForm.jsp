@@ -14,6 +14,8 @@
     <form action="${ pageContext.servletContext.contextPath }/down/enroll" method="post">
        <div class="container">
         <div class="down-enroll">
+         
+         <!-- select option value 설정 -->
             <div class="label-below">
                 <label for="inStationNo">승차해 있는 역</label>
                 <span>
@@ -22,45 +24,38 @@
                 <c:forEach var="station" items="${ requestScope.stationList }"> 
                  <option value="${ station.staNo }">${station.staName}</option>          			                
                  </c:forEach>		
-              <!--    <option value="2">서울역</option>			
-                 <option value="3">영등포</option>			
-                 <option value="4">온양온천</option>			
-                 <option value="5">두정</option>			
-                 <option value="6">진위</option>	 -->		
-	
-              
                 </select></span>
             </div>
+            
             <div class="label-below">
                 <label for="downStationNo">하차 할 역 이름</label>
-                <span><select name="downStationNo" id="downStationNo">
-                 <option selected>(하차역)</option>        			
-                 <option value="1">석계</option>			
-                 <option value="2">서울역</option>			
-                 <option value="3">영등포</option>			
-                 <option value="4">온양온천</option>			
-                 <option value="5">두정</option>			
-                 <option value="6">진위</option>	
+                <span>
+                <select name="downStationNo" id="downStationNo">
+                 <option selected>(하차역)</option>
+                 <c:forEach var="station" items="${ requestScope.stationList }">        			
+                 <option value="${ station.staNo }">${station.staName }</option>			
+                </c:forEach>	
                 </select></span>
             </div>
             <div class="label-below">
                 <label for="downRoom">칸 번호</label>
                 <span><select name="downRoom" id="downRoom" >
                 <option selected>(칸번호)</option>
-                    <option value="1-1칸">1-1</option>
-                    <option value="1-2칸">1-2</option>
-                    <option value="1-3칸">1-3</option>
-                    <option value="2-1칸">2-1</option>
-                    <option>2-2</option>
-                    <option>3-1</option>
-                    <option>3-2</option>
-                    <option>3-3</option>
-                    <option>4-1</option>
-                    <option>4-2</option>
-                    <option>4-3</option>
-                    <option>5-1</option>
-                    <option>5-2</option>
-                    <option>5-3</option>
+                    <option value="1-1칸">1-1칸</option>
+                    <option value="1-2칸">1-2칸</option>
+                    <option value="1-3칸">1-3칸</option>
+                    <option value="2-1칸">2-1칸</option>
+                    <option value="2-2칸">2-2칸</option>
+                    <option value="2-3칸">2-3칸</option>                    
+                    <option value="3-3칸">3-1칸</option>
+                    <option value="3-2칸">3-2칸</option>
+                    <option value="3-3칸">3-3칸</option>
+                    <option value="4-1칸">4-1칸</option>
+                    <option value="4-2칸">4-2칸</option>
+                    <option value="4-3칸">4-3칸</option>
+                    <option value="5-1칸">5-1칸</option>
+                    <option value="5-2칸">5-2칸</option>
+                    <option value="5-3칸">5-3칸</option>
                 </select></span>
             </div>
             <div class="label-below">
@@ -84,6 +79,13 @@
                     <option value="2호선" ${ requestScope.selectCriteria.searchValue eq "2호선"? "selected": "" }>2호선</option>
                     <option value="3호선" ${ requestScope.selectCriteria.searchValue eq "3호선"? "selected": "" }>3호선</option>
                     <option value="4호선" ${ requestScope.selectCriteria.searchValue eq "4호선"? "selected": "" }>4호선</option>
+                    <option value="5호선" ${ requestScope.selectCriteria.searchValue eq "5호선"? "selected": "" }>5호선</option>
+                    <option value="6호선" ${ requestScope.selectCriteria.searchValue eq "6호선"? "selected": "" }>6호선</option>
+                    <option value="7호선" ${ requestScope.selectCriteria.searchValue eq "7호선"? "selected": "" }>7호선</option>
+                    <option value="8호선" ${ requestScope.selectCriteria.searchValue eq "8호선"? "selected": "" }>8호선</option>
+                    <option value="9호선" ${ requestScope.selectCriteria.searchValue eq "9호선"? "selected": "" }>9호선</option>
+                    <option value="공항철도" ${ requestScope.selectCriteria.searchValue eq "공항철도"? "selected": "" }>공항철도</option>
+                    <option value="수인분당선" ${ requestScope.selectCriteria.searchValue eq "4호선"? "selected": "" }>수인분당선</option>
                     
                     <script>
                        function filterStations(selectElement) {
@@ -99,19 +101,33 @@
             </div>
         </div>
     </form>   
-               <br> <br>
+               <br> 
                   <!--dto=down  -->
         <div class="container">
-        <div class="down-enroll">
-            <c:forEach var="down" items="${ requestScope.downList }">
+         <c:forEach var="down" items="${ requestScope.downList }">
+        <div class="item-container">
+        
+                <div class="top-info">
+                <span class="nickname"><label style=" font-size:15px">등록자: </label><c:out value="${ down.user.userNickname}"/></span>
+                </div>
+                
+                <div class="top-info">
+                <span class="date"><c:out value="${ down.getFormattedDownEnrollDate() }"/></span>
+                </div>
+                <br>
                 <div class="label-below">
-                    <label>승차해 있는 역</label>         
-                    <span><div class="box"><c:out value="${ down.inStation.staName }"/></div></span>
+                    <label>하차역</label>         
+                    <span><div class="box"><c:out value="${ down.downStation.staName }"/></div></span>
+                </div>
+                  <div class="label-below">
+                    <label>하차 호선도</label>
+                    <span><div class="box"><c:out value="${ down.downStation.staLine }"/></div></span>
+                <br>                
                 </div>
                 
                 <div class="label-below">
-                    <label>하차 할 역 이름</label>     
-                    <span><div class="box"><c:out value="${ down.downStation.staName }"/></div></span>
+                    <label>승차역</label>     
+                    <span><div class="box"><c:out value="${ down.inStation.staName }"/></div></span>
                 </div>
                 
                 <div class="label-below">
@@ -124,19 +140,17 @@
                     <span><div class="box"><c:out value="${ down.downFull}"/></div></span>
                 </div>
                 
-               <label style="position: absolute; top: 5px; right: 30px; font-size: 12px;">(등록자)</label>
-                <span class="nickname"><c:out value="${ down.user.userNickname}"/></span></lable>
-                 
-                <span class="date"><c:out value="${ down.getFormattedDownEnrollDate() }"/></span>
-                
+             
+         
                  <div class="submit-button">
                 <c:if test="${ sessionScope.loginUser.userNo eq down.user.userNo }">
                     <span><button onclick="deleteDown(${down.downNo})">삭제</button></span>
-                </c:if></div>
+                </c:if>
+                </div>
                 
-            </c:forEach>
-        </div>
-    </div>
+              </div>         
+               </c:forEach> 
+             </div>
     
 	<br>		
 			<!-- 페이징 처리  -->
