@@ -8,11 +8,11 @@
         <result property="reportStatus" column="REPORT_STATUS"/>
         <association property="reportUser" javaType="com.javanos.project.user.model.dto.UserDTO">
             <id property="userNo" column="REPORT_USER_NO"/>
-            <result property="userId" column="USER_ID"/>
+            <result property="userId" column="REPORT_USER_ID"/>
         </association>
         <association property="reportedUser" javaType="com.javanos.project.user.model.dto.UserDTO">
             <id property="userNo" column="REPORTED_USER_NO"/>
-            <result property="userId" column="USER_ID"/>
+            <result property="userId" column="REPORTED_USER_ID"/>
         </association>
         <association property="communityNo" javaType="com.javanos.project.community.model.dto.CommunityDTO">
             <id property="communityNo" column="COMMUNITY_NO"/>
@@ -26,26 +26,25 @@
 
     <!-- Paginated select query -->
     <select id="selectReports" parameterType="com.javanos.project.common.paging.SelectCriteria" resultMap="reportResultMap">
-    SELECT 
-        R.REPORT_NO, R.REPORT_REASON, R.REPORT_DATE, R.REPORT_STATUS, 
-        R.REPORT_USER_NO, RU.USER_ID AS USER_ID,
-        R.REPORTED_USER_NO, RE.USER_ID AS USER_ID,
-        R.COMMUNITY_NO
-    FROM 
-        TBL_REPORT R
-    LEFT JOIN TBL_USER RU ON R.REPORT_USER_NO = RU.USER_NO
-    LEFT JOIN TBL_USER RE ON R.REPORTED_USER_NO = RE.USER_NO
-    ORDER BY R.REPORT_NO DESC
-    LIMIT #{startRow}, #{limit}
-</select>
-
+        SELECT 
+            R.REPORT_NO, R.REPORT_REASON, R.REPORT_DATE, R.REPORT_STATUS, 
+            R.REPORT_USER_NO, RU.USER_ID AS REPORT_USER_ID,
+            R.REPORTED_USER_NO, RE.USER_ID AS REPORTED_USER_ID,
+            R.COMMUNITY_NO
+        FROM 
+            TBL_REPORT R
+        LEFT JOIN TBL_USER RU ON R.REPORT_USER_NO = RU.USER_NO
+        LEFT JOIN TBL_USER RE ON R.REPORTED_USER_NO = RE.USER_NO
+        ORDER BY R.REPORT_NO DESC
+        LIMIT #{startRow}, #{limit}
+    </select>
 
     <!-- All reports select query -->
     <select id="selectAllReports" resultMap="reportResultMap">
         SELECT 
             R.REPORT_NO, R.REPORT_REASON, R.REPORT_DATE, R.REPORT_STATUS, 
-            R.REPORT_USER_NO, RU.USER_ID AS USER_ID,
-            R.REPORTED_USER_NO, RE.USER_ID AS USER_ID,
+            R.REPORT_USER_NO, RU.USER_ID AS REPORT_USER_ID,
+            R.REPORTED_USER_NO, RE.USER_ID AS REPORTED_USER_ID,
             R.COMMUNITY_NO
         FROM 
             TBL_REPORT R
@@ -57,8 +56,8 @@
     <select id="selectReportByNo" parameterType="int" resultMap="reportResultMap">
         SELECT
             R.REPORT_NO, R.REPORT_REASON, R.REPORT_DATE, R.REPORT_STATUS, 
-            R.REPORT_USER_NO, RU.USER_ID AS USER_ID,
-            R.REPORTED_USER_NO, RE.USER_ID AS USER_ID,
+            R.REPORT_USER_NO, RU.USER_ID AS REPORT_USER_ID,
+            R.REPORTED_USER_NO, RE.USER_ID AS REPORTED_USER_ID,
             R.COMMUNITY_NO
         FROM 
             TBL_REPORT R

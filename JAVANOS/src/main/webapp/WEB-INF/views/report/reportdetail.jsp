@@ -100,8 +100,6 @@
     </td>
 </tr>
 
-
-
         <tr>
             <th>신고 처리 상태</th>
             <td><%= report.getReportStatus() %></td>
