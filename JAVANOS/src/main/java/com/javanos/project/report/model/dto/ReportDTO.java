@@ -1,24 +1,25 @@
 package com.javanos.project.report.model.dto;
 
 import java.sql.Date;
+
+import com.javanos.project.community.model.dto.CommunityDTO;
 import com.javanos.project.user.model.dto.UserDTO;
 
 public class ReportDTO implements java.io.Serializable {
-
     private int reportNo;
     private String reportReason;
     private Date reportDate;
     private String reportStatus;
     private UserDTO reportUser;  // 신고자
     private UserDTO reportedUser;  // 신고당한 회원
+    private CommunityDTO communityNo; // 커뮤니티 번호
 
-    // 기본 생성자
+    // 기본 생성자 및 모든 필드를 포함한 생성자
     public ReportDTO() {
         super();
     }
 
-    // 모든 필드를 포함한 생성자
-    public ReportDTO(int reportNo, String reportReason, Date reportDate, String reportStatus, UserDTO reportUser, UserDTO reportedUser) {
+    public ReportDTO(int reportNo, String reportReason, Date reportDate, String reportStatus, UserDTO reportUser, UserDTO reportedUser, CommunityDTO communityNo) {
         super();
         this.reportNo = reportNo;
         this.reportReason = reportReason;
@@ -26,6 +27,7 @@ public class ReportDTO implements java.io.Serializable {
         this.reportStatus = reportStatus;
         this.reportUser = reportUser;
         this.reportedUser = reportedUser;
+        this.communityNo = communityNo;
     }
 
     // Getters and Setters
@@ -76,9 +78,17 @@ public class ReportDTO implements java.io.Serializable {
     public void setReportedUser(UserDTO reportedUser) {
         this.reportedUser = reportedUser;
     }
+    
+    public CommunityDTO getCommunityNo() {
+        return communityNo;
+    }
+
+    public void setCommunityNo(CommunityDTO communityNo) {
+        this.communityNo = communityNo;
+    }
 
     @Override
     public String toString() {
-        return "ReportDTO [reportNo=" + reportNo + ", reportReason=" + reportReason + ", reportDate=" + reportDate + ", reportStatus=" + reportStatus + ", reportUser=" + reportUser + ", reportedUser=" + reportedUser + "]";
+        return "ReportDTO [reportNo=" + reportNo + ", reportReason=" + reportReason + ", reportDate=" + reportDate + ", reportStatus=" + reportStatus + ", reportUser=" + reportUser + ", reportedUser=" + reportedUser + ", communityNo=" + communityNo + "]";
     }
 }

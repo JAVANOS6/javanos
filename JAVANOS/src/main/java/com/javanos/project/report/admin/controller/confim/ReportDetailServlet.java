@@ -23,6 +23,15 @@ public class ReportDetailServlet extends HttpServlet {
             ReportDTO report = reportService.selectReportByNo(reportNo);
             request.setAttribute("report", report);
 
+            // 디버깅 로그 추가
+            System.out.println("Report: " + report);
+            if (report != null) {
+                System.out.println("Report No: " + report.getReportNo());
+                System.out.println("Report Reason: " + report.getReportReason());
+                System.out.println("Reported User ID: " + (report.getReportedUser() != null ? report.getReportedUser().getUserId() : "N/A"));
+                System.out.println("Community No: " + (report.getCommunityNo() != null ? report.getCommunityNo().getCommunityNo() : "N/A"));
+            }
+
             // JSP 페이지로 포워딩
             request.getRequestDispatcher("/WEB-INF/views/report/reportdetail.jsp").forward(request, response);
         } catch (NumberFormatException e) {
