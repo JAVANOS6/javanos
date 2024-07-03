@@ -6,6 +6,12 @@ body {
     padding: 0;
 }
 
+#login-wrap{
+	height:80vh;
+ 	position:relative;
+	width:100%
+}
+
 /* 로그인 폼 설정 */
 .login-wrapper {
     width: 400px; /* 최대 너비 설정 */
@@ -15,7 +21,7 @@ body {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* 그림자 효과 */
     
     margin: auto; /* 가운데 정렬 */
-    margin-top: 300px; /* 메뉴 바와 간격 설정 */ 
+    margin-top: 150px; /* 메뉴 바와 간격 설정 */ 
 }
 
 /* Login 설정 */
