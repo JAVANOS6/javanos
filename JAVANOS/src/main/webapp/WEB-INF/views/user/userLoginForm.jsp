@@ -10,7 +10,7 @@
 </head>
 <body>
 	<jsp:include page="../common/menubar.jsp"/>
-	<div id="wrap">
+	<div id="login-wrap">
 	<section>
 
 	<div class="login-wrapper">
