@@ -36,25 +36,24 @@ public class UserMypageBoardListServlet extends HttpServlet {
 		}
 
 		int totalCount = new UserService().selectTotalCount(loginUser);
-		
-		if (totalCount > 0) {
-			int limit = 10;
-			int buttonAmount = 10;
-			SelectCriteria selectCriteria = null;
-			selectCriteria = Pagenation.getSelectCriteria(pageNo, totalCount, limit, buttonAmount);
-			List<CommunityDTO> communityList = new UserService().selectBoardList(loginUser, selectCriteria);
 
-			String path = "";
+		int limit = 10;
+		int buttonAmount = 10;
+		SelectCriteria selectCriteria = null;
+		selectCriteria = Pagenation.getSelectCriteria(pageNo, totalCount, limit, buttonAmount);
+		List<CommunityDTO> communityList = new UserService().selectBoardList(loginUser, selectCriteria);
 
-			if (communityList != null) {
-				path = "/WEB-INF/views/user/userMypageBoardList.jsp";
-				request.setAttribute("communityList", communityList);
-				request.setAttribute("selectCriteria", selectCriteria);
+		String path = "";
 
-			}
-			request.getRequestDispatcher(path).forward(request, response);
+		if (communityList != null) {
+			path = "/WEB-INF/views/user/userMypageBoardList.jsp";
+			request.setAttribute("communityList", communityList);
+			request.setAttribute("selectCriteria", selectCriteria);
 		} else {
-			System.out.println("게시글 전체 수 세기 실패!");
+			path = "/WEB-INF/views/common/fail.jsp";
+			request.setAttribute("message", "게시물 목록 조회 실패!");
 		}
+
+		request.getRequestDispatcher(path).forward(request, response);
 	}
 }
