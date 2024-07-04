@@ -49,8 +49,8 @@
 	
 	<script>
 		$(document).ready(function() {
-			
-			// 아이디 입력 필드 실시간 유효성 검사
+
+		    // 아이디 입력 필드 실시간 유효성 검사
 		    $("#userId").on('input', function() {
 		        validateUserId();
 		    });
